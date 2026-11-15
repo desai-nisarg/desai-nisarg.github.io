@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nisarg Desai, Ph.D. | Data scientist: machine learning, computer vision, Bayesian statistics</title>
+  <meta name="description" content="Nisarg Desai is a data scientist who builds machine-learning systems that measure behavior from video and audio: 3D pose estimation, audio detection and Bayesian statistics. Creator of OpenApePose.">
+  <meta name="author" content="Nisarg Desai">
+  <!-- launch-meta -->
+  <link rel="canonical" href="https://desai-nisarg.github.io/">
+  <meta property="og:url" content="https://desai-nisarg.github.io/">
+  <meta property="og:site_name" content="Nisarg Desai">
+  <meta property="og:image" content="https://desai-nisarg.github.io/assets/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nisarg Desai, Ph.D.: machine learning, computer vision, Bayesian statistics">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /launch-meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nisarg Desai, Ph.D.">
+  <meta property="og:description" content="Instruments for measuring behavior, built from cameras, microphones and neural networks, and the statistics to know when to believe them.">
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231B365D'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23ffffff'%3END%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=16">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Nisarg Desai",
+    "honorificSuffix": "Ph.D.",
+    "jobTitle": "Postdoctoral Fellow (Data Scientist)",
+    "affiliation": { "@type": "Organization", "name": "Emory University" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "University of Minnesota" },
+      { "@type": "CollegeOrUniversity", "name": "Indian Institute of Science Education and Research Pune" }
+    ],
+    "knowsAbout": ["Machine learning", "Computer vision", "Pose estimation", "Bayesian statistics", "Causal inference", "Bioacoustics", "Primate behavior"],
+    "sameAs": [
+      "https://github.com/desai-nisarg",
+      "https://www.linkedin.com/in/desai-nisarg",
+      "https://scholar.google.com/citations?user=u6LVnycAAAAJ"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- Shared pieces for the diagrams: a 17-keypoint stick figure and arrowheads -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#1B365D"/></marker>
+      <marker id="arr-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0,0L10,5L0,10z" fill="#0B7275"/></marker>
+      <g id="skel">
+        <g fill="none" stroke="#1B365D" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16,24L31,31L50,27L69,29L76,22L84,16L92,19"/>
+          <path d="M67,28L70,44L66,60M71,30L78,42L80,58M29,30L24,44L18,58M33,32L34,46L28,60"/>
+        </g>
+        <g fill="#0B7275">
+          <circle cx="16" cy="24" r="2.7"/><circle cx="29" cy="30" r="2.7"/><circle cx="33" cy="32" r="2.7"/><circle cx="50" cy="27" r="2.7"/>
+          <circle cx="67" cy="28" r="2.7"/><circle cx="71" cy="30" r="2.7"/><circle cx="76" cy="22" r="2.7"/><circle cx="84" cy="16" r="2.7"/>
+          <circle cx="92" cy="19" r="2.7"/><circle cx="70" cy="44" r="2.7"/><circle cx="66" cy="60" r="2.7"/><circle cx="78" cy="42" r="2.7"/>
+          <circle cx="80" cy="58" r="2.7"/><circle cx="24" cy="44" r="2.7"/><circle cx="18" cy="58" r="2.7"/><circle cx="34" cy="46" r="2.7"/>
+          <circle cx="28" cy="60" r="2.7"/>
+        </g>
+      </g>
+    </defs>
+  </svg>
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#top">Nisarg Desai</a>
+      <nav aria-label="Sections">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#background">Background</a>
+        <a href="#contact">Contact</a>
+        <button class="theme-toggle" type="button">Light mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Data scientist · Machine learning · Computer vision · Bayesian statistics</p>
+          <h1>Nisarg Desai, Ph.D.</h1>
+          <p class="lede">I build tools for measuring behavior, out of cameras, microphones and neural networks, and the statistics to know when to believe them.</p>
+          <p>Behavior is one of the hardest things in biology to measure. It is fast, it is continuous, and it will not hold still. Pinning it down has been the thread through my work. For my Ph.D., I followed wild chimpanzees in Tanzania with a microphone to record their calls. Now, as a Postdoctoral Fellow at Emory University, I track young rhesus macaques in 3D with twelve synchronized cameras and deep learning. Along the way I am earning a <a href="projects/coursework.html">master's in computer science at Georgia Tech</a>.</p>
+          <ul class="tags hero-skills" aria-label="Main skills">
+            <li>PyTorch</li><li>3D pose estimation</li><li>Audio machine learning</li><li>Bayesian models (brms, PyMC)</li><li>Causal inference</li><li>Python</li><li>R</li><li>SQL</li>
+          </ul>
+          <div class="actions">
+            <a class="btn primary" href="#projects">See projects</a>
+            <a class="btn" href="assets/Nisarg_Desai_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+            <a class="btn" href="https://github.com/desai-nisarg" rel="me noopener" target="_blank">GitHub</a>
+            <a class="btn" href="https://scholar.google.com/citations?user=u6LVnycAAAAJ" rel="me noopener" target="_blank">Google Scholar</a>
+            <a class="btn" href="https://www.linkedin.com/in/desai-nisarg" rel="me noopener" target="_blank">LinkedIn</a>
+            <a class="btn" href="mailto:nisarg.p.desai@gmail.com">Email</a>
+          </div>
+        </div>
+        <div class="portrait" aria-hidden="true">
+          <img src="assets/photo.jpg" alt="" onerror="this.remove()">
+          <span>ND</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="alt">
+      <div class="wrap">
+        <h2>Projects</h2>
+        <p class="section-intro">Each of these began with something that could not be measured well enough. The cards give the short version, with a link to the full story.</p>
+
+        <!-- ---- 3D motion capture ---- -->
+        <article class="project feature" id="mocap">
+          <p class="kicker">Computer vision · Emory University · 2023–present</p>
+          <h3>The grammar of movement</h3>
+          <p class="question">Some movement problems are easy to see. The ones I am after hide in plain sight.</p>
+          <p class="wide">I designed and built a 12-camera system and deep-learning pipeline that reconstructs freely moving infant rhesus macaques in 3D, to detect motor problems too subtle to see by eye. A second model treats movement like language: given no labels, it breaks movement into short “syllables,” and I study the “grammar” those syllables follow.</p>
+
+          <div class="steps">
+            <div class="step">
+              <svg viewBox="0 0 200 150" role="img" aria-label="Top view of twelve cameras around an enclosure, all aimed at one point">
+                <rect x="62" y="50" width="76" height="50" rx="5" fill="#e9f3f3" stroke="#1B365D" stroke-width="1.5"/>
+                <g stroke="#0B7275" stroke-width="1" opacity=".45">
+                  <path d="M180,75L108,70M169,104L108,70M140,125L108,70M100,133L108,70M60,125L108,70M31,104L108,70M20,75L108,70M31,46L108,70M60,25L108,70M100,17L108,70M140,25L108,70M169,46L108,70"/>
+                </g>
+                <g fill="#1B365D">
+                  <circle cx="180" cy="75" r="6"/><circle cx="169" cy="104" r="6"/><circle cx="140" cy="125" r="6"/><circle cx="100" cy="133" r="6"/>
+                  <circle cx="60" cy="125" r="6"/><circle cx="31" cy="104" r="6"/><circle cx="20" cy="75" r="6"/><circle cx="31" cy="46" r="6"/>
+                  <circle cx="60" cy="25" r="6"/><circle cx="100" cy="17" r="6"/><circle cx="140" cy="25" r="6"/><circle cx="169" cy="46" r="6"/>
+                </g>
+                <circle cx="108" cy="70" r="5" fill="#C84B31"/>
+              </svg>
+              <p><b>1. Capture.</b> 12 machine-vision cameras, hardware-synchronized at up to 60 frames per second, streaming uncompressed video over a 120 Gbps network.</p>
+            </div>
+            <div class="step">
+              <svg viewBox="0 0 200 150" role="img" aria-label="Four camera views, each with body keypoints marked">
+                <g fill="#ffffff" stroke="#1B365D" stroke-width="1.5">
+                  <rect x="6" y="8" width="90" height="62" rx="4"/><rect x="104" y="8" width="90" height="62" rx="4"/>
+                  <rect x="6" y="80" width="90" height="62" rx="4"/><rect x="104" y="80" width="90" height="62" rx="4"/>
+                </g>
+                <use href="#skel" transform="translate(10,12) scale(.8)"/>
+                <use href="#skel" transform="translate(190,14) scale(-.78,.78)"/>
+                <use href="#skel" transform="translate(88,88) scale(-.66,.66)"/>
+                <use href="#skel" transform="translate(116,88) scale(.7)"/>
+              </svg>
+              <p><b>2. Label and detect.</b> 65,000+ frames hand-labeled under a protocol I wrote, then a network finds 17 keypoints in every camera view.</p>
+            </div>
+            <div class="step">
+              <svg viewBox="0 0 200 150" role="img" aria-label="A keypoint skeleton inside a three-dimensional box">
+                <g fill="none" stroke="#9db5b6" stroke-width="1.2" stroke-dasharray="4 3">
+                  <rect x="18" y="46" width="134" height="92"/><rect x="48" y="14" width="134" height="92"/>
+                  <path d="M18,46L48,14M152,46L182,14M18,138L48,106M152,138L182,106"/>
+                </g>
+                <use href="#skel" transform="translate(42,48) scale(1.15)"/>
+              </svg>
+              <p><b>3. Reconstruct in 3D.</b> The views are combined into one 3D pose by triangulation (built on JARVIS, PyTorch). Average error is 13.75 mm, and the model has been run on about a million frames.</p>
+            </div>
+            <div class="step">
+              <svg viewBox="0 0 200 150" role="img" aria-label="A timeline split into colored segments, with a small graph of transitions between them">
+                <g>
+                  <rect x="10" y="16" width="24" height="26" fill="#1B365D"/><rect x="34" y="16" width="14" height="26" fill="#0B7275"/>
+                  <rect x="48" y="16" width="30" height="26" fill="#C84B31"/><rect x="78" y="16" width="12" height="26" fill="#0B7275"/>
+                  <rect x="90" y="16" width="22" height="26" fill="#8fb8c9"/><rect x="112" y="16" width="18" height="26" fill="#1B365D"/>
+                  <rect x="130" y="16" width="16" height="26" fill="#d9b77a"/><rect x="146" y="16" width="20" height="26" fill="#C84B31"/>
+                  <rect x="166" y="16" width="24" height="26" fill="#0B7275"/>
+                </g>
+                <g fill="none" stroke="#1B365D" stroke-width="1.6" marker-end="url(#arr)">
+                  <path d="M52,96L86,82"/><path d="M114,82L148,96"/><path d="M148,110L114,124"/><path d="M86,124L52,110"/><path d="M100,90L100,116"/>
+                </g>
+                <circle cx="40" cy="103" r="11" fill="#1B365D"/><circle cx="100" cy="78" r="11" fill="#0B7275"/>
+                <circle cx="160" cy="103" r="11" fill="#C84B31"/><circle cx="100" cy="128" r="11" fill="#8fb8c9"/>
+              </svg>
+              <p><b>4. Find structure.</b> An unsupervised model (Keypoint-MoSeq tuned for macaques) splits movement into short “syllables” that make up behaviors such as walking and climbing.</p>
+            </div>
+          </div>
+
+          <p class="facts"><b>17</b> keypoints · <b>13.75 mm</b> average 3D error · <b>65,000+</b> hand-labeled frames · <b>about 1 million</b> frames analyzed</p>
+          <p class="callout"><strong>Selected for a Society for Neuroscience 2026 press conference</strong>, one of 30–40 abstracts chosen from 8,000–10,000 submitted. Supported by a $50K pilot grant (Co-PI).</p>
+          <ul class="tags">
+            <li>PyTorch</li><li>3D pose estimation</li><li>Multi-view triangulation</li><li>Keypoint-MoSeq</li><li>Multi-GPU training</li><li>Annotation operations</li>
+          </ul>
+          <p class="links"><a class="btn small primary" href="projects/movement-grammar.html">Read the full story</a></p>
+        </article>
+
+        <!-- ---- Zika ---- -->
+        <article class="project" id="zika">
+          <figure class="fig">
+            <h4 class="first">Seven kinds of outcome, each with its own model</h4>
+            <ul class="chips">
+              <li>Viral load</li><li>Immune response</li><li>Neurobehavior</li><li>Visual acuity</li><li>Acute stress</li><li>Attachment</li><li>Brain MRI</li>
+            </ul>
+            <svg class="posterior" viewBox="0 0 300 110" role="img" aria-label="A bell-shaped posterior distribution with its central 89 percent shaded">
+              <defs><clipPath id="mid"><rect x="98" y="0" width="104" height="110"/></clipPath></defs>
+              <path d="M10,96 C92,96 112,14 150,14 C188,14 208,96 290,96 Z" fill="#0B7275" opacity=".28" clip-path="url(#mid)"/>
+              <path d="M10,96 C92,96 112,14 150,14 C188,14 208,96 290,96" fill="none" stroke="#1B365D" stroke-width="2.5"/>
+              <path d="M10,96H290" stroke="#1B365D" stroke-width="1.2"/>
+              <path d="M70,10V100" stroke="#C84B31" stroke-width="1.6" stroke-dasharray="5 4"/>
+              <g font-size="12" fill="#586172"><text x="70" y="108" text-anchor="middle" dy="0">no effect</text><text x="150" y="64" text-anchor="middle" fill="#1B365D" font-weight="600">89%</text></g>
+            </svg>
+            <figcaption>Schematic: each result is reported as a full posterior distribution with an 89% interval, not a yes-or-no significance test.</figcaption>
+          </figure>
+          <div>
+            <p class="kicker">Bayesian statistics · Emory University · 2023–present</p>
+            <h3>Zika and the developing brain</h3>
+            <p class="question">What does an infection in the first weeks of life do to a brain that is still being built?</p>
+            <p>A study of postnatal Zika virus infection, using infant rhesus macaque models. The same animals were measured in many ways (brain MRI, immune markers, viral load, behavior), and I analyzed each with Bayesian hierarchical models (brms) that adjust for confounders, with priors built from earlier studies.</p>
+            <p>Every result is reported as a distribution with its uncertainty, and all of the code and data are public.</p>
+            <ul class="tags"><li>Bayesian hierarchical models</li><li>R / brms / Stan</li><li>Small-sample longitudinal data</li><li>Reproducible analysis</li></ul>
+            <p class="links"><a class="btn small primary" href="projects/zika-brain.html">Read the full story</a><a href="https://doi.org/10.64898/2026.03.27.714817" target="_blank" rel="noopener">Preprint</a><a href="https://github.com/desai-nisarg/ZIKV-longitudinal-study" target="_blank" rel="noopener">Code and data</a></p>
+          </div>
+        </article>
+
+        <!-- ---- Vocalizations ---- -->
+        <article class="project flip" id="vocal">
+          <figure class="fig">
+            <svg viewBox="0 0 360 200" role="img" aria-label="An audio waveform above its spectrogram, with two calls boxed and labeled scream and coo">
+              <path stroke="#1B365D" stroke-width="5" stroke-linecap="round" d="M14,38v4M25,37v6M36,38v4M47,36v8M58,37v6M69,29v22M80,21v38M91,17v46M102,20v40M113,26v28M124,34v12M135,37v6M146,38v4M157,37v6M168,38v4M179,36v8M190,37v6M201,38v4M212,31v18M223,23v34M234,18v44M245,16v48M256,22v36M267,30v20M278,36v8M289,37v6M300,38v4M311,37v6M322,38v4M333,37v6M344,38v4"/>
+              <rect class="keep" x="8" y="84" width="344" height="108" rx="6" fill="#1B365D"/>
+              <g fill="none" stroke-width="5" stroke-linecap="round">
+                <path stroke="#f0d27a" d="M69,172Q96,152 124,172"/><path stroke="#c9d6a0" d="M69,152Q96,132 124,152"/>
+                <path stroke="#7fc0bd" d="M69,132Q96,112 124,132"/><path stroke="#4f9ea0" d="M69,114Q96,96 124,114"/>
+                <path stroke="#f0d27a" d="M212,174Q240,168 267,174"/><path stroke="#c9d6a0" d="M212,152Q240,146 267,152"/>
+                <path stroke="#7fc0bd" d="M212,130Q240,124 267,130"/>
+              </g>
+              <g fill="none" stroke="#ff8c6e" stroke-width="2.2">
+                <rect x="60" y="104" width="73" height="80" rx="3"/><rect x="203" y="118" width="73" height="66" rx="3"/>
+              </g>
+              <g class="keep" fill="#ffffff" font-size="13" font-weight="600" text-anchor="middle">
+                <text x="96" y="99">scream</text><text x="240" y="113">coo</text>
+              </g>
+            </svg>
+            <figcaption>Schematic: audio becomes a spectrogram, and the model marks where each call starts and ends and what type it is.</figcaption>
+          </figure>
+          <div>
+            <p class="kicker">Bioacoustics · Bayesian statistics · Emory University · 2024–present</p>
+            <h3>What a scream carries</h3>
+            <p class="question">Infant macaques scream when they are kept apart from the person who raised them. Do infants infected with Zika virus sound different when they do?</p>
+            <p>I measured 15 acoustic features in 5,328 calls from 24 infants and fitted a Bayesian model to each. Then I tried to break the results. What survived was a change in the shape of the scream's spectrum and in the rhythm of calling, not in its pitch.</p>
+            <p>Alongside the study I built a PyTorch detector that finds and labels calls automatically, tested on animals it has never heard.</p>
+            <ul class="tags"><li>Audio signal processing</li><li>PyMC</li><li>PyTorch</li><li>Sensitivity analysis</li></ul>
+            <p class="links"><a class="btn small primary" href="projects/zika-vocalizations.html">Read the full story</a></p>
+          </div>
+        </article>
+
+        <!-- ---- OpenApePose ---- -->
+        <article class="project" id="openapepose">
+          <figure class="fig">
+            <img src="assets/openapepose/elife-86873-fig1.jpg" width="1500" height="1000" loading="lazy" alt="A grid of photographs of chimpanzees, gorillas, orangutans, bonobos, gibbons and siamangs in many poses, each overlaid with colored lines joining the labeled body landmarks">
+            <figcaption>A sample of the annotated photographs. Colored lines join the 16 labeled landmarks on each animal. From Desai et al. (2023), <a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener"><em>eLife</em></a>, Figure 1, <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>.</figcaption>
+          </figure>
+          <div>
+            <p class="kicker">Open dataset · University of Minnesota · 2022–2023</p>
+            <h3>OpenApePose</h3>
+            <p class="question">Pose-tracking models learned from pictures of people. What happens when the body belongs to an orangutan?</p>
+            <p>An open dataset of 71,868 photographs of six ape species, each labeled with 16 body landmarks, published in <em>eLife</em>. I led it end to end: collecting images at zoos and sanctuaries with about 10 remote photographers, managing annotation with a commercial service, and choosing images for variety of poses instead of raw count.</p>
+            <p>A model trained on it scored 0.90 on unseen ape photographs, against 0.74 for a monkey-trained model and 0.71 for a human-trained one, and it still beat the monkey-trained model on a species held out of training.</p>
+            <ul class="tags"><li>Dataset design</li><li>HRNet / ResNet</li><li>MMPose</li><li>Out-of-distribution tests</li><li>Data-scaling analysis</li></ul>
+            <p class="links"><a class="btn small primary" href="projects/openapepose.html">Read the full story</a><a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener">Paper</a><a href="https://github.com/desai-nisarg/OpenApePose" target="_blank" rel="noopener">Dataset and code</a></p>
+          </div>
+        </article>
+
+        <!-- ---- Chimpanzee calls ---- -->
+        <article class="project flip" id="chimps">
+          <figure class="fig">
+            <svg viewBox="0 0 360 196" role="img" aria-label="Schematic spectrogram of a chimpanzee pant-hoot with four phases: introduction, build-up, climax and let-down">
+              <path d="M14,12V164H350" fill="none" stroke="#1B365D" stroke-width="1.4"/>
+              <path d="M84,16V164M182,16V164M312,16V164" stroke="#b9c4c4" stroke-width="1" stroke-dasharray="4 4"/>
+              <g fill="#1B365D">
+                <rect x="22" y="138" width="24" height="5" rx="2"/><rect x="52" y="136" width="24" height="5" rx="2"/>
+                <rect x="92" y="140" width="7" height="5" rx="2"/><rect x="105" y="126" width="7" height="5" rx="2"/><rect x="118" y="136" width="7" height="5" rx="2"/>
+                <rect x="131" y="122" width="7" height="5" rx="2"/><rect x="144" y="132" width="7" height="5" rx="2"/><rect x="157" y="118" width="7" height="5" rx="2"/><rect x="170" y="128" width="7" height="5" rx="2"/>
+                <rect x="320" y="128" width="7" height="5" rx="2"/><rect x="330" y="136" width="7" height="5" rx="2"/><rect x="340" y="144" width="7" height="5" rx="2"/>
+              </g>
+              <g fill="#1B365D" opacity=".3">
+                <rect x="22" y="116" width="24" height="4" rx="2"/><rect x="52" y="114" width="24" height="4" rx="2"/>
+              </g>
+              <g fill="none" stroke="#C84B31" stroke-width="5" stroke-linecap="round">
+                <path d="M190,122Q207,34 224,112"/><path d="M232,118Q249,26 266,108"/><path d="M274,122Q291,38 306,114"/>
+              </g>
+              <g fill="none" stroke="#C84B31" stroke-width="4" stroke-linecap="round" opacity=".3" transform="translate(0,-36)">
+                <path d="M190,122Q207,34 224,112"/><path d="M232,118Q249,26 266,108"/><path d="M274,122Q291,38 306,114"/>
+              </g>
+              <g font-size="12.5" fill="#586172" text-anchor="middle">
+                <text x="49" y="184">intro</text><text x="133" y="184">build-up</text><text x="247" y="184" fill="#C84B31" font-weight="600">climax</text><text x="331" y="184">let-down</text>
+              </g>
+            </svg>
+            <figcaption>Schematic spectrogram of a chimpanzee pant-hoot (time runs left to right, pitch runs upward) and its four phases.</figcaption>
+          </figure>
+          <div>
+            <p class="kicker">Field research · Causal inference · Ph.D., 2015–2022</p>
+            <h3>The dialects that were not there</h3>
+            <p class="question">Chimpanzees can pick out a stranger’s call from hundreds of meters away. Are they hearing a foreign dialect, or just a voice they do not know?</p>
+            <p>With a field team I trained at Gombe National Park, Tanzania, we recorded 1,252 pant-hoot calls from two neighboring chimpanzee communities, which I compared with recordings from Uganda. Using causal diagrams (DAGs), permutation tests and an audit of sampling bias, I found no reliable community differences.</p>
+            <p>What the calls carried instead was the caller: strong individual signatures. I published the contrary result, and all of my dissertation data are public.</p>
+            <ul class="tags"><li>Field data collection</li><li>Acoustic feature extraction</li><li>Causal diagrams</li><li>Replication</li></ul>
+            <p class="links"><a class="btn small primary" href="projects/chimpanzee-dialects.html">Read the full story</a><a href="https://doi.org/10.1002/ajp.23430" target="_blank" rel="noopener">Paper</a><a href="https://github.com/desai-nisarg/Gombe-dialects" target="_blank" rel="noopener">Code and data</a></p>
+          </div>
+        </article>
+
+        <!-- ---- Call types (dissertation chapter 1) ---- -->
+        <article class="project" id="calltypes">
+          <figure class="fig">
+            <img src="assets/calltypes/five-calls.png" width="1010" height="945" loading="lazy" alt="Spectrograms of five chimpanzee call types stacked on one time scale: barks, a pant-hoot, rough-grunts, screams and waa-barks">
+            <figcaption>Five chimpanzee call types on the same seven-second scale. Time runs left to right and pitch runs upward. Recordings from Gombe, 1971–73 (Plooij et al. 2015, <a href="https://doi.org/10.1038/sdata.2015.27" target="_blank" rel="noopener"><em>Scientific Data</em></a>). The story page has the audio.</figcaption>
+          </figure>
+          <div>
+            <p class="kicker">Bioacoustics · Machine learning · Ph.D., 2017–2022</p>
+            <h3>What counts as a bark?</h3>
+            <p class="question">Researchers name chimpanzee calls by ear. Would a computer, given only the sound, draw the same lines?</p>
+            <p>For the first chapter of my dissertation I took 281 archival calls of five types and measured each one two ways: with the field’s traditional pitch measurements, and with the features used in human speech recognition (MFCCs). I compared discriminant analysis, random forests and a small neural network, then clustered the calls with no labels at all.</p>
+            <p>Nothing clearly won. About three calls in four were named correctly whatever I used. Pant-hoots and screams were easy and barks were not, and left to itself the computer found three groups, not five.</p>
+            <ul class="tags"><li>Audio features (MFCCs)</li><li>Random forests</li><li>Neural networks</li><li>Clustering</li><li>R (caret)</li></ul>
+            <p class="links"><a class="btn small primary" href="projects/call-types.html">Read the full story</a><a href="https://conservancy.umn.edu/server/api/core/bitstreams/84f8fbfa-3027-46a1-9f6d-4335d7cf8203/content" target="_blank" rel="noopener">Dissertation</a><a href="https://github.com/desai-nisarg/chimpanzee-call-types" target="_blank" rel="noopener">Code and data</a></p>
+          </div>
+        </article>
+
+        <!-- ---- Statistical collaborations ---- -->
+        <article class="project flip" id="consulting">
+          <figure class="fig">
+            <svg viewBox="0 0 300 150" role="img" aria-label="Causal diagram: a confounder points to both exposure and outcome, and exposure points to outcome">
+              <g fill="none" stroke="#1B365D" stroke-width="1.8" marker-end="url(#arr)">
+                <path d="M125,48L78,100"/><path d="M175,48L222,100"/>
+              </g>
+              <path d="M112,121H184" fill="none" stroke="#0B7275" stroke-width="3" marker-end="url(#arr-teal)"/>
+              <g fill="#ffffff" stroke="#1B365D" stroke-width="1.5">
+                <rect x="96" y="12" width="108" height="34" rx="17"/><rect x="14" y="104" width="96" height="34" rx="17"/><rect x="190" y="104" width="96" height="34" rx="17"/>
+              </g>
+              <g font-size="13" font-weight="600" fill="#1B365D" text-anchor="middle">
+                <text x="150" y="34">Confounder</text><text x="62" y="126">Exposure</text><text x="238" y="126">Outcome</text>
+              </g>
+            </svg>
+            <figcaption>A causal diagram comes first: it shows which variables to adjust for, and which to leave alone, before any model is fit.</figcaption>
+          </figure>
+          <div>
+            <p class="kicker">Data science across fields · 2015–present</p>
+            <h3>Statistical collaborations</h3>
+            <p class="question">Most analyses go wrong before any model is fit, at the point of deciding what to compare with what.</p>
+            <p>I have been the analysis lead or advisor on 19 research projects in diverse fields (e.g., neuroscience, archaeology, psychology, ecology). Typical work: draw a causal diagram, fit mixed-effects or Bayesian models, and explain what the data can and cannot support.</p>
+            <p>Results include papers in <em>Current Biology</em>, <em>Philosophical Transactions of the Royal Society B</em> and <em>Ecological Modelling</em>, most with public code.</p>
+            <ul class="tags"><li>Causal inference</li><li>Mixed-effects models</li><li>Study design</li><li>R</li></ul>
+            <p class="links"><a href="https://doi.org/10.1016/j.cub.2024.02.071" target="_blank" rel="noopener">Current Biology (2024)</a><a href="https://github.com/desai-nisarg/Geometry-model" target="_blank" rel="noopener">Example code</a></p>
+          </div>
+        </article>
+
+        <aside class="coursework-band" aria-labelledby="coursework-title">
+          <div>
+            <p class="kicker">Georgia Tech · M.S. in Computer Science (Machine Learning) · GPA 4.00 · 2024–present</p>
+            <h3 id="coursework-title">Coursework</h3>
+            <p>Language models and a question-answering network built by hand in PyTorch; supervised, unsupervised and reinforcement learning compared in four reports; tree ensembles written from scratch for trading; a team Android app; Bayesian modeling with PyMC.</p>
+            <p class="links"><a class="btn small primary" href="projects/coursework.html">Course by course</a></p>
+          </div>
+          <ul class="course-chips" aria-label="Completed courses">
+            <li><a href="projects/coursework.html#nlp">Natural Language Processing</a></li>
+            <li><a href="projects/coursework.html#ml">Machine Learning</a></li>
+            <li><a href="projects/coursework.html#sdp">Software Development Process</a></li>
+            <li><a href="projects/coursework.html#ml4t">Machine Learning for Trading</a></li>
+            <li><a href="projects/coursework.html#bayes">Bayesian Statistics</a></li>
+          </ul>
+        </aside>
+
+        <h2 class="sub">Smaller projects</h2>
+        <div class="cards">
+          <article class="card">
+            <p class="kicker">Internship · 0ptimus Analytics · 2019</p>
+            <h3>Faster voter-turnout models</h3>
+            <p>Built and compared five ways to predict turnout from several past elections (XGBoost, random forests, logistic regression). A 4% training sample matched full-data accuracy, and one approach gave ~70× faster training at comparable accuracy.</p>
+            <div class="bars" role="img" aria-label="Pipeline run time: 13 hours on full data, 50 minutes on a 4 percent sample">
+              <p>Pipeline run time</p>
+              <div><span>Full data</span><b><i style="width:100%"></i></b><em>13 h</em></div>
+              <div><span>4% sample</span><b><i class="fast" style="width:6.4%"></i></b><em>50 min</em></div>
+            </div>
+          </article>
+          <article class="card">
+            <p class="kicker">Hackathon · PIT-UN Tech for Change, Georgia State University · 2025</p>
+            <h3>Scoring sites for affordable housing</h3>
+            <p>Built a tool that scores possible development sites in Georgia against the state's criteria for housing tax credits (about 40 measures of nearby amenities such as grocery stores, schools and healthcare), a job developers usually do by hand in Google Maps.</p>
+            <ul class="tags"><li>Python</li><li>pandas</li><li>Google Maps Places API</li></ul>
+            <p class="links"><a href="https://newventurefund.badges.parchment.com/public/assertions/sNqEpvR4TeuZZLxoskF3dQ" target="_blank" rel="noopener">Participant badge</a></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about">
+      <div class="wrap about-grid">
+        <div>
+          <p class="kicker">About</p>
+          <p>I am a data scientist who trained as a biologist. I build computer-vision and audio models that measure what animals do, and I use Bayesian statistics to work out what those measurements mean. I am a Postdoctoral Fellow at Emory University in Atlanta and a part-time master's student in computer science at Georgia Tech.</p>
+          <p>I have been interested in wildlife since I was a child, and I studied biology and mathematics at IISER Pune in India. My first research jobs there were surveying birds up a mountainside in Arunachal Pradesh and writing simulations of when plants flower.</p>
+          <p>For my Ph.D. at the University of Minnesota, I recorded wild chimpanzees in Tanzania with a field team I trained. Collecting the recordings turned out to be the easier half. To analyze them I taught myself statistics and machine learning from textbooks and online courses, and along the way I became the person other researchers came to with their data: 19 projects so far, in fields from archaeology to neuroscience.</p>
+          <p>A postdoc in a neuroscience lab at Minnesota moved me into deep learning, where I built <a href="projects/openapepose.html">OpenApePose</a>. At Emory I designed a <a href="projects/movement-grammar.html">3D motion-capture system</a> from the cameras up, and I lead the statistics for a study of <a href="projects/zika-brain.html">how early Zika virus infection affects the developing brain</a>.</p>
+        </div>
+        <aside>
+          <h3>What I work with</h3>
+          <ul>
+            <li>PyTorch; MMPose, JARVIS, Keypoint-MoSeq</li>
+            <li>Multi-GPU training on computing clusters</li>
+            <li>2D and 3D pose estimation, multi-camera capture</li>
+            <li>Audio signal processing</li>
+            <li>Bayesian models (brms, PyMC) and causal diagrams</li>
+            <li>Python, R, SQL, Git; some Java</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ PUBLICATIONS ============ -->
+    <section id="publications" class="alt">
+      <div class="wrap">
+        <h2>Publications</h2>
+        <p class="section-intro">15 peer-reviewed papers and 1 preprint, with code wherever it is public.</p>
+
+        <ol class="pubs">
+          <li><strong>Desai, N.</strong>, Love, K., van Schoor, A., … Chahroudi, A., &amp; Raper, J. (2026). Altered neurodevelopment, CSF volume, and emotional reactivity following postnatal Zika virus infection in infant macaques. <em>bioRxiv</em> (preprint; in revision at <em>Communications Biology</em>). <a href="https://doi.org/10.64898/2026.03.27.714817" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/ZIKV-longitudinal-study" target="_blank" rel="noopener">code</a></li>
+          <li><strong>Desai, N.</strong>, Bala, P., Richardson, R., Raper, J., Zimmermann, J., &amp; Hayden, B. (2023). OpenApePose, a database of annotated ape photographs for pose estimation. <em>eLife</em>, 12:RP86873. <a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/OpenApePose" target="_blank" rel="noopener">code</a></li>
+          <li><strong>Desai, N.</strong>, Fedurek, P., Slocombe, K. E., &amp; Wilson, M. L. (2022). Chimpanzee pant-hoots encode individual information more reliably than group differences. <em>American Journal of Primatology</em>, 84(11):e23430. <a href="https://doi.org/10.1002/ajp.23430" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Gombe-dialects" target="_blank" rel="noopener">code</a></li>
+          <li>Mouginot, M., Wilson, M. L., <strong>Desai, N.</strong>, &amp; Surbeck, M. (2024). Differences in expression of male aggression between wild bonobos and chimpanzees. <em>Current Biology</em>. <a href="https://doi.org/10.1016/j.cub.2024.02.071" target="_blank" rel="noopener">doi</a></li>
+          <li>Crouse, K., <strong>Desai, N.</strong>, Cassidy, K., Stahler, E., Lehman, C., &amp; Wilson, M. L. (2022). Larger territories reduce mortality risk for chimpanzees, wolves, and agents: Multiple lines of evidence in a model validation framework. <em>Ecological Modelling</em>, 471:110063. <a href="https://doi.org/10.1016/j.ecolmodel.2022.110063" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Geometry-model" target="_blank" rel="noopener">code</a></li>
+          <li>Eleuteri, V., van der Werff, J., Wilhelm, W., Soldati, A., Crockford, C., <strong>Desai, N.</strong>, Fedurek, P., … Hobaiter, C. (2025). Chimpanzee drumming shows rhythmicity and subspecies variation. <em>Current Biology</em>. <a href="https://doi.org/10.1016/j.cub.2025.04.019" target="_blank" rel="noopener">doi</a></li>
+          <li>Khaksar, S., <strong>Desai, N.</strong>, Eren, M. I., &amp; Tostevin, G. (2023). The influence of cut material on the slicing efficiency effects of stone tool flake size, edge length, and gross edge curvature. <em>Journal of Archaeological Science: Reports</em>, 47:103700. <a href="https://doi.org/10.1016/j.jasrep.2022.103700" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Cut-material-and-efficiency" target="_blank" rel="noopener">code</a></li>
+          <li>Khaksar, S., <strong>Desai, N.</strong>, Eren, M. I., &amp; Tostevin, G. (2023). Experimental assessment of plan-view and profile-view gross-edge curvature on stone flake slicing efficiency. <em>Archaeometry</em>. <a href="https://doi.org/10.1111/arcm.12803" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Edge-curvature-and-efficiency" target="_blank" rel="noopener">code</a></li>
+          <li>Massaro, A., Gilby, I., <strong>Desai, N.</strong>, Weiss, A., Feldblum, J., Pusey, A., &amp; Wilson, M. L. (2022). Correlates of individual participation in boundary patrols by male chimpanzees. <em>Philosophical Transactions of the Royal Society B</em>, 377(1851):20210151. <a href="https://doi.org/10.1098/rstb.2021.0151" target="_blank" rel="noopener">doi</a></li>
+          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Kelty-Stephen, D. G. (2021). Proprioceptive afferents differentially contribute to effortful perception of object heaviness and length. <em>Experimental Brain Research</em>, 239(4):1085–1098. <a href="https://doi.org/10.1007/s00221-021-06045-4" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Heaviness-Length-EMG" target="_blank" rel="noopener">code</a></li>
+          <li>Das, S., Erinjery, J. J., <strong>Desai, N.</strong>, Mohan, K., Kumara, H. N., &amp; Singh, M. (2019). Deceased-infant carrying in nonhuman anthropoids: Insights from systematic analysis and case studies of bonnet macaques and lion-tailed macaques. <em>Journal of Comparative Psychology</em>, 133(2):156. <a href="https://doi.org/10.1037/com0000140" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Deceased-infant-carrying" target="_blank" rel="noopener">code</a></li>
+          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2016). Division of labour: a democratic approach towards understanding manual asymmetries in non-human primates. <em>Current Science</em>, 110(9):1630–1638. <a href="https://doi.org/10.18520/cs/v110/i9/1630-1638" target="_blank" rel="noopener">doi</a></li>
+          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2016). Self-organization of laterally asymmetrical movements as a consequence of space-time optimization. <em>Journal of Theoretical Biology</em>, 390:50–60. <a href="https://doi.org/10.1016/j.jtbi.2015.10.038" target="_blank" rel="noopener">doi</a></li>
+          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2015). Division of labor in hand usage is associated with higher hand performance in free-ranging bonnet macaques. <em>PLoS ONE</em>, 10(3):e0119337. <a href="https://doi.org/10.1371/journal.pone.0119337" target="_blank" rel="noopener">doi</a></li>
+          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2014). Do right-handed monkeys use the right cheek pouch before the left? <em>PLoS ONE</em>, 9(5):e97971. <a href="https://doi.org/10.1371/journal.pone.0097971" target="_blank" rel="noopener">doi</a></li>
+          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2014). Division of labor in hand usage in free-ranging bonnet macaques. <em>American Journal of Primatology</em>, 76(6):576–585. <a href="https://doi.org/10.1002/ajp.22250" target="_blank" rel="noopener">doi</a></li>
+        </ol>
+
+        <p class="more">Citations and the full record are on <a href="https://scholar.google.com/citations?user=u6LVnycAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
+
+        <h2 class="sub">Recognition</h2>
+        <ul class="recognition">
+          <li><strong>Society for Neuroscience press conference</strong> (2026): selected for “New Biomarkers Offer Clues for Brain Disorders” (selection rate: 30–40 of 8,000–10,000 abstracts)</li>
+          <li><strong>Pediatric Research Alliance Pilot Grant</strong> (2024–25): $50,000, Co-PI, for the 3D motion-tracking system</li>
+          <li><strong>Best Poster Award</strong> (2024): EPC Research Day Symposium, Emory</li>
+          <li><strong>Doctoral Dissertation Fellowship</strong> and <strong>Interdisciplinary Doctoral Fellowship</strong> (2019–21): University of Minnesota, $25,000 each</li>
+          <li><strong>KVPY National Fellowship</strong> (2009–15): Department of Science &amp; Technology, Government of India</li>
+          <li><strong>In the press:</strong> Smithsonian National Museum of Natural History (“The Scientist Is In”), <em>The Conversation</em> and <em>EurekAlert!</em> (2018)</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ BACKGROUND ============ -->
+    <section id="background">
+      <div class="wrap">
+        <h2>Background</h2>
+        <ol class="timeline">
+          <li>
+            <p class="when">Aug 2023 – present</p>
+            <div>
+              <h3>Postdoctoral Fellow</h3>
+              <p class="where">Emory National Biomedical Research Center, Emory University · Atlanta, GA</p>
+              <p>Lead the data science for studies of how early viral infections affect brain and behavioral development: the 3D motion-capture system, the audio call detector, and Bayesian analyses of MRI, immune and behavioral data. Work daily with neuroscientists, physicians (pediatrics, infectious diseases), and Parkinson's researchers. Co-PI on a funded $50K pilot grant and Principal Investigator on two 2026 proposals.</p>
+            </div>
+          </li>
+          <li>
+            <p class="when">2022 – 2023</p>
+            <div>
+              <h3>Postdoctoral Associate</h3>
+              <p class="where">Department of Neuroscience, University of Minnesota · Minneapolis, MN</p>
+              <p>Created and open-sourced OpenApePose (<em>eLife</em>, 2023): designed the image collection, ran annotation with a commercial service, trained and benchmarked pose-estimation models on multiple GPUs, and documented where the models fail.</p>
+            </div>
+          </li>
+          <li>
+            <p class="when">2015 – present</p>
+            <div>
+              <h3>Statistical Consultant &amp; Research Collaborator</h3>
+              <p class="where">Multiple national and international collaborations</p>
+              <p>Analysis lead or advisor on 19 research projects in diverse fields (e.g., neuroscience, archaeology, psychology, ecology), from study design to published results. Peer reviewer for 13 journals (about 17 manuscripts).</p>
+            </div>
+          </li>
+          <li>
+            <p class="when">2015 – 2022</p>
+            <div>
+              <h3>Ph.D. Researcher</h3>
+              <p class="where">Department of Anthropology, University of Minnesota · Minneapolis, MN</p>
+              <p>Studied chimpanzee vocal communication with field recordings from Tanzania and Uganda, machine-learning classifiers and Bayesian models. Trained and supervised two field assistants in Tanzania, mentored 17 undergraduate researchers, and taught for seven semesters.</p>
+            </div>
+          </li>
+          <li>
+            <p class="when">Summer 2019</p>
+            <div>
+              <h3>Data Science Intern</h3>
+              <p class="where">0ptimus Analytics · Washington, DC area</p>
+              <p>Built and compared five ways to predict voter turnout from several past elections (XGBoost, random forests, logistic regression). One approach gave ~70× faster training at comparable accuracy, and a 4% training sample matched full-data accuracy, which cut the pipeline from 13 hours to 50 minutes.</p>
+            </div>
+          </li>
+        </ol>
+
+        <h2 class="sub">Education</h2>
+        <ul class="edu">
+          <li>
+            <h3>M.S., Computer Science (Machine Learning)</h3>
+            <p class="where">Georgia Institute of Technology · in progress, expected 2028 · GPA 4.00</p>
+            <p>Completed so far: Machine Learning, Bayesian Statistics, Natural Language Processing, Machine Learning for Trading, Software Development Process. <a href="projects/coursework.html">What I built in each course</a>.</p>
+          </li>
+          <li>
+            <h3>Ph.D., Biological Anthropology (Minor: Ecology, Evolution, and Behavior)</h3>
+            <p class="where">University of Minnesota · 2022 · GPA 3.81</p>
+            <p>Dissertation on chimpanzee vocalizations: <a href="https://conservancy.umn.edu/server/api/core/bitstreams/84f8fbfa-3027-46a1-9f6d-4335d7cf8203/content" target="_blank" rel="noopener"><em>Exploring the form and functions of chimpanzee pant-hoots from basic evolutionary principles</em></a> (PDF, University of Minnesota Digital Conservancy).</p>
+            <p>Graduate statistics coursework: Statistical Learning &amp; Data Mining, Applied Multivariate Statistics, Advanced Multiple Regression Analysis.</p>
+          </li>
+          <li>
+            <h3>B.S. &amp; M.S., Biology (Minor: Mathematics)</h3>
+            <p class="where">Indian Institute of Science Education and Research (IISER) Pune · 2015 · GPA 8.1/10</p>
+            <p>Master's thesis on hand use in wild macaques, which led to five peer-reviewed papers.</p>
+            <p>Mathematics and computing coursework: Linear Algebra, Multivariable Calculus, Probability &amp; Statistics, Algorithms, Numerical Methods &amp; Scientific Computing.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="contact alt">
+      <div class="wrap">
+        <h2>Get in touch</h2>
+        <p>I am always glad to talk about machine learning, statistics or animal behavior, and most of all about how to tell whether a result is real. Email is the best way to reach me.</p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:nisarg.p.desai@gmail.com">nisarg.p.desai@gmail.com</a>
+          <a class="btn" href="assets/Nisarg_Desai_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
+          <a class="btn" href="https://github.com/desai-nisarg" rel="me noopener" target="_blank">GitHub</a>
+          <a class="btn" href="https://scholar.google.com/citations?user=u6LVnycAAAAJ" rel="me noopener" target="_blank">Google Scholar</a>
+          <a class="btn" href="https://www.linkedin.com/in/desai-nisarg" rel="me noopener" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Nisarg Desai · Atlanta, GA</p>
+    </div>
+  </footer>
+  <script src="site.js?v=16"></script>
+</body>
+</html>

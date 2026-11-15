@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zika and the developing brain | Nisarg Desai</title>
+  <meta name="description" content="How to learn as much as 24 animals can honestly tell you: the Bayesian analysis behind a study of Zika virus infection soon after birth, with priors from earlier studies, two kinds of control, and the checks that changed the conclusions.">
+  <meta name="author" content="Nisarg Desai">
+  <!-- launch-meta -->
+  <link rel="canonical" href="https://desai-nisarg.github.io/projects/zika-brain.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Zika and the developing brain">
+  <meta property="og:description" content="How to learn as much as 24 animals can honestly tell you: the Bayesian analysis behind a study of Zika virus infection soon after birth, with priors from earlier studies, two kinds of control, and the checks that changed the conclusions.">
+  <meta property="og:url" content="https://desai-nisarg.github.io/projects/zika-brain.html">
+  <meta property="og:site_name" content="Nisarg Desai">
+  <meta property="og:image" content="https://desai-nisarg.github.io/assets/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nisarg Desai, Ph.D.: machine learning, computer vision, Bayesian statistics">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /launch-meta -->
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231B365D'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23ffffff'%3END%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=16">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">Nisarg Desai</a>
+      <nav aria-label="Sections">
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#contact">Contact</a>
+        <button class="theme-toggle" type="button">Light mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="story-head">
+      <div class="wrap">
+        <p class="crumb"><a href="../index.html#projects">&larr; All projects</a></p>
+        <p class="kicker">Emory University · 2023–present · Bayesian statistics · Study design · Reproducible analysis</p>
+        <h1>Zika and the developing brain</h1>
+        <p class="standfirst">Twelve infant monkeys were infected with Zika virus at five weeks old and followed until they were eight months old, alongside twelve controls. My job was the statistics: to learn as much as 24 animals can honestly tell you, and no more.</p>
+        <ul class="glance">
+          <li><strong>24</strong><span>infants, 12 infected and 12 controls</span></li>
+          <li><strong>8 months</strong><span>of follow-up</span></li>
+          <li><strong>7</strong><span>kinds of outcome</span></li>
+          <li><strong>2</strong><span>kinds of control</span></li>
+          <li><strong>9</strong><span>public analysis scripts</span></li>
+        </ul>
+      </div>
+    </header>
+
+    <article class="story">
+      <div class="wrap">
+
+        <h2>An infection after birth</h2>
+
+        <p>Zika virus is known for what it does before birth. During the epidemic of 2015 and 2016, infection in pregnancy was linked to microcephaly and other birth defects. Much less is known about infection after birth, even though children account for 10 to 31 percent of Zika infections and the brain grows rapidly through the first two years of life.</p>
+
+        <p>That question is hard to answer in children. You cannot choose who gets infected or when, and a mild infection often goes unnoticed. Our lab studies it using infant rhesus macaque models. In this study, 12 infants were infected at about five weeks of age. The virus peaked in the blood within three days and was gone within three weeks. Then we watched what happened to development over the next eight months.</p>
+
+        <ol class="when-list wide">
+          <li><b>Weeks 2–9</b><span>Weekly exams of reflexes, attention and temperament</span></li>
+          <li class="hot"><b>Week 5</b><span>Zika infection, or a control treatment</span></li>
+          <li><b>Month 3</b><span>Brain MRI</span></li>
+          <li><b>Months 4 and 6</b><span>Visual acuity by eye tracking</span></li>
+          <li><b>Month 5</b><span>Response to a brief stressor</span></li>
+          <li><b>Months 7–8</b><span>Attachment to the caregiver</span></li>
+        </ol>
+
+        <h2>Twenty-four animals</h2>
+
+        <p>The statistics of a study like this are shaped by one number. There are 24 animals. Split them by infection and you have 12 against 12. Split again by sex and you have 6. Split the controls by type and you have 3. Every one of those animals matters, and there will not be more of them.</p>
+
+        <p class="pull">A study this small cannot afford to waste information, and it cannot afford to fool itself.</p>
+
+        <p>Those two needs pull in opposite directions, and most of my decisions were about holding both.</p>
+
+        <ul>
+          <li><strong>Report a range, never a verdict.</strong> Every model is Bayesian (written in R with brms). Each result is an estimate with an 89% interval and the probability that the effect goes in the stated direction. There are no p-values in the paper and nothing is called “significant.”</li>
+          <li><strong>Borrow from the past, where the past exists.</strong> The lab had measured healthy infant macaques before, in earlier studies. Ignoring that would be waste. So for the control animals, each model starts from what those studies found, weighted by their size, and lets the new data pull it. For infected animals there was nothing comparable to borrow, so the models start with almost no opinion.</li>
+          <li><strong>Fit the model to the measurement.</strong> Exam scores on an ordered scale get an ordinal model. Counts of behaviors get a negative binomial model. Percent of time looking gets a beta regression, with missing values estimated inside the model. Brain volumes get a linear model adjusted for overall brain size, so a region is not called small merely because the whole brain is.</li>
+        </ul>
+
+        <h2>Two kinds of control</h2>
+
+        <p>An infection does two things at once. The virus acts on the body, and the body's immune system reacts. Either could alter a developing brain. To separate them, half of the controls were left alone, and the other half received a synthetic molecule that sets off the immune reaction to a virus without any virus.</p>
+
+        <p>The weekly exams show why that matters. Two things worsened after infection, and the two controls split them apart.</p>
+
+        <figure class="plate mid">
+          <img src="../assets/zika/neurobehavior.png" width="1300" height="1625" loading="lazy" alt="Four rows of panels showing estimated differences in exam scores between groups from 2 to 9 weeks of age, for motor, neuromotor, orientation and state control scores">
+          <figcaption>Estimated differences between groups as the infants aged, with 89% intervals. Each row is one part of the exam; the columns compare immune-stimulated with untreated controls, infected with immune-stimulated, and infected with untreated. The dotted vertical line marks the infection.</figcaption>
+        </figure>
+
+        <p><strong>Attention</strong> to sights and sounds (third row) fell in the infected infants. It fell about as much in the immune-stimulated controls. That points to the immune reaction, not the virus.</p>
+
+        <p><strong>Emotional regulation</strong> (bottom row: how irritable an infant is, and how hard to console) worsened only in the infected infants, week after week. The immune-stimulated controls showed no such change. That one belongs to the virus.</p>
+
+        <h2>What the animals showed</h2>
+
+        <p>Across eight months, the picture that emerged was of an infection that leaves the basics intact and changes how emotion is regulated.</p>
+
+        <ul>
+          <li><strong>In the first weeks,</strong> poorer emotional regulation, beginning at the first exam after infection and growing through week 9.</li>
+          <li><strong>At five months,</strong> more hostile behavior, and in an unusual place: during the least threatening parts of the stress test, which is not typical for this test.</li>
+          <li><strong>At seven to eight months,</strong> attachment to the caregiver was as strong as in controls, but distress at being kept apart was blunted. Infected males screamed less. (I followed that thread into the sound of the calls themselves: <a href="zika-vocalizations.html">What a scream carries</a>.)</li>
+          <li><strong>In the brain at three months,</strong> more cerebrospinal fluid, most clearly in females, sitting in the space around the brain and not in its ventricles. Males had a larger amygdala. Females had a smaller temporal-limbic cortex.</li>
+        </ul>
+
+        <figure class="wide">
+          <img src="../assets/zika/mri.jpg" width="1600" height="1113" loading="lazy" alt="MRI slices of two infant macaque brains side by side. Arrows on the infected animal's scans point to wider fluid-filled spaces around the folds of the brain">
+          <figcaption>MRI at three months: an infected male (left two columns) and a control male (right two columns). Arrows mark the wider fluid-filled spaces around the brain of the infected animal.</figcaption>
+        </figure>
+
+        <figure class="wide plate">
+          <img src="../assets/zika/brain-regions.png" width="1500" height="960" loading="lazy" alt="For each of twelve brain regions, the estimated difference between infected and control animals, shown separately for females and males with intervals">
+          <figcaption>The estimated difference between infected and control animals in each brain region, adjusted for overall brain size, for females (red) and males (blue). Shapes show the full range of plausible values; the bars are 89% intervals.</figcaption>
+        </figure>
+
+        <p>One result was a clear absence. The early drop in attention raised the worry of lasting damage to vision. We tested visual acuity at four and six months, at three levels of difficulty, and found no difference at either age. I gave that null result the same care as the positive ones, because a careful “no” is worth as much to a parent or a doctor as a “yes.”</p>
+
+        <figure class="plate narrow">
+          <img src="../assets/zika/visual-acuity.png" width="1100" height="1333" loading="lazy" alt="Estimated differences in looking time between infected and control infants at high, medium and low contrast, at four and six months; all intervals include zero">
+          <figcaption>Visual acuity at four and six months. Every interval includes zero.</figcaption>
+        </figure>
+
+        <h2>Where the checks changed the story</h2>
+
+        <p>The first version of the analysis was not the last. Reviewers pushed, I pushed, and four checks shaped what the paper now says.</p>
+
+        <ul>
+          <li><strong>An effect before its cause.</strong> My main model described each group difference as a straight line over age. For emotional regulation, that line crossed into “credible” at four weeks, a week before anyone was infected. A virus cannot do that. I refit the model with every week estimated separately. The virus-specific difference appeared only after infection; the early signal reflected a brief dip in the untreated controls, not anything particular to the infected group. The same check found that a small difference in reflexes really was there before infection, so the paper now calls it what it is: variation between animals, not a consequence.</li>
+          <li><strong>Pooled controls.</strong> Most analyses compare infected animals with both kinds of control together. Is that fair? I refit everything with the three groups apart. The main findings held against each control group separately. Two did not hold against both (reductions in visual and auditory cortex), and the paper now treats those with caution.</li>
+          <li><strong>“Different in males” is a claim about a difference.</strong> An effect that is credible in one sex and not in the other does not show that the sexes differ. That needs its own test. I estimated the difference between the sexes directly: strong for some regions, weaker for others, and all labeled preliminary, because six animals per subgroup cannot carry more.</li>
+          <li><strong>Does more virus mean more harm?</strong> If the virus causes these changes, animals that carried more of it might be expected to show more. Within the 12 infected animals, I tested that. A few associations crossed the threshold, but each one depended on whether a single animal with an unusually low viral load was included. The paper reports the analysis as exploratory and the answer as a null, and says why a null among 12 animals settles little.</li>
+        </ul>
+
+        <p class="pull">The shape of a model can create a result. The only defense is to change the shape and see whether the result stays.</p>
+
+        <h2>What I would still not claim</h2>
+
+        <p>The brain was scanned at three months and the behaviors were measured at other ages, so the study cannot tie a particular brain change to a particular behavior. The explanations offered for the extra fluid are inferences from images, not measurements of how the fluid moves. The infants were raised in a nursery, not by their mothers. And eight months is early. Whether these changes fade, persist or grow is a question for longer follow-up.</p>
+
+        <h2>Open by default</h2>
+
+        <p>All of the analysis code and the data behind it are public: nine R scripts, in the order the analyses appear in the paper, with the priors and the sensitivity analyses. Anyone can rerun it, and anyone can disagree with a choice I made and see what changes.</p>
+
+        <p class="links"><a href="https://github.com/desai-nisarg/ZIKV-longitudinal-study" target="_blank" rel="noopener">Code and data on GitHub</a><a href="https://doi.org/10.64898/2026.03.27.714817" target="_blank" rel="noopener">Preprint on bioRxiv</a></p>
+
+        <div class="aside-note">
+          <p><strong>Status.</strong> Posted as a preprint in March 2026 and in revision at <em>Communications Biology</em>. This page follows the revised analysis, so a few details differ from the preprint.</p>
+        </div>
+
+        <div class="credits">
+          <p>With Jessica Raper (senior author), Ann Chahroudi and 18 other colleagues; the full author list is on the preprint. Funded by the National Institute of Neurological Disorders and Stroke (R01 NS120182), the NIH Office of the Director (P51 OD011132) and the other awards listed in the paper.</p>
+        </div>
+
+      </div>
+    </article>
+
+    <nav class="story-nav" aria-label="More projects">
+      <div class="wrap">
+        <a href="movement-grammar.html">&larr; Previous: The grammar of movement</a>
+        <a href="zika-vocalizations.html">Next: What a scream carries &rarr;</a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Nisarg Desai · Atlanta, GA</p>
+    </div>
+  </footer>
+  <script src="../site.js?v=16"></script>
+</body>
+</html>

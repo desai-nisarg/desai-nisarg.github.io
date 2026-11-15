@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What counts as a bark? | Nisarg Desai</title>
+  <meta name="description" content="Primatologists sort chimpanzee calls into types by ear. I tested whether a computer would sort 281 calls the same way, and whether features built for human speech recognition beat the field's traditional measurements.">
+  <meta name="author" content="Nisarg Desai">
+  <!-- launch-meta -->
+  <link rel="canonical" href="https://desai-nisarg.github.io/projects/call-types.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="What counts as a bark?">
+  <meta property="og:description" content="Primatologists sort chimpanzee calls into types by ear. I tested whether a computer would sort 281 calls the same way, and whether features built for human speech recognition beat the field's traditional measurements.">
+  <meta property="og:url" content="https://desai-nisarg.github.io/projects/call-types.html">
+  <meta property="og:site_name" content="Nisarg Desai">
+  <meta property="og:image" content="https://desai-nisarg.github.io/assets/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nisarg Desai, Ph.D.: machine learning, computer vision, Bayesian statistics">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /launch-meta -->
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231B365D'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23ffffff'%3END%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=16">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">Nisarg Desai</a>
+      <nav aria-label="Sections">
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#contact">Contact</a>
+        <button class="theme-toggle" type="button">Light mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="story-head">
+      <div class="wrap">
+        <p class="crumb"><a href="../index.html#projects">&larr; All projects</a></p>
+        <p class="kicker">University of Minnesota · Ph.D., 2017–2022 · Bioacoustics · Machine learning · Comparing methods</p>
+        <h1>What counts as a bark?</h1>
+        <p class="standfirst">Primatologists sort chimpanzee calls into types by ear. I asked whether a computer, given only the sound, would sort them the same way, and whether tools built for human speech would do it better than the field's own.</p>
+        <ul class="glance">
+          <li><strong>281</strong><span>calls from Gombe, recorded 1971–73</span></li>
+          <li><strong>5</strong><span>call types</span></li>
+          <li><strong>2</strong><span>ways of measuring a call</span></li>
+          <li><strong>5</strong><span>statistical methods</span></li>
+          <li><strong>3 in 4</strong><span>calls sorted correctly, at best</span></li>
+        </ul>
+      </div>
+    </header>
+
+    <article class="story">
+      <div class="wrap">
+
+        <h2>Listen first</h2>
+
+        <p>Here are five chimpanzee calls. Play them before you read on.</p>
+
+        <p>Each picture is a spectrogram of the recording under it. Time runs from left to right and pitch runs upward, so a high call sits high in the picture. Darker means louder. All five are drawn to the same scale, seven seconds wide.</p>
+
+        <figure class="plate">
+          <img src="../assets/calltypes/spec-bark.png" width="1190" height="339" loading="lazy" alt="Spectrogram of chimpanzee barks: fifteen short, evenly spaced calls over six seconds, each a stack of arched bands">
+          <audio controls preload="none" src="../assets/calltypes/bark.wav" aria-label="Recording of chimpanzee barks">Your browser cannot play this recording.</audio>
+          <figcaption><strong>Barks.</strong> Short, high and repeated. Each one lasts less than a third of a second.</figcaption>
+        </figure>
+
+        <figure class="plate">
+          <img src="../assets/calltypes/spec-pant-hoot.png" width="1190" height="339" loading="lazy" alt="Spectrogram of a chimpanzee pant-hoot: three seconds of low hoots, then tall arched screams alternating with noisy breaths, then low hoots again">
+          <audio controls preload="none" src="../assets/calltypes/pant-hoot.wav" aria-label="Recording of a chimpanzee pant-hoot">Your browser cannot play this recording.</audio>
+          <figcaption><strong>A pant-hoot.</strong> The chimpanzee's long-distance call, and the only one of the five built from different kinds of sound in a set order: low hoots that build up, high screams, then a wind-down.</figcaption>
+        </figure>
+
+        <figure class="plate">
+          <img src="../assets/calltypes/spec-rough-grunt.png" width="1190" height="339" loading="lazy" alt="Spectrogram of chimpanzee rough-grunts: short, low, noisy calls scattered over five seconds, with most of their energy near the bottom of the picture">
+          <audio controls preload="none" src="../assets/calltypes/rough-grunt.wav" aria-label="Recording of chimpanzee rough-grunts">Your browser cannot play this recording.</audio>
+          <figcaption><strong>Rough-grunts.</strong> Short, low and often noisy. Chimpanzees often give them while eating.</figcaption>
+        </figure>
+
+        <figure class="plate">
+          <img src="../assets/calltypes/spec-scream.png" width="1190" height="339" loading="lazy" alt="Spectrogram of chimpanzee screams: five long, loud, noisy calls over three seconds, filling the picture from bottom to top">
+          <audio controls preload="none" src="../assets/calltypes/scream.wav" aria-label="Recording of chimpanzee screams">Your browser cannot play this recording.</audio>
+          <figcaption><strong>Screams.</strong> Long, high and noisy.</figcaption>
+        </figure>
+
+        <figure class="plate">
+          <img src="../assets/calltypes/spec-waa-bark.png" width="1190" height="339" loading="lazy" alt="Spectrogram of two chimpanzee waa-barks: each about a third of a second long, high and noisy">
+          <audio controls preload="none" src="../assets/calltypes/waa-bark.wav" aria-label="Recording of chimpanzee waa-barks">Your browser cannot play this recording.</audio>
+          <figcaption><strong>Waa-barks.</strong> Longer than a bark, shorter than a scream, and noisy like a scream.</figcaption>
+        </figure>
+
+        <p>The pant-hoot and the rough-grunts are easy to pick out. Now try the other three. Where does a bark end and a waa-bark begin? When is a long waa-bark a short scream?</p>
+
+        <p>If you are not sure, you are in good company. The computer was not sure either.</p>
+
+        <p>These recordings are fifty years old. Hetty van de Rijt-Plooij and Frans Plooij made them at Gombe National Park, Tanzania, between 1971 and 1973, and the tapes were later digitized and <a href="https://doi.org/10.1038/sdata.2015.27" target="_blank" rel="noopener">released to the public</a>. I began this study in late 2017, while my own field recordings from Gombe were still coming in, so I worked with theirs.</p>
+
+        <h2>Why the names matter</h2>
+
+        <p>Almost every study of chimpanzee calls begins with a name. Do pant-hoots carry a <a href="chimpanzee-dialects.html">community's dialect</a>? Do rough-grunts tell other chimpanzees what kind of food has been found? Do screams differ with how badly the caller is being attacked? Each question takes it for granted that we know what a pant-hoot, a rough-grunt or a scream is.</p>
+
+        <p>Where did the names come from? From people listening. In the 1960s Jane Goodall and Peter Marler described the calls of the Gombe chimpanzees by ear and by looking at spectrograms, and researchers have used their categories, with additions, ever since.</p>
+
+        <p>That is a sensible way to start. It also has problems.</p>
+
+        <ul>
+          <li><strong>Listeners differ.</strong> Two people can file the same call under different names, and each will tend to hear what they expect.</li>
+          <li><strong>The calls blend.</strong> Many chimpanzee calls grade into one another, as you just heard. Marler said so in 1976. A name draws a line across something that may have no line in it.</li>
+          <li><strong>One name can hide several calls.</strong> Researchers still argue about what rough-grunts mean, and part of the trouble may be that several different calls are being lumped together as “rough-grunts.”</li>
+        </ul>
+
+        <p>I had a practical reason to care as well. I wanted to test whether chimpanzee communities have dialects, and I knew my samples would be small. With small samples, the way you measure a call can decide the answer. So before measuring anything that mattered, I wanted to know which tools to trust.</p>
+
+        <h2>Two ways to measure a call</h2>
+
+        <p>A computer cannot sort sounds. It sorts numbers. So the first decision is which numbers to take from each call, and there were two schools of thought.</p>
+
+        <p><strong>The field's own measurements.</strong> Primatologists mostly measure pitch. How high is the call? How does the pitch rise and fall? At what frequency is the call loudest, and how long does it last? The standard tool is a program called LMA, written by Kurt Hammerschmidt at the German Primate Center in Göttingen. In March 2020 I visited his lab, and he taught me to use it. It gave me 90 measurements for each call.</p>
+
+        <p><strong>Measurements borrowed from speech recognition.</strong> The software that turns your voice into text does not measure pitch that way. It uses numbers with an unfriendly name, mel-frequency cepstral coefficients, built on a simple idea: measure sound the way an ear hears it.</p>
+
+        <p>Ears do not treat all frequencies alike. We hear some better than others, and a step of 100 hertz that is obvious in a low sound is much harder to notice in a high one. These features stretch and squeeze the frequency scale to match, then describe the overall shape of the sound. An open-source Python library, pyAudioAnalysis, gave me 136 such numbers for each call.</p>
+
+        <p>Why might they suit chimpanzee calls? Because a call evolved to be heard by another chimpanzee, not to be measured by a primatologist. Features built around hearing might capture what matters to the listener. They are built around human hearing, which is only a rough stand-in for a chimpanzee's, but it is a start. They had worked for frogs, birds and elephants. Nobody had used them to sort chimpanzee calls into types.</p>
+
+        <h2>Two kinds of test</h2>
+
+        <p>I went through the archive and pulled out calls of five types, 281 in all. I chose those five because I could recognize them with confidence, and I threw out poor recordings and choruses where several chimpanzees called at once. Then I ran two kinds of test.</p>
+
+        <p><strong>With the names.</strong> Show the computer 70% of the calls along with their names, let it learn, and then ask it to name the other 30%, which it has never heard. I tried three methods:</p>
+
+        <ul>
+          <li><strong>Discriminant function analysis</strong>, which primatologists have used for decades.</li>
+          <li><strong>A random forest</strong>, which builds hundreds of small decision trees and lets them vote.</li>
+          <li><strong>A neural network</strong>, and a very small one, with a single hidden layer. With 281 calls there was not enough data for anything deeper.</li>
+        </ul>
+
+        <p><strong>Without the names.</strong> Give the computer the measurements and nothing else, and ask what groups it finds on its own. Does it rediscover our five types? I used two standard methods for this, k-means clustering and principal components analysis.</p>
+
+        <p>I was teaching myself machine learning at the time, partly from Jeff Leek's online course, and the analysis uses the R toolkit that course teaches. An early version, with speech-recognition features only, became a talk at the Acoustical Society of America's meeting in May 2018. One of my slides asked the acousticians in the room for feedback.</p>
+
+        <h2>What happened</h2>
+
+        <p>How do you score a sorting machine? Take pant-hoots. Of the calls I had labeled as pant-hoots, how many did the computer find? And of the calls the computer called pant-hoots, how many had I labeled that way? A good method does well on both. The F1 score combines the two into one number from 0 to 100.</p>
+
+        <figure class="plate">
+          <img src="../assets/calltypes/f1-scores.png" width="1430" height="559" loading="lazy" alt="Two panels of F1 scores by call type for three methods. In both panels pant-hoots and screams score about 75 to 92, rough-grunts and waa-barks about 60 to 88, and barks lowest, from 25 to 57">
+          <figcaption>F1 scores on the calls held back for testing, for each call type and method. Left: the field's traditional measurements. Right: speech-recognition features. Drawn from Tables 4 and 5 of the dissertation.</figcaption>
+        </figure>
+
+        <p>Three things stand out.</p>
+
+        <p><strong>Nothing won.</strong> The best pairing was a random forest on the traditional measurements, which named 78% of the test calls correctly. The neural network on speech-recognition features got 77%. The worst pairing got 71%. With only 82 calls in the test set, each of those figures is uncertain by about ten points either way, so the differences between them mean very little. Roughly three calls in four, whatever I did.</p>
+
+        <p><strong>Pant-hoots and screams were easy.</strong> Every method scored between 74 and 92 on them.</p>
+
+        <p><strong>Barks were hard.</strong> No method scored above 57 on barks, and one scored 25. Barks, waa-barks and screams blend into one another, and the computer tripped over the same blend a human listener does.</p>
+
+        <p>So the speech-recognition features were not the improvement I was looking for. At their best they were a little ahead on pant-hoots, screams and waa-barks, and clearly behind on rough-grunts. Overall it was a draw.</p>
+
+        <h2>Without the names</h2>
+
+        <p>Would the computer find five types if nobody told it there were five? It did not. With either set of measurements, the natural number of groups was three.</p>
+
+        <p>Pant-hoots separated most cleanly. Barks never got a group of their own, at three groups or at five. They were scattered among the screams, the waa-barks and the rough-grunts.</p>
+
+        <div class="pair">
+          <figure class="plate">
+            <img src="../assets/calltypes/pca-traditional.png" width="996" height="829" loading="lazy" alt="Scatter plot of 281 calls on two axes, colored by call type, from the traditional measurements. The five ellipses overlap heavily in the middle of the plot">
+            <figcaption>The traditional measurements. Each point is a call, placed by the two combinations of measurements that vary most. Each ellipse holds about two-thirds of one call type.</figcaption>
+          </figure>
+          <figure class="plate">
+            <img src="../assets/calltypes/pca-speech.png" width="963" height="829" loading="lazy" alt="The same kind of scatter plot from the speech-recognition features. Pant-hoots and rough-grunts form their own clusters, while barks, screams and waa-barks overlap">
+            <figcaption>The speech-recognition features. Pant-hoots (light blue) and rough-grunts (green) pull apart from the rest. Barks (yellow) sit on top of screams and waa-barks.</figcaption>
+          </figure>
+        </div>
+
+        <p>This is where the speech-recognition features did better. In the pictures above, they separate the call types more cleanly than the traditional measurements do, even though nobody told the method which call was which. It was not a clean sweep. When I forced the clustering method to make exactly five groups, the groups matched my five names a little better with the traditional measurements (69% of calls against 64%).</p>
+
+        <p>They also turned up something I had not asked about. When I allowed six or seven groups, the rough-grunts split into two groups of their own. That fits what other researchers had suspected from listening: “rough-grunt” may be more than one call.</p>
+
+        <h2>What I decided</h2>
+
+        <p>I had gone looking for a better tool, and I found one that was about as good. For pant-hoots, the call I cared most about, the old method scored 85 and the best new one scored 88.</p>
+
+        <p>That was not enough to switch. Earlier studies of chimpanzee dialects had used the traditional measurements and discriminant function analysis. If I used the same tools and got a different answer, the difference could not be blamed on the tools. So for <a href="chimpanzee-dialects.html">the dialect study</a> I used the old ones.</p>
+
+        <p>It is not an exciting conclusion. But it is why, when the dialect study later disagreed with earlier ones, nobody could say I had simply measured the calls differently.</p>
+
+        <h2>What this does not show</h2>
+
+        <ul>
+          <li><strong>The answer key was me.</strong> The computer was graded against names that people gave the calls. When it disagrees with me about a bark, I cannot say which of us is wrong. Only the chimpanzees can, and asking them means playback experiments in the forest.</li>
+          <li><strong>I picked the easy cases.</strong> The archive's authors describe 39 call types. I used the five I was surest of, and only clear recordings. The real problem is harder than the one I tested.</li>
+          <li><strong>It is a small sample from one place.</strong> There are 281 calls here, from one population, on tapes from the early 1970s.</li>
+          <li><strong>I averaged each call over time.</strong> Every feature was averaged across the whole call, which throws away the order of events. For a pant-hoot, the order is most of the point.</li>
+          <li><strong>The neural network was tiny.</strong> One hidden layer says little about what deep networks can do with a large dataset.</li>
+        </ul>
+
+        <p>This chapter was never published as a paper. It is Chapter 1 of my dissertation.</p>
+
+        <h2>What I would do now</h2>
+
+        <p>Reading the chapter today, I notice how much effort went into choosing the numbers. Ninety hand-designed measurements against 136 others. The field of machine learning has mostly stopped doing that. You hand a deep network the spectrogram itself and let it work out what to measure, provided you have enough examples.</p>
+
+        <p>That is what I did a few years later. For <a href="zika-vocalizations.html">infant macaque calls at Emory</a> I built a detector that reads spectrograms directly and finds and names the calls in a recording. It had thousands of labeled calls to learn from, not 281. And its spectrograms use the same ear-shaped frequency scale I first met here.</p>
+
+        <p>The harder question has not changed. Computers keep getting better at sorting calls into our categories. Whether those are the chimpanzees' categories is still something only the chimpanzees can tell us.</p>
+
+        <div class="aside-note">
+          <p><strong>Read more.</strong> Chapter 1 of my <a href="https://conservancy.umn.edu/server/api/core/bitstreams/84f8fbfa-3027-46a1-9f6d-4335d7cf8203/content" target="_blank" rel="noopener">Ph.D. dissertation</a> (University of Minnesota, 2022), “A comparison of quantitative classification techniques for studying chimpanzee vocalizations.” An early version was presented as Desai, Lehman, Munson and Wilson, “Supervised and unsupervised machine learning techniques for classifying chimpanzee vocalizations,” Acoustical Society of America, May 2018.</p>
+        </div>
+
+        <div class="credits">
+          <p>With Michael Wilson (advisor), Clarence Lehman and Benjamin Munson. Thanks to Kurt Hammerschmidt for teaching me LMA, and to Matthew Winn and Mark Bee.</p>
+          <p>The recordings are from Plooij, van de Rijt-Plooij, Fischer, Wilson and Pusey (2015), “An archive of longitudinal recordings of the vocalizations of adult Gombe chimpanzees,” <a href="https://doi.org/10.1038/sdata.2015.27" target="_blank" rel="noopener"><em>Scientific Data</em> 2:150027</a>, archived at the Macaulay Library and on <a href="https://doi.org/10.5061/dryad.sd15m" target="_blank" rel="noopener">Dryad</a> (public domain). The five clips are the examples I used in my talks, cut from the archive's longer recordings. I drew the spectrograms and the score chart for this page; the two scatter plots are Figures 6 and 7 of the dissertation.</p>
+        </div>
+
+      </div>
+    </article>
+
+    <nav class="story-nav" aria-label="More projects">
+      <div class="wrap">
+        <a href="chimpanzee-dialects.html">&larr; Previous: The dialects that were not there</a>
+        <a href="../index.html#projects">All projects &rarr;</a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Nisarg Desai · Atlanta, GA</p>
+    </div>
+  </footer>
+  <script src="../site.js?v=16"></script>
+</body>
+</html>

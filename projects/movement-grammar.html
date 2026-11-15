@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The grammar of movement | Nisarg Desai</title>
+  <meta name="description" content="How a 12-camera motion-capture system and a 3D pose network were built to find movement differences that no human observer can see.">
+  <meta name="author" content="Nisarg Desai">
+  <!-- launch-meta -->
+  <link rel="canonical" href="https://desai-nisarg.github.io/projects/movement-grammar.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The grammar of movement">
+  <meta property="og:description" content="How a 12-camera motion-capture system and a 3D pose network were built to find movement differences that no human observer can see.">
+  <meta property="og:url" content="https://desai-nisarg.github.io/projects/movement-grammar.html">
+  <meta property="og:site_name" content="Nisarg Desai">
+  <meta property="og:image" content="https://desai-nisarg.github.io/assets/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nisarg Desai, Ph.D.: machine learning, computer vision, Bayesian statistics">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /launch-meta -->
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231B365D'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23ffffff'%3END%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=16">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">Nisarg Desai</a>
+      <nav aria-label="Sections">
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#contact">Contact</a>
+        <button class="theme-toggle" type="button">Light mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="story-head">
+      <div class="wrap">
+        <p class="crumb"><a href="../index.html#projects">&larr; All projects</a></p>
+        <p class="kicker">Emory University · 2023–present · Computer vision · Unsupervised learning · Bayesian statistics</p>
+        <h1>The grammar of movement</h1>
+        <p class="standfirst">How I built a 12-camera motion-capture system for freely moving monkeys, taught a neural network to track them in 3D, and went looking for differences in movement that no human observer can see.</p>
+        <ul class="glance">
+          <li><strong>12</strong><span>synchronized cameras</span></li>
+          <li><strong>17</strong><span>body keypoints tracked in 3D</span></li>
+          <li><strong>65,000+</strong><span>frames labeled by hand</span></li>
+          <li><strong>13.75 mm</strong><span>average 3D error</span></li>
+          <li><strong>~1 million</strong><span>frames analyzed</span></li>
+        </ul>
+      </div>
+    </header>
+
+    <article class="story">
+      <div class="wrap">
+
+        <h2>A slip anyone can see</h2>
+
+        <figure class="wide">
+          <video controls muted playsinline preload="metadata" poster="../assets/movement/loss-of-balance-poster.jpg">
+            <source src="../assets/movement/loss-of-balance.mp4" type="video/mp4">
+          </video>
+          <figcaption>A young macaque that was infected with Zika virus as an infant slips off a ledge, then the same moment in slow motion. The colored dots are body points tracked by the system described below.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+        </figure>
+
+        <p>A young macaque jumps for a ledge and one foot misses. Anyone watching can see it. My colleagues spent hours watching video and counting moments like this one, and the count was clear: juveniles that had been infected with Zika virus soon after birth lost their balance more often than healthy ones.</p>
+
+        <figure class="plate narrow">
+          <img src="../assets/movement/loss-of-balance-plot.png" width="700" height="858" loading="lazy" alt="Plot of losses of balance per animal: controls cluster near zero, Zika-infected animals are spread higher">
+          <figcaption>Losses of balance counted by human observers, one point per animal. Controls are on the left, infected animals on the right (p = 0.002).<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+        </figure>
+
+        <p>But a fall is the end of a story. By the time a movement problem is obvious enough for a person to count, it has probably existed for a while in forms nobody notices: an odd choice of what to do next, a sequence that does not quite flow. A person with a checklist cannot score that.</p>
+
+        <p class="pull">The point was not to do the counting faster. It was to see what counting cannot.</p>
+
+        <h2>Building the tracking setup</h2>
+
+        <p>The animals play in a large hexagonal cage. Around it is a t-rail frame holding 12 machine-vision cameras (FLIR Blackfly S), mounted on five of the cage's six sides. A hardware trigger fires all twelve at the same instant, up to 60 times a second, and the uncompressed video streams over a 120 Gbps network to a custom-built computer with fast solid-state storage.</p>
+
+        <figure class="wide">
+          <div class="pair uneven">
+            <img src="../assets/movement/rig-room.jpg" width="1100" height="1467" loading="lazy" alt="A hexagonal mesh play cage in a white room, surrounded by a metal frame with small cameras mounted on it">
+            <img src="../assets/movement/rig-cameras.jpg" width="1400" height="966" loading="lazy" alt="Close view of four small machine-vision cameras clamped to an aluminum rail outside the cage, with cables running down">
+          </div>
+          <figcaption>The play cage with its camera frame, and some of the cameras up close.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+        </figure>
+
+        <p>Two decisions mattered most. The first was synchronization. To find where a wrist is in space, you need to see it in several images taken at exactly the same moment. If the cameras drift apart in time, a fast-moving limb appears to be in two places at once. The second was redundancy. A monkey climbing a mesh wall is always hidden from somebody. With twelve views, when one camera loses a limb, another usually still has it.</p>
+
+        <p>None of this was guaranteed to work. For under $50,000, we created an end-to-end hardware-software pipeline that demonstrably catches subtle movement differences.</p>
+
+        <h2>Teaching it to see</h2>
+
+        <p>A camera records pixels. To get from pixels to a body, a neural network has to learn where the joints are, and it learns from examples that people label by hand.</p>
+
+        <figure>
+          <img src="../assets/movement/tracked-frame.jpg" width="1416" height="869" loading="lazy" alt="A young macaque standing on a platform, overlaid with colored dots on its joints connected by lines">
+          <figcaption>One camera's view with the tracked landmarks drawn in.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+        </figure>
+
+        <p>I defined 17 landmarks (nose, eyes, head, neck, shoulders, elbows, wrists, hip, knees, feet and tail) and wrote the protocol for labeling them. Which frames get labeled matters as much as how many. An algorithm picks frames that are as different from one another as possible, across poses and across animals, so the network sees the rare postures too and not ten thousand copies of a monkey sitting still. More than 65,000 frames have been labeled so far, with help from an outside annotation team. The model behind the results on this page was trained on about 30,000 of them; a final model trained on all of them comes next.</p>
+
+        <p>The network is JARVIS-HybridNet, a 3D convolutional network written in PyTorch. It finds each landmark in the camera views and combines them into one position in space. A training run takes about four days on Emory's HyPER C3 GPU cluster.</p>
+
+        <h2>How good is it?</h2>
+
+        <p>I measure the network against people: for each landmark, how far is its 3D estimate from where a human annotator placed it?</p>
+
+        <figure class="wide plate">
+          <div class="pair">
+            <img src="../assets/movement/error-distribution.png" width="1239" height="881" loading="lazy" alt="Histogram of 3D errors: a tall peak near zero with a long thin tail out to 400 millimeters; the mean is 13.75 millimeters">
+            <img src="../assets/movement/error-per-joint.png" width="1170" height="935" loading="lazy" alt="Bar chart of average error for each of 17 landmarks, from about 10 millimeters for the nose and eyes to about 29 for the tail">
+          </div>
+          <figcaption>Left: the distance between the network's estimate and the human label, across all 17 landmarks. Right: the average error for each landmark.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+        </figure>
+
+        <p>On average, 13.75 millimeters, less than the width of a dime. The face is easiest (nose and eyes, around 10 mm) and the tail is hardest (about 29 mm), which makes sense: it moves the most and hides the most. Every landmark averages under 30 mm.</p>
+
+        <p>The average hides a tail of its own, the statistical kind. Most estimates land within a few millimeters, but a small share are far off, mostly during fast movements when a limb blurs or disappears. Smoothing over time repairs many of these. More labeled frames should repair more, and the labeling continues.</p>
+
+        <h2>From coordinates to behavior</h2>
+
+        <p>Seventeen points moving through space are not yet behavior. The usual next step is for a person to decide which behaviors matter and count them, which brings back the limit I was trying to escape: you find only what you already thought to look for.</p>
+
+        <p>So I used a tool that breaks down movement like language: Keypoint-MoSeq. Speech is built from a small set of syllables, reused and recombined. Movement seems to work the same way. An unsupervised model trained using Keypoint-MoSeq (an autoregressive hidden Markov model) reads the stream of 3D poses and, with no labels at all, discovers short chunks of movement, each a little over a second long, that the animals use again and again. These are the “syllables” that make up behaviors such as walking and climbing. The order they come in is the grammar.</p>
+
+        <figure class="wide">
+          <div class="pair">
+            <img class="plate-img" src="../assets/movement/syllables.png" width="1224" height="844" loading="lazy" alt="Four small panels, each showing a stick-figure body sweeping through a short movement, drawn from yellow to red as time passes" style="background:#fff;padding:0.9rem">
+            <video controls autoplay muted loop playsinline preload="metadata" aria-label="Animation: a grid of stick figures, each performing the same short movement">
+              <source src="../assets/movement/syllable-grid.mp4#t=0.5" type="video/mp4">
+            </video>
+          </div>
+          <figcaption>Left: four syllables, each drawn as a stick figure moving from yellow to red over about a second. Right: many separate instances of one syllable played together. Watching them side by side is how a syllable gets a name.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+        </figure>
+
+        <p>There was a catch. The tool was built and validated for mice, and a macaque is not a large mouse. Its movements unfold over longer timescales, and the model's key setting, the one that controls how long a syllable lasts, is tuned to mice. So I measured how quickly the macaques' own poses change over time (their autocorrelation) and set the model's timescale from that. The result was 15 stable syllables across about a million frames.</p>
+
+        <h2>What the instrument saw</h2>
+
+        <p>I compared 6 animals that had been infected with Zika virus as infants with 6 controls, over 28 recording sessions.</p>
+
+        <p>The infected animals used some syllables more and others less: 4 of the 15 differed credibly between the groups. The more interesting difference was in the grammar. Given what an animal is doing now, how well can you predict what it will do next? For healthy animals, fairly well. For the infected animals, less well. The entropy of their transitions, a measure of unpredictability, was higher by 0.16 bits (89% interval: 0.01 to 0.31; probability that the increase is real: 96%).</p>
+
+        <figure class="wide plate">
+          <img src="../assets/movement/sequence-stability.png" width="1800" height="694" loading="lazy" alt="Three panels comparing control and Zika groups: transition entropy is higher in the Zika group; switch rate and mean bout duration overlap">
+          <figcaption>Each dot is one recording session; the shaded curves show the estimate for each group. Left: how unpredictable the next syllable is (higher in the infected group). Middle and right: how often animals switch syllables and how long each one lasts (no clear difference).<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+        </figure>
+
+        <p>What did not change is as informative as what did. The infected animals did not switch between movements more often, and each movement lasted as long as it did in controls. They commit to a movement just as healthy animals do. What differs is what comes next.</p>
+
+        <p class="pull">Each movement looks normal. Only the order is off, and no one watching could see it.</p>
+
+        <figure class="wide plate">
+          <div class="pair">
+            <img src="../assets/movement/syllable-usage.png" width="1500" height="889" loading="lazy" alt="Plot of the difference in usage for each of 15 syllables between groups, with intervals; four are colored as credibly different">
+            <img src="../assets/movement/transition-matrix.png" width="1100" height="952" loading="lazy" alt="Heat map of the difference in transition probabilities between each pair of syllables, infected minus control">
+          </div>
+          <figcaption>Left: how much more or less each syllable was used by infected animals, with 89% intervals; colored points are credible differences. Right: the difference in how often one syllable follows another.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+        </figure>
+
+        <h2>What I do not know yet</h2>
+
+        <p>Six animals per group is a small study. The models I use are Bayesian, so each answer comes as a range and not a verdict, and some of the ranges are wide. One result, an overall drift in transition patterns away from the healthy average, points the same way but could still be chance (probability 90%), and I report it as suggestive and nothing more. The analysis treats recording sessions as independent, which they are not quite. The syllables do not have names yet: I can show that one is used more often, but cannot yet say that it is climbing. And the method itself is new to primates.</p>
+
+        <p>Next come more labeled frames, all 24 animals, direct measurements of gait and balance, and names for the syllables. The same system is now being applied to a macaque model of Parkinson's disease. Nothing in it is specific to Zika. All it needs is cameras.</p>
+
+        <div class="aside-note">
+          <p><strong>Recognition.</strong> Selected for a press conference at the Society for Neuroscience's 2026 meeting, one of 30–40 abstracts chosen from 8,000–10,000 submitted. Best Poster Award, EPC Research Day Symposium, Emory (2024). Supported in part by a $50,000 pilot grant on which I am Co-PI.</p>
+        </div>
+
+        <div class="credits">
+          <p>With Rebecca Richardson, Alex van Schoor, Kaitlyn Love, Praneet Bala, Gordon Ramsay, Mehul Suthar, Ann Chahroudi and Jessica Raper (principal investigator), at the Emory National Biomedical Research Center. Funded by a Pediatric Research pilot grant through the Marcus Autism Center, the National Institute of Neurological Disorders and Stroke (R01 NS120182) and the center's base grant (P51 OD011132).</p>
+          <p>Earlier work on balance in this model: Raper et al. (2020), <a href="https://doi.org/10.1038/s41467-020-16320-7" target="_blank" rel="noopener"><em>Nature Communications</em> 11:2534</a>.</p>
+        </div>
+
+      </div>
+    </article>
+
+    <nav class="story-nav" aria-label="More projects">
+      <div class="wrap">
+        <a href="../index.html#projects">&larr; All projects</a>
+        <a href="zika-brain.html">Next: Zika and the developing brain &rarr;</a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Nisarg Desai · Atlanta, GA</p>
+    </div>
+  </footer>
+  <script src="../site.js?v=16"></script>
+</body>
+</html>

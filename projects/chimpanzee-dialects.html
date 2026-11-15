@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The dialects that were not there | Nisarg Desai</title>
+  <meta name="description" content="Do chimpanzee communities have their own dialects? A replication with recordings from Gombe, a causal diagram to choose what to control, and a permutation test that a talkative male cannot fool. The dialects were not there; the individual voices were.">
+  <meta name="author" content="Nisarg Desai">
+  <!-- launch-meta -->
+  <link rel="canonical" href="https://desai-nisarg.github.io/projects/chimpanzee-dialects.html">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The dialects that were not there">
+  <meta property="og:description" content="Do chimpanzee communities have their own dialects? A replication with recordings from Gombe, a causal diagram to choose what to control, and a permutation test that a talkative male cannot fool. The dialects were not there; the individual voices were.">
+  <meta property="og:url" content="https://desai-nisarg.github.io/projects/chimpanzee-dialects.html">
+  <meta property="og:site_name" content="Nisarg Desai">
+  <meta property="og:image" content="https://desai-nisarg.github.io/assets/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nisarg Desai, Ph.D.: machine learning, computer vision, Bayesian statistics">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- /launch-meta -->
+  <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231B365D'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23ffffff'%3END%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=16">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <a class="brand" href="../index.html">Nisarg Desai</a>
+      <nav aria-label="Sections">
+        <a href="../index.html#projects">Projects</a>
+        <a href="../index.html#about">About</a>
+        <a href="../index.html#publications">Publications</a>
+        <a href="../index.html#background">Background</a>
+        <a href="../index.html#contact">Contact</a>
+        <button class="theme-toggle" type="button">Light mode</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <header class="story-head">
+      <div class="wrap">
+        <p class="crumb"><a href="../index.html#projects">&larr; All projects</a></p>
+        <p class="kicker">University of Minnesota · Ph.D., 2015–2022 · Field research · Causal inference · Replication</p>
+        <h1>The dialects that were not there</h1>
+        <p class="standfirst">Earlier studies had reported that each chimpanzee community calls in its own dialect, a hint that our closest relatives learn their calls the way we learn to speak. I spent much of my Ph.D. testing that claim with recordings from Gombe, in Tanzania. The dialects were not there. The individual voices were.</p>
+        <ul class="glance">
+          <li><strong>1,252</strong><span>calls recorded by the Gombe field team</span></li>
+          <li><strong>325</strong><span>pant-hoots analyzed</span></li>
+          <li><strong>18</strong><span>adult males</span></li>
+          <li><strong>3</strong><span>communities in two countries</span></li>
+          <li><strong>1,000</strong><span>shuffles behind every test</span></li>
+        </ul>
+      </div>
+    </header>
+
+    <article class="story">
+      <div class="wrap">
+
+        <figure class="wide">
+          <img src="../assets/chimps/grooming.jpg" width="1600" height="1149" alt="Three chimpanzees sitting close together on a forest path; one grooms another's head while a young one leans against them">
+          <figcaption>Chimpanzees grooming at Gombe National Park, Tanzania. Photograph: Nisarg Desai.</figcaption>
+        </figure>
+
+        <h2>A call that carries</h2>
+
+        <p>A male chimpanzee starts with a few low hoots. They quicken into panting, rise into screams, and sometimes end with his feet drumming on the buttress of a tree. Other chimpanzees, hundreds of meters away and out of sight, hear it. This is the pant-hoot, and my question was what they hear in it.</p>
+
+        <figure class="wide plate">
+          <img src="../assets/chimps/pant-hoot-spectrogram.png" width="2000" height="501" loading="lazy" alt="Spectrogram of a seven-second pant-hoot, with the introduction, build-up, climax and let-down phases labeled below it, and drumming marked during the climax">
+          <figcaption>A typical pant-hoot, seven seconds long. Time runs left to right and pitch runs upward. The climax screams are the tall arches; arrows mark drumming. Figure 1 of the paper.</figcaption>
+          <audio controls preload="none" src="../assets/chimps/pant-hoot.wav" aria-label="Recording of the pant-hoot shown in the spectrogram">Your browser cannot play this recording.</audio>
+        </figure>
+
+        <p>The reason anyone cares about chimpanzee dialects is speech. Humans learn to speak by copying the sounds around them. Songbirds, whales and parrots learn their calls in a similar way, but most primates appear to be born with theirs. If chimpanzee communities had learned dialects, some capacity for vocal learning might go back to the common ancestor of chimpanzees and humans. And a dialect would be useful to a chimpanzee. Neighboring communities are rivals, sometimes lethal ones, and a call that says “one of us” to a listener who cannot see the caller could matter.</p>
+
+        <p>Chimpanzees can certainly pick out a stranger by ear. In playback experiments in Kibale National Park, Uganda, my advisor played a single pant-hoot from another population through a hidden speaker (he tells the story in <a href="https://blog.michael-lawrence-wilson.com/2022/09/30/%ef%bf%bcdo-chimpanzees-have-dialects/" target="_blank" rel="noopener">a blog post about our study</a>). Parties with several males called back loudly and moved toward it; smaller parties went quiet or slipped away. What nobody knew was what the listeners were recognizing: a foreign dialect, or simply a voice they had never heard.</p>
+
+        <h2>A claim resting on three animals</h2>
+
+        <p>The evidence was thinner than the idea. The first study compared Gombe with Mahale, about 160 kilometers away. Those two populations are far enough apart that differences could come from genes, body size or the acoustics of the forest rather than from learning. A later analysis by the same group found that community explained 0 to 11 percent of the variation in the calls, against 17 to 52 percent for differences between individuals.</p>
+
+        <p>The strongest evidence came from Taï, in Côte d'Ivoire, where neighboring communities sounded more different from each other than from a distant one. That is what learning would predict: neighbors pushing their calls apart. But it rested on three males per community. Small, noisy samples do not only miss real effects. They also produce large, false ones.</p>
+
+        <p class="pull">A surprising result from three animals is a reason to look again, not yet a fact.</p>
+
+        <p>So I designed the study as a replication: two neighboring communities, where learned differences should be largest, plus one distant community for comparison.</p>
+
+        <h2>Recording at Gombe</h2>
+
+        <p>Gombe National Park sits on the shore of Lake Tanganyika and holds the longest-running study of wild chimpanzees. In 2016, my advisor Michael Wilson and I trained two Tanzanian field assistants, Hashim Issa Salala and Nasibu Zuberi Madumbi, to follow individual males through the day with a shotgun microphone and a recorder. For each call they noted the caller, what he was doing and who was nearby. I coordinated the work from Minnesota and returned in 2017. By December 2017 they had recorded 1,252 calls from the Kasekela and Mitumba communities.</p>
+
+        <p>Most of those recordings did not survive. I screened them down to 723 of good enough quality, then removed choruses in which callers overlapped and males with fewer than eight pant-hoots. That left 214 pant-hoots from 11 males. Field data also have their own plot twists. Kasekela's alpha male was overthrown in October 2016 and was never again recorded giving a pant-hoot. In Mitumba, the alpha killed another adult male in July 2017. For the distant community, Pawel Fedurek and Katie Slocombe shared 111 pant-hoots from 7 males of the Kanyawara community in Kibale National Park, Uganda.</p>
+
+        <p>Before analyzing anything, I wrote down how the sample could mislead me, using a checklist for sampling bias in animal studies (STRANGE):</p>
+
+        <ul>
+          <li><strong>Who calls gets counted.</strong> High-ranking males call more, so they are more likely to reach the eight-call minimum.</li>
+          <li><strong>When calls get counted.</strong> Chimpanzees pant-hoot more in the morning, and possibly more when fruit is plentiful, so mornings and the wet season are probably overrepresented.</li>
+          <li><strong>Family resemblance.</strong> Three of the six Kasekela males were close kin: two brothers and their father. If relatives sound alike, Kasekela could look distinct for reasons that have nothing to do with learning.</li>
+        </ul>
+
+        <h2>Turning a call into numbers</h2>
+
+        <p>A pant-hoot does not come with a list of measurements, so I had to decide what to measure. I measured 14 features of each call's structure by hand from its spectrogram: how many elements each phase had, how long the phases lasted, and how fast the build-up was and whether it sped up. Then I picked two single elements, the middle element of the build-up and the highest-pitched scream of the climax, and measured their pitch, tonality and noisiness with acoustic software (24 and 25 features).</p>
+
+        <p>Wherever I could, I matched the features used in the earlier dialect studies. If my result disagreed with theirs, I did not want the disagreement to come from measuring different things.</p>
+
+        <h2>What to hold constant</h2>
+
+        <p>The question sounds simple: does a chimpanzee's community shape his call? But community is tangled up with other causes. Communities are defined partly by where they live, and where they live affects the forest's acoustics and who is related to whom. Each community is also made of particular individuals, each with his own voice. Any of these could make two communities sound different without any learning at all.</p>
+
+        <p>I drew those assumptions as a causal diagram and asked which variables would have to be held constant for the link from community to call to be read without bias. A software package for causal diagrams (dagitty) found two sufficient sets. I had not measured genes or habitat acoustics, so the usable one was <strong>individual identity and geographical location</strong>.</p>
+
+        <figure class="wide diagram">
+          <svg viewBox="0 0 640 400" role="img" aria-label="Causal diagram. Geographical location affects community identity, genes and environment. Genes affect individual identity and acoustic structure. Environment affects acoustic structure. Individual identity affects community identity and acoustic structure. Context affects acoustic structure. The relationship of interest is from community identity to acoustic structure. Individual identity and geographical location are marked as controlled.">
+<defs><marker id="dag-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#1B365D"/></marker><marker id="dag-b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#C84B31"/></marker></defs>
+<g fill="none" stroke="#1B365D" stroke-width="1.6" marker-end="url(#dag-a)">
+<path d="M148,323L132,167"/>
+<path d="M200,323L284,294"/>
+<path d="M252,324L459,292"/>
+<path d="M320,265L320,227"/>
+<path d="M346,265L494,167"/>
+<path d="M520,265L520,167"/>
+<path d="M266,193L184,167"/>
+<path d="M377,193L463,167"/>
+<path d="M520,59L520,133"/>
+</g>
+<path d="M220,150L430,150" fill="none" stroke="#C84B31" stroke-width="2.6" stroke-dasharray="7 5" marker-end="url(#dag-b)"/>
+<text x="325" y="116" text-anchor="middle" font-size="13" font-weight="600" fill="#C84B31">the question: does community shape the call?</text>
+<rect x="475" y="25" width="89" height="34" rx="17" fill="#ffffff" stroke="#1B365D" stroke-width="1.4"/>
+<text x="520" y="47" text-anchor="middle" font-size="14" font-weight="600" fill="#1B365D">Context</text>
+<rect x="40" y="133" width="180" height="34" rx="17" fill="#ffffff" stroke="#1B365D" stroke-width="1.4"/>
+<text x="130" y="155" text-anchor="middle" font-size="14" font-weight="600" fill="#1B365D">Community identity</text>
+<rect x="430" y="133" width="180" height="34" rx="17" fill="#ffffff" stroke="#1B365D" stroke-width="1.4"/>
+<text x="520" y="155" text-anchor="middle" font-size="14" font-weight="600" fill="#1B365D">Acoustic structure</text>
+<rect x="226" y="193" width="188" height="34" rx="17" fill="#e9f3f3" stroke="#0B7275" stroke-width="2.2"/>
+<text x="320" y="215" text-anchor="middle" font-size="14" font-weight="600" fill="#1B365D">Individual identity</text>
+<rect x="284" y="265" width="73" height="34" rx="17" fill="#ffffff" stroke="#1B365D" stroke-width="1.4"/>
+<text x="320" y="287" text-anchor="middle" font-size="14" font-weight="600" fill="#1B365D">Genes</text>
+<rect x="459" y="265" width="122" height="34" rx="17" fill="#ffffff" stroke="#1B365D" stroke-width="1.4"/>
+<text x="520" y="287" text-anchor="middle" font-size="14" font-weight="600" fill="#1B365D">Environment</text>
+<rect x="48" y="323" width="204" height="34" rx="17" fill="#e9f3f3" stroke="#0B7275" stroke-width="2.2"/>
+<text x="150" y="345" text-anchor="middle" font-size="14" font-weight="600" fill="#1B365D">Geographical location</text>
+<rect x="420" y="352" width="26" height="18" rx="9" fill="#e9f3f3" stroke="#0B7275" stroke-width="2.2"/><text x="454" y="366" font-size="13" fill="#586172">controlled for</text>
+</svg>
+          <figcaption>The assumed causes, redrawn from Figure 2 of the paper. Holding individual identity and geographical location constant is enough to read the dashed link without bias, under these assumptions.</figcaption>
+        </figure>
+
+        <p>Geography I handled by design: the two Gombe communities share a forest and a gene pool, so I compared them first, and then added the distant community. Individual identity needed a statistical method. Context, whether the caller was feeding or traveling, is not a confounder in the diagram, but it can add noise. I tested it first. It changed the structure of the calls but nothing else, so I analyzed structural features one context at a time.</p>
+
+        <h2>A test that a talkative male cannot fool</h2>
+
+        <p>The standard tool for this question is a classifier (discriminant function analysis): give it calls labeled by community and see how often it guesses the community of new calls. The trap is that every male belongs to one community. If the classifier learns to recognize Sampson's voice, it also “knows” Sampson is from Kasekela. Group differences come out inflated.</p>
+
+        <p>The fix is a permutation version of the test (permuted discriminant function analysis). It fits the classifier on balanced subsets of calls and scores it on the calls left out. Then it shuffles the community labels between males, keeping each male's calls together, and runs the same procedure again, 1,000 times. Recognizing voices helps on shuffled labels just as much as on real ones, so the bar to beat is not 50 percent. It is whatever the classifier scores when community is meaningless.</p>
+
+        <p>To keep the classifier from overfitting, I first compressed the features into principal components, keeping no more components than the smallest group had calls and no more than were needed for 90 percent of the variation. I then checked that the results held with a different rule for choosing the number of components.</p>
+
+        <p class="pull">The baseline is part of the claim. Beat the wrong baseline and you can prove almost anything.</p>
+
+        <h2>What the calls carried</h2>
+
+        <p>The two neighboring communities, where learned dialects should have been strongest, could not be told apart in any set of features. The closest call was the climax scream: 70.7 percent correct against 58.0 percent on shuffled labels, with a p-value of 0.089.</p>
+
+        <p>There was one exception, and I report it as it is. With all three communities included, the climax screams did separate the communities better than chance (54.0 percent against 40.8 percent, p = 0.016). But no pair of communities differed on its own, and the pair that dialect learning predicts should differ most, the neighbors, did not. A difference that shows up only between two national parks hundreds of kilometers apart is just as easily explained by genes or habitat.</p>
+
+        <figure class="wide diagram">
+          <svg viewBox="0 0 720 330" role="img" aria-label="Classifier accuracy divided by its accuracy on shuffled labels. Community: neighbors at Gombe, whole call 1.09 times; neighbors, climax scream 1.22 times; all three communities, climax scream 1.32 times. Individual males: whole call 1.89 times; climax scream 2.14 times.">
+<text x="0" y="26" font-size="13" font-weight="700" fill="#1B365D" letter-spacing=".04em">WHICH COMMUNITY?</text>
+<text x="0" y="57" font-size="13.5" fill="#586172">Neighbors at Gombe, whole call</text>
+<rect x="270" y="43" width="98" height="18" rx="3" fill="#0B7275"/>
+<text x="376" y="57" font-size="13" font-weight="600" fill="#1B365D">1.09×<tspan font-weight="400" fill="#586172">  59.6% vs 54.6% · p = 0.27</tspan></text>
+<text x="0" y="93" font-size="13.5" fill="#586172">Neighbors at Gombe, climax scream</text>
+<rect x="270" y="79" width="110" height="18" rx="3" fill="#0B7275"/>
+<text x="388" y="93" font-size="13" font-weight="600" fill="#1B365D">1.22×<tspan font-weight="400" fill="#586172">  70.7% vs 58% · p = 0.089</tspan></text>
+<text x="0" y="129" font-size="13.5" fill="#586172">All three communities, climax scream</text>
+<rect x="270" y="115" width="119" height="18" rx="3" fill="#0B7275"/>
+<text x="397" y="129" font-size="13" font-weight="600" fill="#1B365D">1.32×<tspan font-weight="400" fill="#586172">  54% vs 40.8% · p = 0.016</tspan></text>
+<text x="0" y="174" font-size="13" font-weight="700" fill="#1B365D" letter-spacing=".04em">WHICH MALE?</text>
+<text x="0" y="205" font-size="13.5" fill="#586172">All 17 males, whole call</text>
+<rect x="270" y="191" width="171" height="18" rx="3" fill="#C84B31"/>
+<text x="449" y="205" font-size="13" font-weight="600" fill="#1B365D">1.89×<tspan font-weight="400" fill="#586172">  14.4% vs 7.6% · p = 0.007</tspan></text>
+<text x="0" y="241" font-size="13.5" fill="#586172">All 18 males, climax scream</text>
+<rect x="270" y="227" width="192" height="18" rx="3" fill="#C84B31"/>
+<text x="470" y="241" font-size="13" font-weight="600" fill="#1B365D">2.14×<tspan font-weight="400" fill="#586172">  20.1% vs 9.4% · p = 0.001</tspan></text>
+<path d="M360,40V254" stroke="#1B365D" stroke-width="1.4" stroke-dasharray="4 4"/>
+<path d="M270,40V254" stroke="#1B365D" stroke-width="1.2"/>
+<text x="360" y="274" text-anchor="middle" font-size="12.5" fill="#586172">1× = no better than shuffled labels</text>
+</svg>
+          <figcaption>How well each test beat its own baseline: the classifier's accuracy divided by its accuracy on shuffled labels. The percentages are the two accuracies. Community tests are in teal, individual tests in coral. From Tables 6 and 7 of the paper.</figcaption>
+        </figure>
+
+        <p>Individuals were a different story. The same test could tell males apart from their call structure, their climax screams and their whole calls, among the neighbors and across all three communities. The strongest signal was the pitch of the climax scream (its average, its peak and its range) and how long the climax lasted. The build-up element alone did not identify anyone.</p>
+
+        <p>That signal is real but not a fingerprint. Picking the right male out of 18 from his climax scream worked about 20 percent of the time, twice the shuffled baseline: some males have very distinctive calls, others blend in. The plots below show the same pattern without a classifier.</p>
+
+        <figure class="wide plate">
+          <img src="../assets/chimps/communities-pca.png" width="1500" height="1001" loading="lazy" alt="Four scatter plots of pant-hoots in principal-component space, colored by community; the ellipses for the three communities overlap heavily in every panel">
+          <figcaption>Calls colored by community. The ellipses, each holding about two-thirds of a community's calls, overlap in every feature set. Figure 4 of the paper.</figcaption>
+        </figure>
+
+        <figure class="plate">
+          <img src="../assets/chimps/individuals-pca.png" width="1500" height="1413" loading="lazy" alt="Three scatter plots of pant-hoots, one per community, colored by individual male; several males form their own clusters">
+          <figcaption>The same calls colored by individual male, one panel per community. Several males form clusters of their own. Figure 5 of the paper.</figcaption>
+        </figure>
+
+        <p>The calls also said a little about what the caller was doing. Pant-hoots given while traveling had more build-up and let-down elements; pant-hoots given at food had more climax elements.</p>
+
+        <h2>What it does not show</h2>
+
+        <p>Not finding dialects is not proof that there are none. I had five to seven males per community: more than three, and enough to detect a difference as large as the one reported at Taï, but not a smaller one. Gombe could also be unusual. Neither my study nor the earlier ones controlled for age, body size, health or rank, and nobody has measured how the acoustics of each forest shape the calls. The paper says all of this, and it ends by calling for larger samples and a Bayesian reanalysis of the existing data. Since then, Bayesian modeling has become the core of my statistical work.</p>
+
+        <p>What the study does show is narrower and, I think, sturdier. With the controls the causal diagram called for and a baseline that cannot be beaten by recognizing voices, the evidence for community dialects disappears, and the evidence for individual voices does not.</p>
+
+        <p>That also offers a simpler answer to the playback puzzle. A chimpanzee who knows the voices of the males in his own community would not need a dialect to recognize a stranger. And if chimpanzees do not learn their calls the way songbirds and whales do, the rich vocal learning behind human speech probably arose in our own lineage, after it split from theirs.</p>
+
+        <h2>Where it led</h2>
+
+        <p>If a pant-hoot carries the caller, the next question is what it carries about him. My last dissertation chapter asks whether pant-hoots carry cues of a male's age, rank and health, using recordings from six studies at two sites across three decades, linked to Gombe's long-term records. That manuscript is in preparation.</p>
+
+        <p>The code and the acoustic measurements behind every test in the paper are public, so anyone can rerun the analysis or try a different one.</p>
+
+        <p class="links"><a href="https://github.com/desai-nisarg/Gombe-dialects" target="_blank" rel="noopener">Code and data on GitHub</a><a href="https://doi.org/10.1002/ajp.23430" target="_blank" rel="noopener">Paper (open access)</a><a href="https://blog.michael-lawrence-wilson.com/2022/09/30/%ef%bf%bcdo-chimpanzees-have-dialects/" target="_blank" rel="noopener">Michael Wilson’s blog post on the study</a></p>
+
+        <div class="aside-note">
+          <p><strong>Published</strong> in the <em>American Journal of Primatology</em> (2022) as “Chimpanzee pant-hoots encode individual information more reliably than group differences.” This study is one chapter of my <a href="https://conservancy.umn.edu/server/api/core/bitstreams/84f8fbfa-3027-46a1-9f6d-4335d7cf8203/content" target="_blank" rel="noopener">Ph.D. dissertation</a> at the University of Minnesota.</p>
+        </div>
+
+        <div class="credits">
+          <p>With Pawel Fedurek, Katie Slocombe and Michael Wilson (advisor). Field recordings at Gombe by Hashim Issa Salala and Nasibu Zuberi Madumbi; Kanyawara recordings by Pawel Fedurek. Research at Gombe was approved by the Tanzania Wildlife Research Institute and the Tanzania Commission for Science and Technology and followed the guidelines of the Jane Goodall Institute. Funded by the University of Minnesota (Talle Faculty Research Award to M. L. Wilson), Frans Plooij and Twise Victory BV, and the grants listed in the paper.</p>
+          <p class="credit">Figures, numbers and the recording are from Desai, Fedurek, Slocombe and Wilson (2022), <a href="https://doi.org/10.1002/ajp.23430" target="_blank" rel="noopener"><em>American Journal of Primatology</em> 84:e23430</a> (Figures 1, 4 and 5, Tables 6 and 7, and Sound S1), used under the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons Attribution license</a>. The causal diagram is redrawn from Figure 2, and the accuracy chart is drawn from Tables 6 and 7.</p>
+        </div>
+
+      </div>
+    </article>
+
+    <nav class="story-nav" aria-label="More projects">
+      <div class="wrap">
+        <a href="openapepose.html">&larr; Previous: OpenApePose</a>
+        <a href="call-types.html">Next: What counts as a bark? &rarr;</a>
+      </div>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Nisarg Desai · Atlanta, GA</p>
+    </div>
+  </footer>
+  <script src="../site.js?v=16"></script>
+</body>
+</html>
