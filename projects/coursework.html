@@ -34,7 +34,6 @@
       <a class="brand" href="../index.html">Nisarg Desai</a>
       <nav aria-label="Sections">
         <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#about">About</a>
         <a href="../index.html#publications">Publications</a>
         <a href="../index.html#background">Background</a>
         <a href="../index.html#contact">Contact</a>
@@ -49,7 +48,7 @@
         <p class="crumb"><a href="../index.html#projects">&larr; All projects</a></p>
         <p class="kicker">Georgia Tech · M.S. Computer Science (Machine Learning) · 2024–present</p>
         <h1>Coursework at Georgia Tech</h1>
-        <p class="standfirst">I learned most of my statistics and machine learning on my own, from textbooks, online courses and research problems that needed them. In 2024 I started a part-time master's in computer science at Georgia Tech to put formal foundations under what I had taught myself. Every course so far has been built around projects.</p>
+        <p class="standfirst">I taught myself much of my statistics and machine learning from textbooks, online courses, and research problems that demanded them. In 2024, I enrolled in Georgia Tech's part-time master's in computer science to put formal foundations under those skills—building PyTorch language models, tree ensembles, reinforcement-learning agents, Bayesian models, and a team Android app across five project-driven courses.</p>
         <ul class="glance">
           <li><strong>5</strong><span>courses completed</span></li>
           <li><strong>4.00</strong><span>GPA</span></li>
@@ -64,11 +63,11 @@
 
         <h2>Skills by course</h2>
 
-        <p>Each row links to the courses where I practiced that skill.</p>
+        <p>Each row maps a core technical skill to the courses where I practiced it.</p>
 
         <ul class="skillmap">
           <li><span>Deep learning in PyTorch</span><span class="courses"><a href="#nlp">Natural Language Processing</a><a href="#ml">Machine Learning</a></span></li>
-          <li><span>Machine learning from scratch<small>models written by hand, not called from a library</small></span><span class="courses"><a href="#ml4t">ML for Trading</a><a href="#nlp">Natural Language Processing</a></span></li>
+          <li><span>Machine learning from scratch<small>models implemented without ML libraries</small></span><span class="courses"><a href="#ml4t">ML for Trading</a><a href="#nlp">Natural Language Processing</a></span></li>
           <li><span>Model comparison and evaluation</span><span class="courses"><a href="#ml">Machine Learning</a><a href="#ml4t">ML for Trading</a></span></li>
           <li><span>Reinforcement learning</span><span class="courses"><a href="#ml">Machine Learning</a><a href="#ml4t">ML for Trading</a></span></li>
           <li><span>Unsupervised learning</span><span class="courses"><a href="#ml">Machine Learning</a></span></li>
@@ -79,7 +78,7 @@
         </ul>
 
         <div class="aside-note">
-          <p><strong>Why there is no code here.</strong> Georgia Tech asks students to keep graded code and reports private, so that future students cannot copy them. This page describes what I built and what each course covered, not how I solved the assignments. I am happy to talk through any of it.</p>
+          <p><strong>Why there is no code here.</strong> Georgia Tech asks students to keep graded code and reports private so future students cannot copy them. This page summarizes what I built and what each course covered without sharing assignment solutions, and I am glad to walk through the technical details in conversation.</p>
         </div>
 
         <h2>Course by course</h2>
@@ -87,43 +86,43 @@
         <section class="course" id="nlp">
           <p class="kicker">CS 7650 · Summer 2026</p>
           <h3>Natural Language Processing</h3>
-          <p>How computers learn language, from the ground up. Six programming assignments in PyTorch, each building a piece of a language system by hand rather than calling a library that already does it. The course did not allow AI coding assistants.</p>
+          <p>This course built language systems from the ground up across six <a href="https://pytorch.org/" target="_blank" rel="noopener">PyTorch</a> programming assignments, implemented by hand without high-level NLP libraries or AI coding assistants.</p>
           <h4>What I built</h4>
           <ul>
-            <li>A neural-network primer, then text classifiers that sort movie reviews into positive and negative</li>
-            <li>Language models that predict the next word, over two assignments</li>
-            <li>Word embeddings learned from the company words keep (distributional semantics)</li>
-            <li>An end-to-end mini-project: a key-value memory network, built from scratch with attention, that answers questions by looking up facts from Wikipedia biographies stored outside the model. I prepared the data, wrote the training loop and tests, and wrote up the results.</li>
+            <li>Built a neural-network primer and trained text classifiers to sort movie reviews by sentiment.</li>
+            <li>Implemented next-word language models from scratch across two progressive assignments.</li>
+            <li>Trained word embeddings from surrounding word context (distributional semantics).</li>
+            <li>Designed and shipped an end-to-end mini-project: an attention-based key-value memory network that answers questions by retrieving facts from external Wikipedia biographies. I handled data preparation, the training loop, test suites, and experimental write-up.</li>
           </ul>
-          <p class="carried"><strong>Carried into my work.</strong> This course and online courses such as Andrej Karpathy's Zero to Hero gave me some formal and self-directed training in large language models. What I want to learn next is how to turn biological data into tokens for transformer models. Movement already breaks into something like words (<a href="movement-grammar.html">The grammar of movement</a>).</p>
+          <p class="carried"><strong>Carried into my work.</strong> Combining this course with Andrej Karpathy's <em>Zero to Hero</em> series gave me hands-on implementation experience with language models and attention mechanisms. Next, I plan to adapt those sequence tools to biological data by tokenizing continuous animal behavior into discrete symbols, extending the movement syllables in <a href="movement-grammar.html">The grammar of movement</a>.</p>
           <ul class="tags"><li>Python</li><li>PyTorch</li><li>Text classification</li><li>Language models</li><li>Word embeddings</li><li>Attention</li></ul>
         </section>
 
         <section class="course" id="ml">
           <p class="kicker">CS 7641 · Spring 2026</p>
           <h3>Machine Learning</h3>
-          <p>A survey of machine learning, taught through analysis rather than code. Four reports used the same two public datasets, census income and wine quality, and each was built around hypotheses written down before the experiments ran.</p>
+          <p>This survey course centered on four hypothesis-driven experimental reports backed by Python benchmarks in <a href="https://scikit-learn.org/" target="_blank" rel="noopener">scikit-learn</a>, PyTorch, and <a href="https://gymnasium.farama.org/" target="_blank" rel="noopener">Gymnasium</a>. Using two public datasets—census income and wine quality—I wrote down falsifiable hypotheses before running experiments and analyzed where each algorithm succeeded or broke.</p>
           <h4>What I built</h4>
           <ul>
-            <li><strong>Supervised learning.</strong> Compared decision trees, k-nearest neighbors, support vector machines and neural networks on data where one class far outnumbers the others.</li>
-            <li><strong>Optimization.</strong> Compared how neural-network optimizers train, from plain stochastic gradient descent through momentum, RMSProp, Adam and AdamW.</li>
-            <li><strong>Unsupervised learning.</strong> Clustering (k-means, Gaussian mixtures) and dimensionality reduction (PCA, ICA, random projection).</li>
-            <li><strong>Reinforcement learning.</strong> Planning with a known model of the world (value and policy iteration) against learning from experience (SARSA, Q-learning), in Blackjack and CartPole.</li>
+            <li><strong>Supervised learning:</strong> Benchmarked decision trees, k-nearest neighbors, support vector machines, and neural networks under strong class imbalance.</li>
+            <li><strong>Optimization:</strong> Compared neural-network optimizers head to head, from plain stochastic gradient descent through momentum, RMSProp, Adam, and AdamW.</li>
+            <li><strong>Unsupervised learning:</strong> Evaluated clustering methods (k-means, Gaussian mixtures) alongside dimensionality reduction (PCA, ICA, random projection).</li>
+            <li><strong>Reinforcement learning:</strong> Contrasted model-based planning (value and policy iteration) against model-free learning from experience (SARSA, Q-learning) in Blackjack and CartPole.</li>
           </ul>
-          <p>Every report came with a reproducibility sheet: the exact code version, environment, random seeds and run commands needed to regenerate each figure.</p>
+          <p>I paired every report with a reproducibility manifest listing the exact code commits, environments, random seeds, and run commands needed to regenerate every figure.</p>
           <ul class="tags"><li>Python</li><li>scikit-learn</li><li>PyTorch</li><li>Gymnasium</li><li>Experiment design</li><li>Reproducibility</li></ul>
         </section>
 
         <section class="course" id="sdp">
           <p class="kicker">CS 6300 · Summer 2025</p>
           <h3>Software Development Process</h3>
-          <p>How software gets built by a team, in Java: version control, requirements, design, testing and coordination.</p>
+          <p>This course trained team software engineering workflows in Java, covering version control, formal requirements, modular architecture, automated testing, and release coordination.</p>
           <h4>What I built</h4>
           <ul>
-            <li>Git workflows: branching, merging and pull requests</li>
-            <li>An individual project: a command-line text-processing tool, with its tests designed before the code (the category-partition method) and written in JUnit</li>
-            <li>A four-person team project: an Android app taken from requirements and use cases through design documents, a project plan, a test plan, weekly reports and a release build</li>
-            <li>Software designs drawn as UML class diagrams</li>
+            <li>Practiced collaborative Git workflows, including feature branching, merging, and pull-request reviews.</li>
+            <li>Built a command-line text-processing tool in Java, designing test cases ahead of implementation via the category-partition method and automating them in JUnit.</li>
+            <li>Co-engineered a four-person Android app from requirements and use cases through design documents, project and test plans, weekly reports, and a release build.</li>
+            <li>Modeled object-oriented software designs as UML class diagrams.</li>
           </ul>
           <ul class="tags"><li>Java</li><li>Android</li><li>JUnit</li><li>Git</li><li>UML</li><li>Software testing</li></ul>
         </section>
@@ -131,14 +130,14 @@
         <section class="course" id="ml4t">
           <p class="kicker">CS 7646 · Spring 2025</p>
           <h3>Machine Learning for Trading</h3>
-          <p>Machine learning on stock-market data, where overfitting is easy and the real test set is the future. Eight Python projects build a small trading-research toolkit, each with a report written like a journal article.</p>
+          <p>Financial time series expose overfitting quickly because the only honest test set is the future. Across eight Python projects, I built a modular trading-research toolkit and documented each experiment like a journal article.</p>
           <h4>What I built</h4>
           <ul>
-            <li>A Monte Carlo simulation of a roulette betting strategy</li>
-            <li>Decision-tree and random-tree learners, and bagged ensembles of them, written from scratch in NumPy</li>
-            <li>A portfolio optimizer, a market simulator with trading costs, and technical indicators</li>
-            <li>A reinforcement-learning agent (Q-learning with Dyna-Q planning)</li>
-            <li>A final project comparing a hand-designed trading strategy with a machine-learned one (a bagged random-tree ensemble), both tested on a later period held out from development</li>
+            <li>Simulated a roulette betting strategy via Monte Carlo experiments to quantify variance and bankroll risk.</li>
+            <li>Implemented decision trees, random trees, and bagged ensembles from scratch in <a href="https://numpy.org/" target="_blank" rel="noopener">NumPy</a>.</li>
+            <li>Built a portfolio optimizer, technical indicators, and a market simulator that incorporates trading costs.</li>
+            <li>Trained a reinforcement-learning agent using Q-learning with Dyna-Q planning.</li>
+            <li>Benchmarked a hand-designed trading strategy against a bagged random-tree ensemble on a strictly held-out future period.</li>
           </ul>
           <ul class="tags"><li>Python</li><li>NumPy</li><li>pandas</li><li>Ensemble learning</li><li>Reinforcement learning</li><li>Backtesting</li></ul>
         </section>
@@ -146,23 +145,23 @@
         <section class="course" id="bayes">
           <p class="kicker">ISYE 6420 · Fall 2024</p>
           <h3>Bayesian Statistics</h3>
-          <p>Bayesian statistics from first principles: priors, conjugate models, Markov chain Monte Carlo (Metropolis and Gibbs sampling), hierarchical and linear models, missing data, survival models, and checking and comparing models.</p>
+          <p>This course derived Bayesian inference from first principles: priors, conjugate models, Markov chain Monte Carlo (Metropolis and Gibbs sampling), hierarchical linear models, missing-data imputation, survival models, and posterior model checking.</p>
           <h4>What I built</h4>
           <ul>
-            <li>Six problem sets in Python (PyMC, ArviZ)</li>
-            <li>An open-ended final project: a Bayesian analysis of my own lab's data, asking how postnatal Zika virus infection changes the calls of young rhesus macaques</li>
+            <li>Completed six applied modeling problem sets in Python using <a href="https://www.pymc.io/" target="_blank" rel="noopener">PyMC</a> and <a href="https://python.arviz.org/" target="_blank" rel="noopener">ArviZ</a>.</li>
+            <li>Executed an open-ended final project applying Bayesian hierarchical models to my lab's data to test whether postnatal Zika virus infection alters infant rhesus macaque calls—work that grew directly into <a href="zika-vocalizations.html">What a scream carries</a>.</li>
           </ul>
           <ul class="tags"><li>Bayesian inference</li><li>MCMC</li><li>Hierarchical models</li><li>Python</li><li>PyMC</li><li>ArviZ</li></ul>
         </section>
 
         <h2>Earlier foundations</h2>
 
-        <p>Georgia Tech is where I made it formal, but it is not where I started. The math came first, during my undergraduate years, and much of the statistics and machine learning I use every day I taught myself.</p>
+        <p>My formal mathematics training began well before Georgia Tech, and I built much of my applied statistics and machine-learning toolkit through graduate research and self-directed study.</p>
 
         <ul>
-          <li><strong>IISER Pune (B.S. &amp; M.S., Mathematics minor):</strong> Linear Algebra, Multivariable Calculus, Probability &amp; Statistics, Algorithms, Numerical Methods &amp; Scientific Computing.</li>
-          <li><strong>University of Minnesota (Ph.D., graduate statistics):</strong> Statistical Learning &amp; Data Mining, Applied Multivariate Statistics, Advanced Multiple Regression Analysis.</li>
-          <li><strong>Self-taught:</strong> Richard McElreath's <em>Statistical Rethinking</em>, where my habit of drawing a causal diagram before fitting a model comes from; Andrej Karpathy's <em>Neural Networks: Zero to Hero</em>; Stanford's <em>Statistical Learning</em>; and Coursera courses including Jeff Leek's <em>Practical Machine Learning</em> (Johns Hopkins).</li>
+          <li><strong>IISER Pune (B.S. &amp; M.S., Mathematics minor):</strong> Linear Algebra, Multivariable Calculus, Probability &amp; Statistics, Algorithms, and Numerical Methods &amp; Scientific Computing.</li>
+          <li><strong>University of Minnesota (Ph.D., graduate statistics):</strong> Statistical Learning &amp; Data Mining, Applied Multivariate Statistics, and Advanced Multiple Regression Analysis.</li>
+          <li><strong>Self-directed study:</strong> Richard McElreath's <em>Statistical Rethinking</em> (where my habit of drawing causal diagrams before fitting models comes from), Andrej Karpathy's <em>Neural Networks: Zero to Hero</em>, Stanford's <em>Statistical Learning</em>, and Coursera courses including Jeff Leek's <em>Practical Machine Learning</em> (Johns Hopkins).</li>
         </ul>
 
       </div>

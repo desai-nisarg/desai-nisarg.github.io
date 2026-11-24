@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The grammar of movement | Nisarg Desai</title>
-  <meta name="description" content="How a 12-camera motion-capture system and a 3D pose network were built to find movement differences that no human observer can see.">
+  <meta name="description" content="How I built a 12-camera motion-capture setup, trained a PyTorch 3D pose network, and used unsupervised sequence modeling to detect subtle motor changes in young macaques.">
   <meta name="author" content="Nisarg Desai">
   <!-- launch-meta -->
   <link rel="canonical" href="https://desai-nisarg.github.io/projects/movement-grammar.html">
   <meta property="og:type" content="article">
   <meta property="og:title" content="The grammar of movement">
-  <meta property="og:description" content="How a 12-camera motion-capture system and a 3D pose network were built to find movement differences that no human observer can see.">
+  <meta property="og:description" content="How I built a 12-camera motion-capture setup, trained a PyTorch 3D pose network, and used unsupervised sequence modeling to detect subtle motor changes in young macaques.">
   <meta property="og:url" content="https://desai-nisarg.github.io/projects/movement-grammar.html">
   <meta property="og:site_name" content="Nisarg Desai">
   <meta property="og:image" content="https://desai-nisarg.github.io/assets/og-card.png">
@@ -34,7 +34,6 @@
       <a class="brand" href="../index.html">Nisarg Desai</a>
       <nav aria-label="Sections">
         <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#about">About</a>
         <a href="../index.html#publications">Publications</a>
         <a href="../index.html#background">Background</a>
         <a href="../index.html#contact">Contact</a>
@@ -49,7 +48,7 @@
         <p class="crumb"><a href="../index.html#projects">&larr; All projects</a></p>
         <p class="kicker">Emory University · 2023–present · Computer vision · Unsupervised learning · Bayesian statistics</p>
         <h1>The grammar of movement</h1>
-        <p class="standfirst">How I built a 12-camera motion-capture system for freely moving monkeys, taught a neural network to track them in 3D, and went looking for differences in movement that no human observer can see.</p>
+        <p class="standfirst">I designed a 12-camera capture setup for freely moving rhesus macaques, trained a PyTorch 3D pose network across a million frames, and used unsupervised sequence modeling to uncover subtle motor changes that manual checklists miss.</p>
         <ul class="glance">
           <li><strong>12</strong><span>synchronized cameras</span></li>
           <li><strong>17</strong><span>body keypoints tracked in 3D</span></li>
@@ -69,70 +68,68 @@
           <video controls muted playsinline preload="metadata" poster="../assets/movement/loss-of-balance-poster.jpg">
             <source src="../assets/movement/loss-of-balance.mp4" type="video/mp4">
           </video>
-          <figcaption>A young macaque that was infected with Zika virus as an infant slips off a ledge, then the same moment in slow motion. The colored dots are body points tracked by the system described below.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+          <figcaption>A young macaque infected with Zika virus as an infant slips off a ledge, followed by the same moment in slow motion. Colored dots mark the 17 body keypoints tracked by the 3D pose network.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
         </figure>
 
-        <p>A young macaque jumps for a ledge and one foot misses. Anyone watching can see it. My colleagues spent hours watching video and counting moments like this one, and the count was clear: juveniles that had been infected with Zika virus soon after birth lost their balance more often than healthy ones.</p>
+        <p>A young macaque leaps for a ledge, and one foot misses. Play the clip once and you see the slip immediately. Earlier in our lab, colleagues spent hours scanning video and tallying moments just like this one. Their count showed a clear gap: juveniles infected with Zika virus soon after birth lost their balance more often than healthy controls.</p>
 
         <figure class="plate narrow">
           <img src="../assets/movement/loss-of-balance-plot.png" width="700" height="858" loading="lazy" alt="Plot of losses of balance per animal: controls cluster near zero, Zika-infected animals are spread higher">
-          <figcaption>Losses of balance counted by human observers, one point per animal. Controls are on the left, infected animals on the right (p = 0.002).<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+          <figcaption>Losses of balance counted by human observers in an earlier lab analysis, one point per animal. Controls sit on the left and Zika-infected animals sit on the right (p = 0.002).<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
         </figure>
 
-        <p>But a fall is the end of a story. By the time a movement problem is obvious enough for a person to count, it has probably existed for a while in forms nobody notices: an odd choice of what to do next, a sequence that does not quite flow. A person with a checklist cannot score that.</p>
+        <p>A visible fall, however, is a late alarm. Long before a motor problem causes a monkey to tumble off a ledge, subtler disruptions may already be changing how it strings movements together—a slight hesitation, or an unusual choice of what to do next. Human observers with a checklist can count dramatic slips, yet they cannot reliably score continuous shifts across thousands of ordinary seconds. I wanted a way to track full-body 3D motion directly, so we could detect hidden motor changes without deciding ahead of time which mistakes to count.</p>
 
-        <p class="pull">The point was not to do the counting faster. It was to see what counting cannot.</p>
+        <p class="pull">Visible falls are late alarms. Subtle shifts in how movements fit together can begin long before anyone spots a slip.</p>
 
-        <h2>Building the tracking setup</h2>
+        <h2>Motion capture without the suit</h2>
 
-        <p>The animals play in a large hexagonal cage. Around it is a t-rail frame holding 12 machine-vision cameras (FLIR Blackfly S), mounted on five of the cage's six sides. A hardware trigger fires all twelve at the same instant, up to 60 times a second, and the uncompressed video streams over a 120 Gbps network to a custom-built computer with fast solid-state storage.</p>
+        <p>Hollywood motion capture solves 3D tracking by gluing reflective markers onto an actor's suit. That approach fails immediately with freely moving young macaques, who will not wear sensors while climbing and playing. To capture their motion cleanly without touching the animals, I designed a markerless camera rig around their large hexagonal play cage.</p>
+
+        <p>An aluminum t-rail frame wraps five of the cage's six sides and carries 12 machine-vision cameras (FLIR Blackfly S). A hardware trigger fires all 12 shutters at the exact same instant, up to 60 times a second, streaming uncompressed video over a 120 Gbps network to a custom workstation with high-speed solid-state storage.</p>
 
         <figure class="wide">
           <div class="pair uneven">
             <img src="../assets/movement/rig-room.jpg" width="1100" height="1467" loading="lazy" alt="A hexagonal mesh play cage in a white room, surrounded by a metal frame with small cameras mounted on it">
             <img src="../assets/movement/rig-cameras.jpg" width="1400" height="966" loading="lazy" alt="Close view of four small machine-vision cameras clamped to an aluminum rail outside the cage, with cables running down">
           </div>
-          <figcaption>The play cage with its camera frame, and some of the cameras up close.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+          <figcaption>The hexagonal play cage with its aluminum camera frame (left) and four of the machine-vision cameras mounted along a rail (right).<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
         </figure>
 
-        <p>Two decisions mattered most. The first was synchronization. To find where a wrist is in space, you need to see it in several images taken at exactly the same moment. If the cameras drift apart in time, a fast-moving limb appears to be in two places at once. The second was redundancy. A monkey climbing a mesh wall is always hidden from somebody. With twelve views, when one camera loses a limb, another usually still has it.</p>
+        <p>Two practical hazards shaped every piece of that hardware design: motion blur across cameras and blocked views. Reconstructing a fast-moving wrist in 3D requires seeing it from several angles at the exact same millisecond; if the cameras drift out of sync, the wrist appears in two places at once and triangulation breaks. Climbing macaques also constantly hide limbs behind their bodies and the cage mesh, so 12 surrounding views give us redundancy whenever several angles go blind. We built the entire capture and storage setup for under $50,000, betting that sharp multi-view video would give a deep neural network everything it needed.</p>
 
-        <p>None of this was guaranteed to work. For under $50,000, we created an end-to-end hardware-software pipeline that demonstrably catches subtle movement differences.</p>
+        <h2>Teaching a network to follow an acrobat</h2>
 
-        <h2>Teaching it to see</h2>
+        <p>Turning synchronized video into a moving 3D skeleton requires teaching a neural network where every joint sits across every awkward posture a young primate can invent. I defined 17 keypoints across the body—nose, eyes, head, neck, shoulders, elbows, wrists, hip, knees, feet, and tail—and wrote the labeling protocol for an outside annotation team.</p>
 
-        <p>A camera records pixels. To get from pixels to a body, a neural network has to learn where the joints are, and it learns from examples that people label by hand.</p>
+        <p>Choosing which frames to label mattered just as much as labeling a large volume. Picking frames at random from hours of playroom footage mostly feeds a model thousands of near-identical pictures of a monkey sitting still. Instead, I ran a diversity-sampling algorithm that pulls frames spanning distinct poses, camera angles, and individuals, ensuring the training set covers rare mid-air twists and climbs. Together with the annotation team, we have hand-labeled more than 65,000 frames so far. The results on this page come from a model trained on roughly 30,000 of those frames, while a final model trained on the full set is up next.</p>
 
         <figure>
           <img src="../assets/movement/tracked-frame.jpg" width="1416" height="869" loading="lazy" alt="A young macaque standing on a platform, overlaid with colored dots on its joints connected by lines">
-          <figcaption>One camera's view with the tracked landmarks drawn in.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+          <figcaption>One camera's view overlaid with the 17 tracked keypoints predicted by the network.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
         </figure>
 
-        <p>I defined 17 landmarks (nose, eyes, head, neck, shoulders, elbows, wrists, hip, knees, feet and tail) and wrote the protocol for labeling them. Which frames get labeled matters as much as how many. An algorithm picks frames that are as different from one another as possible, across poses and across animals, so the network sees the rare postures too and not ten thousand copies of a monkey sitting still. More than 65,000 frames have been labeled so far, with help from an outside annotation team. The model behind the results on this page was trained on about 30,000 of them; a final model trained on all of them comes next.</p>
+        <p>To reconstruct 3D poses directly from the synchronized video, I trained <a href="https://jarvis-mocap.github.io/jarvis-docs/" target="_blank" rel="noopener">JARVIS-HybridNet</a>, a 3D convolutional neural network in PyTorch. The network locates each keypoint across the camera views and combines that multi-view evidence into a single 3D coordinate in space. Each training run takes roughly four days on <a href="https://it.emory.edu/catalog/cloud-services/hyper-c3.html" target="_blank" rel="noopener">Emory's HyPER C3 GPU cluster</a>, and I have now run inference across about one million frames.</p>
 
-        <p>The network is JARVIS-HybridNet, a 3D convolutional network written in PyTorch. It finds each landmark in the camera views and combines them into one position in space. A training run takes about four days on Emory's HyPER C3 GPU cluster.</p>
+        <h2>Within the width of a dime</h2>
 
-        <h2>How good is it?</h2>
-
-        <p>I measure the network against people: for each landmark, how far is its 3D estimate from where a human annotator placed it?</p>
+        <p>Measured against human annotators, the network's 3D estimates land within an average of 13.75 millimeters—less than the width of a dime. Every one of the 17 keypoints averages under 30 millimeters of error. Facial keypoints are easiest to pin down (roughly 10 mm for the nose and eyes), while the tail is hardest (about 29 mm) because it whips quickly and frequently tucks behind the body or mesh.</p>
 
         <figure class="wide plate">
           <div class="pair">
             <img src="../assets/movement/error-distribution.png" width="1239" height="881" loading="lazy" alt="Histogram of 3D errors: a tall peak near zero with a long thin tail out to 400 millimeters; the mean is 13.75 millimeters">
             <img src="../assets/movement/error-per-joint.png" width="1170" height="935" loading="lazy" alt="Bar chart of average error for each of 17 landmarks, from about 10 millimeters for the nose and eyes to about 29 for the tail">
           </div>
-          <figcaption>Left: the distance between the network's estimate and the human label, across all 17 landmarks. Right: the average error for each landmark.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+          <figcaption>Left: distribution of 3D distances between network predictions and human labels across all 17 keypoints (mean: 13.75 mm). Right: average 3D error for each keypoint.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
         </figure>
 
-        <p>On average, 13.75 millimeters, less than the width of a dime. The face is easiest (nose and eyes, around 10 mm) and the tail is hardest (about 29 mm), which makes sense: it moves the most and hides the most. Every landmark averages under 30 mm.</p>
+        <p>That 13.75-millimeter average hides a thin statistical tail of messy frames. Most predictions land within a few millimeters of the human mark, yet a small share jump as far as 400 millimeters during fast motion blur or brief occlusion. Smoothing trajectories over time repairs many of those sudden spikes, and retraining on all 65,000+ labeled frames should pull that outlier tail in further.</p>
 
-        <p>The average hides a tail of its own, the statistical kind. Most estimates land within a few millimeters, but a small share are far off, mostly during fast movements when a limb blurs or disappears. Smoothing over time repairs many of these. More labeled frames should repair more, and the labeling continues.</p>
+        <h2>Reading movement like a language</h2>
 
-        <h2>From coordinates to behavior</h2>
+        <p>Once the pose network worked, I ran straight into a second puzzle: a million frames of 17 floating 3D dots still do not tell you what a monkey is doing. If I sat down to write hand-crafted rules for “climbing” or “reaching,” I would be right back inside the human-checklist bottleneck—measuring only the behaviors I already thought to look for.</p>
 
-        <p>Seventeen points moving through space are not yet behavior. The usual next step is for a person to decide which behaviors matter and count them, which brings back the limit I was trying to escape: you find only what you already thought to look for.</p>
-
-        <p>So I used a tool that breaks down movement like language: Keypoint-MoSeq. Speech is built from a small set of syllables, reused and recombined. Movement seems to work the same way. An unsupervised model trained using Keypoint-MoSeq (an autoregressive hidden Markov model) reads the stream of 3D poses and, with no labels at all, discovers short chunks of movement, each a little over a second long, that the animals use again and again. These are the “syllables” that make up behaviors such as walking and climbing. The order they come in is the grammar.</p>
+        <p>Spoken language offers a way out. Infinite sentences are built from a compact set of reusable syllables arranged by a grammar, and continuous animal movement follows a remarkably similar structure. I applied <a href="https://keypoint-moseq.readthedocs.io/en/stable/" target="_blank" rel="noopener">Keypoint-MoSeq</a>, an unsupervised sequence model built on an autoregressive hidden Markov model, to read the stream of 3D keypoints with no behavioral labels at all. On its own, the model discovers short, recurring movement “syllables”—each lasting a little over a second—and estimates the transition rules governing how one syllable flows into the next.</p>
 
         <figure class="wide">
           <div class="pair">
@@ -141,46 +138,46 @@
               <source src="../assets/movement/syllable-grid.mp4#t=0.5" type="video/mp4">
             </video>
           </div>
-          <figcaption>Left: four syllables, each drawn as a stick figure moving from yellow to red over about a second. Right: many separate instances of one syllable played together. Watching them side by side is how a syllable gets a name.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+          <figcaption>Left: four discovered syllables, drawn as stick figures progressing from yellow to red over about one second. Right: separate instances of a single syllable played side by side—reviewing grids like this is how we will assign behavioral names to each syllable next.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
         </figure>
 
-        <p>There was a catch. The tool was built and validated for mice, and a macaque is not a large mouse. Its movements unfold over longer timescales, and the model's key setting, the one that controls how long a syllable lasts, is tuned to mice. So I measured how quickly the macaques' own poses change over time (their autocorrelation) and set the model's timescale from that. The result was 15 stable syllables across about a million frames.</p>
+        <p>Borrowing a tool from mouse neuroscience brought an immediate snag: a rhesus macaque moves nothing like a mouse. Mice dart in rapid fractions of a second, whereas a juvenile monkey's climbs and leaps unfold over longer arcs. Because Keypoint-MoSeq's core hyperparameter controls how long each syllable lasts, running it with mouse defaults chops primate actions into noisy fragments. To set the timescale from the animals themselves, I measured how quickly macaque 3D poses change over time (their temporal autocorrelation) and retuned the model accordingly. Across roughly one million frames, the adapted model settled on 15 stable syllables.</p>
 
-        <h2>What the instrument saw</h2>
+        <h2>What was hiding in the sequence</h2>
 
-        <p>I compared 6 animals that had been infected with Zika virus as infants with 6 controls, over 28 recording sessions.</p>
+        <p>With those 15 syllables in hand, I compared 6 Zika-infected macaques against 6 controls across 28 recording sessions. Unlike our lab's earlier manual balance tally that reported a p-value, I analyzed the syllable metrics using Bayesian models that return full uncertainty ranges. I report <a href="https://hal.science/hal-05243742/document" target="_blank" rel="noopener">89% credible intervals</a> rather than the conventional 95%, following Richard McElreath's <em>Statistical Rethinking</em>—a deliberate reminder that any numerical cutoff is arbitrary rather than a magic boundary.</p>
 
-        <p>The infected animals used some syllables more and others less: 4 of the 15 differed credibly between the groups. The more interesting difference was in the grammar. Given what an animal is doing now, how well can you predict what it will do next? For healthy animals, fairly well. For the infected animals, less well. The entropy of their transitions, a measure of unpredictability, was higher by 0.16 bits (89% interval: 0.01 to 0.31; probability that the increase is real: 96%).</p>
+        <p>Two distinct differences surfaced between the groups. First, Zika-infected macaques used 4 of the 15 syllables at credibly different rates than controls. Second—and more surprising—their movement grammar was less predictable. Using transition entropy, an information-theory metric in bits that captures how uncertain the next syllable is once you know the current one, Zika-infected animals scored 0.16 bits higher than controls (89% credible interval: 0.01 to 0.31; 96% posterior probability that the increase is real). Knowing what a Zika-infected macaque is doing right now gives you less grip on what it will do next.</p>
 
         <figure class="wide plate">
           <img src="../assets/movement/sequence-stability.png" width="1800" height="694" loading="lazy" alt="Three panels comparing control and Zika groups: transition entropy is higher in the Zika group; switch rate and mean bout duration overlap">
-          <figcaption>Each dot is one recording session; the shaded curves show the estimate for each group. Left: how unpredictable the next syllable is (higher in the infected group). Middle and right: how often animals switch syllables and how long each one lasts (no clear difference).<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+          <figcaption>Each dot represents one recording session; shaded curves show the Bayesian group estimates. Left: transition entropy (higher in Zika-infected animals). Middle and right: syllable switch rate and mean bout duration (no clear difference between groups).<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
         </figure>
 
-        <p>What did not change is as informative as what did. The infected animals did not switch between movements more often, and each movement lasted as long as it did in controls. They commit to a movement just as healthy animals do. What differs is what comes next.</p>
+        <p>What stayed unchanged makes that shift even more intriguing. Zika-infected macaques did not jump restlessly between actions: they switched syllables at the same rate as controls, and each syllable bout lasted just as long. Both groups commit to individual movements in the exact same way. Watch any single second of video and an infected monkey looks completely ordinary; the difference only appears when you track how one ordinary movement chains into the next.</p>
 
-        <p class="pull">Each movement looks normal. Only the order is off, and no one watching could see it.</p>
+        <p class="pull">Watch any single second of video and a Zika-infected monkey looks ordinary. The difference only surfaces in how one movement chains into the next.</p>
 
         <figure class="wide plate">
           <div class="pair">
             <img src="../assets/movement/syllable-usage.png" width="1500" height="889" loading="lazy" alt="Plot of the difference in usage for each of 15 syllables between groups, with intervals; four are colored as credibly different">
             <img src="../assets/movement/transition-matrix.png" width="1100" height="952" loading="lazy" alt="Heat map of the difference in transition probabilities between each pair of syllables, infected minus control">
           </div>
-          <figcaption>Left: how much more or less each syllable was used by infected animals, with 89% intervals; colored points are credible differences. Right: the difference in how often one syllable follows another.<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
+          <figcaption>Left: estimated difference in usage between Zika-infected and control animals for all 15 syllables, with 89% credible intervals (colored points exclude zero). Right: difference in transition probabilities between each pair of syllables (Zika-infected minus control).<br><span class="rights">© Emory National Biomedical Research Center, Emory University. All rights reserved.</span></figcaption>
         </figure>
 
-        <h2>What I do not know yet</h2>
+        <h2>What remains uncertain</h2>
 
-        <p>Six animals per group is a small study. The models I use are Bayesian, so each answer comes as a range and not a verdict, and some of the ranges are wide. One result, an overall drift in transition patterns away from the healthy average, points the same way but could still be chance (probability 90%), and I report it as suggestive and nothing more. The analysis treats recording sessions as independent, which they are not quite. The syllables do not have names yet: I can show that one is used more often, but cannot yet say that it is climbing. And the method itself is new to primates.</p>
+        <p>Six animals per group is a small cohort, so these early findings come with real caveats. Several Bayesian intervals remain wide, and a separate measure—overall drift in transition patterns away from the control average—points in the same direction with 90% posterior probability, which I treat as suggestive rather than settled. Our current models also treat the 28 recording sessions as independent even though multiple sessions come from the same 12 animals, the 15 syllables do not yet have validated names like “climbing” or “walking,” and Keypoint-MoSeq is still new to primate kinematics.</p>
 
-        <p>Next come more labeled frames, all 24 animals, direct measurements of gait and balance, and names for the syllables. The same system is now being applied to a macaque model of Parkinson's disease. Nothing in it is specific to Zika. All it needs is cameras.</p>
+        <p>Those open questions set the immediate roadmap. Next, I am retraining the 3D pose network on all 65,000+ labeled frames, expanding the behavioral analysis to all 24 animals with animal-level hierarchical models, adding direct measurements of gait and balance, and assigning clear behavioral names to each syllable. Best of all, nothing in this pipeline depends on Zika virus: our team is already pointing the same 12-camera system at a macaque model of Parkinson's disease, looking for the earliest subtle motor changes before obvious symptoms ever appear.</p>
 
         <div class="aside-note">
           <p><strong>Recognition.</strong> Selected for a press conference at the Society for Neuroscience's 2026 meeting, one of 30–40 abstracts chosen from 8,000–10,000 submitted. Best Poster Award, EPC Research Day Symposium, Emory (2024). Supported in part by a $50,000 pilot grant on which I am Co-PI.</p>
         </div>
 
         <div class="credits">
-          <p>With Rebecca Richardson, Alex van Schoor, Kaitlyn Love, Praneet Bala, Gordon Ramsay, Mehul Suthar, Ann Chahroudi and Jessica Raper (principal investigator), at the Emory National Biomedical Research Center. Funded by a Pediatric Research pilot grant through the Marcus Autism Center, the National Institute of Neurological Disorders and Stroke (R01 NS120182) and the center's base grant (P51 OD011132).</p>
+          <p>With Rebecca Richardson, Alex van Schoor, Kaitlyn Love, Praneet Bala, Gordon Ramsay, Mehul Suthar, Ann Chahroudi, and Jessica Raper (principal investigator), at the Emory National Biomedical Research Center. Funded by a Pediatric Research pilot grant through the Marcus Autism Center, the National Institute of Neurological Disorders and Stroke (R01 NS120182), and the center's base grant (P51 OD011132).</p>
           <p>Earlier work on balance in this model: Raper et al. (2020), <a href="https://doi.org/10.1038/s41467-020-16320-7" target="_blank" rel="noopener"><em>Nature Communications</em> 11:2534</a>.</p>
         </div>
 

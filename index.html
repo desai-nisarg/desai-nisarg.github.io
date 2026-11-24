@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nisarg Desai, Ph.D. | Data scientist: machine learning, computer vision, Bayesian statistics</title>
-  <meta name="description" content="Nisarg Desai is a data scientist who builds machine-learning systems that measure behavior from video and audio: 3D pose estimation, audio detection and Bayesian statistics. Creator of OpenApePose.">
+  <meta name="description" content="Nisarg Desai is a data scientist and machine learning researcher who builds computer-vision, audio, and Bayesian statistical systems to measure complex behavior. Creator of OpenApePose.">
   <meta name="author" content="Nisarg Desai">
   <!-- launch-meta -->
   <link rel="canonical" href="https://desai-nisarg.github.io/">
@@ -18,7 +18,7 @@
   <!-- /launch-meta -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Nisarg Desai, Ph.D.">
-  <meta property="og:description" content="Instruments for measuring behavior, built from cameras, microphones and neural networks, and the statistics to know when to believe them.">
+  <meta property="og:description" content="Computer-vision, audio, and Bayesian statistical systems that measure complex behavior from raw video and sound.">
   <script>try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231B365D'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' font-weight='700' text-anchor='middle' fill='%23ffffff'%3END%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -69,12 +69,12 @@
       </g>
     </defs>
   </svg>
+
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="#top">Nisarg Desai</a>
       <nav aria-label="Sections">
         <a href="#projects">Projects</a>
-        <a href="#about">About</a>
         <a href="#publications">Publications</a>
         <a href="#background">Background</a>
         <a href="#contact">Contact</a>
@@ -85,16 +85,18 @@
 
   <main id="main">
 
-    <!-- ============ HERO ============ -->
+    <!-- ============ HERO / ABOUT ============ -->
     <section class="hero" id="top">
       <div class="wrap hero-grid">
-        <div>
+        <div id="about">
           <p class="eyebrow">Data scientist · Machine learning · Computer vision · Bayesian statistics</p>
           <h1>Nisarg Desai, Ph.D.</h1>
-          <p class="lede">I build tools for measuring behavior, out of cameras, microphones and neural networks, and the statistics to know when to believe them.</p>
-          <p>Behavior is one of the hardest things in biology to measure. It is fast, it is continuous, and it will not hold still. Pinning it down has been the thread through my work. For my Ph.D., I followed wild chimpanzees in Tanzania with a microphone to record their calls. Now, as a Postdoctoral Fellow at Emory University, I track young rhesus macaques in 3D with twelve synchronized cameras and deep learning. Along the way I am earning a <a href="projects/coursework.html">master's in computer science at Georgia Tech</a>.</p>
+          <p class="lede">I build computer-vision and audio models to measure animal behavior, and Bayesian statistical models to work out what those measurements mean.</p>
+          <p>I am a data scientist who trained as a biologist and now focuses on machine learning and statistical modeling. As a Postdoctoral Fellow at Emory University, I train multi-GPU 3D pose-estimation networks, build PyTorch audio detectors, and lead Bayesian analyses of brain imaging and behavioral data. Alongside my postdoc, I am completing a part-time <a href="projects/coursework.html">M.S. in Computer Science (Machine Learning) at Georgia Tech</a> (4.00 GPA).</p>
+          <p>My path into machine learning started with messy biological data. I studied biology and mathematics at IISER Pune in India, where I surveyed birds up a mountainside in Arunachal Pradesh and simulated plant flowering times. For my Ph.D. at the University of Minnesota, I trained a field team in Tanzania to record wild chimpanzees. Analyzing those recordings pushed me to teach myself statistics and machine learning, and I have since served as analysis lead or statistical advisor on 19 collaborations across neuroscience, archaeology, psychology, and ecology.</p>
+          <p>That quantitative work led to a neuroscience postdoc at Minnesota, where I created <a href="projects/openapepose.html">OpenApePose</a>—an open dataset of 71,868 labeled ape photographs—and trained deep pose-estimation models on it. At Emory, I expanded that computer-vision work into <a href="projects/movement-grammar.html">12-camera 3D motion capture</a>, unsupervised behavioral modeling, and automated bioacoustics.</p>
           <ul class="tags hero-skills" aria-label="Main skills">
-            <li>PyTorch</li><li>3D pose estimation</li><li>Audio machine learning</li><li>Bayesian models (brms, PyMC)</li><li>Causal inference</li><li>Python</li><li>R</li><li>SQL</li>
+            <li>PyTorch</li><li>3D pose estimation</li><li>Audio machine learning</li><li>Bayesian models (brms, PyMC)</li><li>Causal inference</li><li>Multi-GPU training</li><li>Python</li><li>R</li><li>SQL</li>
           </ul>
           <div class="actions">
             <a class="btn primary" href="#projects">See projects</a>
@@ -116,14 +118,15 @@
     <section id="projects" class="alt">
       <div class="wrap">
         <h2>Projects</h2>
-        <p class="section-intro">Each of these began with something that could not be measured well enough. The cards give the short version, with a link to the full story.</p>
+        <p class="section-intro">Machine-learning pipelines, open datasets, and statistical studies I have built or led. Each card summarizes the main finding and links to the full write-up.</p>
 
         <!-- ---- 3D motion capture ---- -->
         <article class="project feature" id="mocap">
-          <p class="kicker">Computer vision · Emory University · 2023–present</p>
+          <p class="kicker">Computer vision · Unsupervised learning · Emory University · 2023–present</p>
           <h3>The grammar of movement</h3>
-          <p class="question">Some movement problems are easy to see. The ones I am after hide in plain sight.</p>
-          <p class="wide">I designed and built a 12-camera system and deep-learning pipeline that reconstructs freely moving infant rhesus macaques in 3D, to detect motor problems too subtle to see by eye. A second model treats movement like language: given no labels, it breaks movement into short “syllables,” and I study the “grammar” those syllables follow.</p>
+          <p class="question">Can deep learning catch subtle motor problems in infant monkeys before a human observer can see them?</p>
+          <p class="wide">Juvenile macaques infected with Zika virus as infants lose their balance more often than control animals, but obvious slips only appear late. To detect subtler motor changes earlier, I designed a 12-camera capture setup and trained a 3D convolutional pose network (JARVIS-HybridNet in PyTorch) to track 17 keypoints across roughly one million frames.</p>
+          <p class="wide">Zika-infected macaques moved with less predictable sequences than controls, even though each individual movement lasted just as long. To uncover this pattern without human checklists, I retuned an unsupervised sequence model (Keypoint-MoSeq) from mice to macaques, segmenting 3D pose streams into 15 recurring movement “syllables” and modeling transitions between them.</p>
 
           <div class="steps">
             <div class="step">
@@ -139,7 +142,7 @@
                 </g>
                 <circle cx="108" cy="70" r="5" fill="#C84B31"/>
               </svg>
-              <p><b>1. Capture.</b> 12 machine-vision cameras, hardware-synchronized at up to 60 frames per second, streaming uncompressed video over a 120 Gbps network.</p>
+              <p><b>1. Capture.</b> Twelve synchronized cameras surround a play cage and record freely moving macaques at up to 60 frames per second, keeping occluded limbs visible from multiple angles.</p>
             </div>
             <div class="step">
               <svg viewBox="0 0 200 150" role="img" aria-label="Four camera views, each with body keypoints marked">
@@ -152,7 +155,7 @@
                 <use href="#skel" transform="translate(88,88) scale(-.66,.66)"/>
                 <use href="#skel" transform="translate(116,88) scale(.7)"/>
               </svg>
-              <p><b>2. Label and detect.</b> 65,000+ frames hand-labeled under a protocol I wrote, then a network finds 17 keypoints in every camera view.</p>
+              <p><b>2. Label and detect.</b> I wrote the annotation protocol and selected over 65,000 diverse frames for hand labeling; a neural network then detects 17 keypoints in every camera view.</p>
             </div>
             <div class="step">
               <svg viewBox="0 0 200 150" role="img" aria-label="A keypoint skeleton inside a three-dimensional box">
@@ -162,7 +165,7 @@
                 </g>
                 <use href="#skel" transform="translate(42,48) scale(1.15)"/>
               </svg>
-              <p><b>3. Reconstruct in 3D.</b> The views are combined into one 3D pose by triangulation (built on JARVIS, PyTorch). Average error is 13.75 mm, and the model has been run on about a million frames.</p>
+              <p><b>3. Reconstruct in 3D.</b> I trained a 3D convolutional network (JARVIS-HybridNet, PyTorch) on multi-GPU clusters to fuse all views into one 3D skeleton, averaging 13.75 mm of error (less than the width of a dime) across about one million frames.</p>
             </div>
             <div class="step">
               <svg viewBox="0 0 200 150" role="img" aria-label="A timeline split into colored segments, with a small graph of transitions between them">
@@ -179,11 +182,11 @@
                 <circle cx="40" cy="103" r="11" fill="#1B365D"/><circle cx="100" cy="78" r="11" fill="#0B7275"/>
                 <circle cx="160" cy="103" r="11" fill="#C84B31"/><circle cx="100" cy="128" r="11" fill="#8fb8c9"/>
               </svg>
-              <p><b>4. Find structure.</b> An unsupervised model (Keypoint-MoSeq tuned for macaques) splits movement into short “syllables” that make up behaviors such as walking and climbing.</p>
+              <p><b>4. Discover behavioral structure.</b> I retuned Keypoint-MoSeq to macaque movement timescales, discovering 15 recurring “syllables” whose transition patterns separate Zika-infected animals from controls.</p>
             </div>
           </div>
 
-          <p class="facts"><b>17</b> keypoints · <b>13.75 mm</b> average 3D error · <b>65,000+</b> hand-labeled frames · <b>about 1 million</b> frames analyzed</p>
+          <p class="facts"><b>17</b> keypoints · <b>13.75 mm</b> average 3D error · <b>65,000+</b> hand-labeled frames · <b>~1 million</b> frames analyzed</p>
           <p class="callout"><strong>Selected for a Society for Neuroscience 2026 press conference</strong>, one of 30–40 abstracts chosen from 8,000–10,000 submitted. Supported by a $50K pilot grant (Co-PI).</p>
           <ul class="tags">
             <li>PyTorch</li><li>3D pose estimation</li><li>Multi-view triangulation</li><li>Keypoint-MoSeq</li><li>Multi-GPU training</li><li>Annotation operations</li>
@@ -206,14 +209,14 @@
               <path d="M70,10V100" stroke="#C84B31" stroke-width="1.6" stroke-dasharray="5 4"/>
               <g font-size="12" fill="#586172"><text x="70" y="108" text-anchor="middle" dy="0">no effect</text><text x="150" y="64" text-anchor="middle" fill="#1B365D" font-weight="600">89%</text></g>
             </svg>
-            <figcaption>Schematic: each result is reported as a full posterior distribution with an 89% interval, not a yes-or-no significance test.</figcaption>
+            <figcaption>Schematic: each result is reported as a full posterior distribution with an 89% credible interval, rather than a yes-or-no significance test.</figcaption>
           </figure>
           <div>
             <p class="kicker">Bayesian statistics · Emory University · 2023–present</p>
             <h3>Zika and the developing brain</h3>
-            <p class="question">What does an infection in the first weeks of life do to a brain that is still being built?</p>
-            <p>A study of postnatal Zika virus infection, using infant rhesus macaque models. The same animals were measured in many ways (brain MRI, immune markers, viral load, behavior), and I analyzed each with Bayesian hierarchical models (brms) that adjust for confounders, with priors built from earlier studies.</p>
-            <p>Every result is reported as a distribution with its uncertainty, and all of the code and data are public.</p>
+            <p class="question">What does a Zika virus infection in the first weeks of life do to a developing brain?</p>
+            <p>I led the statistical analysis for an eight-month longitudinal study of 24 infant rhesus macaques—12 infected with Zika virus at five weeks old and 12 controls—measured across brain MRI, immune markers, vision, stress, and attachment. Because small cohorts demand rigorous uncertainty quantification, I built Bayesian hierarchical models (R, brms, Stan) with priors informed by earlier healthy-infant studies and reported full posterior distributions rather than binary significance tests.</p>
+            <p>Zika-infected infants matched controls on visual acuity at four and six months, but they showed poorer early emotional regulation, unusual hostility during mild stress, blunted separation distress, and wider cerebrospinal fluid spaces around the brain on MRI at three months. Every analysis script, prior specification, sensitivity check, and dataset is public.</p>
             <ul class="tags"><li>Bayesian hierarchical models</li><li>R / brms / Stan</li><li>Small-sample longitudinal data</li><li>Reproducible analysis</li></ul>
             <p class="links"><a class="btn small primary" href="projects/zika-brain.html">Read the full story</a><a href="https://doi.org/10.64898/2026.03.27.714817" target="_blank" rel="noopener">Preprint</a><a href="https://github.com/desai-nisarg/ZIKV-longitudinal-study" target="_blank" rel="noopener">Code and data</a></p>
           </div>
@@ -243,9 +246,9 @@
           <div>
             <p class="kicker">Bioacoustics · Bayesian statistics · Emory University · 2024–present</p>
             <h3>What a scream carries</h3>
-            <p class="question">Infant macaques scream when they are kept apart from the person who raised them. Do infants infected with Zika virus sound different when they do?</p>
-            <p>I measured 15 acoustic features in 5,328 calls from 24 infants and fitted a Bayesian model to each. Then I tried to break the results. What survived was a change in the shape of the scream's spectrum and in the rhythm of calling, not in its pitch.</p>
-            <p>Alongside the study I built a PyTorch detector that finds and labels calls automatically, tested on animals it has never heard.</p>
+            <p class="question">Infant macaques scream when separated from their caregivers. Do Zika-infected infants sound different when they do?</p>
+            <p>Zika-infected infants matched controls in scream pitch and vocal steadiness, yet two acoustic differences survived stress testing. Zika-infected infants concentrated scream energy at lower frequencies and in a narrower band, and Zika-infected males gave fewer back-to-back calls than control males (11–36% vs. 38–81%). To separate real signal from noise, I fitted 36 Bayesian hierarchical models in PyMC across 5,328 calls from 24 infants and ran five rounds of sensitivity checks.</p>
+            <p>Because four annotators had to hand-mark 10,118 calls, I also built an automated PyTorch audio detector (CNN + bidirectional GRU on log-mel spectrograms) to scale future studies. Evaluated via cross-validation on held-out animals it has never heard, the detector identifies call boundaries and call types directly from raw audio.</p>
             <ul class="tags"><li>Audio signal processing</li><li>PyMC</li><li>PyTorch</li><li>Sensitivity analysis</li></ul>
             <p class="links"><a class="btn small primary" href="projects/zika-vocalizations.html">Read the full story</a></p>
           </div>
@@ -260,9 +263,9 @@
           <div>
             <p class="kicker">Open dataset · University of Minnesota · 2022–2023</p>
             <h3>OpenApePose</h3>
-            <p class="question">Pose-tracking models learned from pictures of people. What happens when the body belongs to an orangutan?</p>
-            <p>An open dataset of 71,868 photographs of six ape species, each labeled with 16 body landmarks, published in <em>eLife</em>. I led it end to end: collecting images at zoos and sanctuaries with about 10 remote photographers, managing annotation with a commercial service, and choosing images for variety of poses instead of raw count.</p>
-            <p>A model trained on it scored 0.90 on unseen ape photographs, against 0.74 for a monkey-trained model and 0.71 for a human-trained one, and it still beat the monkey-trained model on a species held out of training.</p>
+            <p class="question">Pose-tracking models learned what a body looks like from photographs of people. What happens when the body belongs to an orangutan?</p>
+            <p>I created OpenApePose (<em>eLife</em>, 2023), an open dataset of 71,868 photographs across six ape species labeled with 16 body landmarks. Leading the project end to end, I coordinated roughly 10 remote photographers across zoos and sanctuaries, managed commercial annotation quality control, and curated images for pose diversity rather than raw count.</p>
+            <p>I trained and benchmarked six deep pose-estimation architectures in MMPose on OpenApePose, and my best model (HRNet-W48) substantially outperformed models trained on close relatives. On unseen ape photographs, this OpenApePose model reached an accuracy score (AUC) of 0.90 out of 1.0, compared with 0.74 for a monkey-trained model and 0.71 for a human-trained model. When I held out an entire ape species from training, the OpenApePose model still beat the monkey-trained baseline on every unseen species.</p>
             <ul class="tags"><li>Dataset design</li><li>HRNet / ResNet</li><li>MMPose</li><li>Out-of-distribution tests</li><li>Data-scaling analysis</li></ul>
             <p class="links"><a class="btn small primary" href="projects/openapepose.html">Read the full story</a><a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener">Paper</a><a href="https://github.com/desai-nisarg/OpenApePose" target="_blank" rel="noopener">Dataset and code</a></p>
           </div>
@@ -298,9 +301,9 @@
           <div>
             <p class="kicker">Field research · Causal inference · Ph.D., 2015–2022</p>
             <h3>The dialects that were not there</h3>
-            <p class="question">Chimpanzees can pick out a stranger’s call from hundreds of meters away. Are they hearing a foreign dialect, or just a voice they do not know?</p>
-            <p>With a field team I trained at Gombe National Park, Tanzania, we recorded 1,252 pant-hoot calls from two neighboring chimpanzee communities, which I compared with recordings from Uganda. Using causal diagrams (DAGs), permutation tests and an audit of sampling bias, I found no reliable community differences.</p>
-            <p>What the calls carried instead was the caller: strong individual signatures. I published the contrary result, and all of my dissertation data are public.</p>
+            <p class="question">Chimpanzees can pick out a stranger’s call from hundreds of meters away. Are they hearing a foreign dialect, or just a voice they do not recognize?</p>
+            <p>Contrary to earlier reports of chimpanzee dialects, I found no reliable vocal differences between neighboring communities at Gombe National Park, Tanzania. Working with two field assistants I trained, we recorded 1,252 pant-hoot calls from two neighboring communities and compared them with recordings from Uganda (325 screened calls across 18 males). I used causal diagrams (DAGs) to select control variables, ran a 1,000-shuffle permutation test so talkative males could not inflate group accuracy, and audited the sample for collection bias.</p>
+            <p>Instead of group dialects, pant-hoots strongly encoded individual identity: classifiers identified individual males at roughly twice the shuffled baseline. That result offers a simpler explanation for playback experiments, because a chimpanzee only needs to remember the voices of its own group to spot a stranger. I published the replication with all code and acoustic measurements open.</p>
             <ul class="tags"><li>Field data collection</li><li>Acoustic feature extraction</li><li>Causal diagrams</li><li>Replication</li></ul>
             <p class="links"><a class="btn small primary" href="projects/chimpanzee-dialects.html">Read the full story</a><a href="https://doi.org/10.1002/ajp.23430" target="_blank" rel="noopener">Paper</a><a href="https://github.com/desai-nisarg/Gombe-dialects" target="_blank" rel="noopener">Code and data</a></p>
           </div>
@@ -315,9 +318,9 @@
           <div>
             <p class="kicker">Bioacoustics · Machine learning · Ph.D., 2017–2022</p>
             <h3>What counts as a bark?</h3>
-            <p class="question">Researchers name chimpanzee calls by ear. Would a computer, given only the sound, draw the same lines?</p>
-            <p>For the first chapter of my dissertation I took 281 archival calls of five types and measured each one two ways: with the field’s traditional pitch measurements, and with the features used in human speech recognition (MFCCs). I compared discriminant analysis, random forests and a small neural network, then clustered the calls with no labels at all.</p>
-            <p>Nothing clearly won. About three calls in four were named correctly whatever I used. Pant-hoots and screams were easy and barks were not, and left to itself the computer found three groups, not five.</p>
+            <p class="question">Researchers sort chimpanzee calls into types by ear. Would a computer, given only the sound, draw the same lines?</p>
+            <p>For the first chapter of my Ph.D. dissertation, I tested whether machine-learning features borrowed from human speech recognition (MFCCs) classify chimpanzee calls better than traditional pitch measurements. Across 281 archival Gombe calls spanning five types, I compared discriminant analysis, random forests, and a small neural network, and then clustered the calls without any labels.</p>
+            <p>Neither feature set nor classifier clearly won: every pairing matched human labels on roughly three calls in four (71–78% test accuracy). Pant-hoots and screams separated cleanly, while barks blurred into waa-barks and screams. Left without labels, unsupervised clustering grouped the five human-named call types into three natural clusters rather than five.</p>
             <ul class="tags"><li>Audio features (MFCCs)</li><li>Random forests</li><li>Neural networks</li><li>Clustering</li><li>R (caret)</li></ul>
             <p class="links"><a class="btn small primary" href="projects/call-types.html">Read the full story</a><a href="https://conservancy.umn.edu/server/api/core/bitstreams/84f8fbfa-3027-46a1-9f6d-4335d7cf8203/content" target="_blank" rel="noopener">Dissertation</a><a href="https://github.com/desai-nisarg/chimpanzee-call-types" target="_blank" rel="noopener">Code and data</a></p>
           </div>
@@ -343,9 +346,9 @@
           <div>
             <p class="kicker">Data science across fields · 2015–present</p>
             <h3>Statistical collaborations</h3>
-            <p class="question">Most analyses go wrong before any model is fit, at the point of deciding what to compare with what.</p>
-            <p>I have been the analysis lead or advisor on 19 research projects in diverse fields (e.g., neuroscience, archaeology, psychology, ecology). Typical work: draw a causal diagram, fit mixed-effects or Bayesian models, and explain what the data can and cannot support.</p>
-            <p>Results include papers in <em>Current Biology</em>, <em>Philosophical Transactions of the Royal Society B</em> and <em>Ecological Modelling</em>, most with public code.</p>
+            <p class="question">How do you turn messy experimental and field data across disciplines into conclusions the data can actually support?</p>
+            <p>I have served as analysis lead or statistical advisor on 19 research projects across neuroscience, archaeology, psychology, and ecology. Specific projects include modeling how stone-tool edge curvature affects slicing efficiency, validating how larger territories lower mortality risk in wolves and chimpanzees, and comparing male aggression between wild bonobos and chimpanzees.</p>
+            <p>In each collaboration, I start by drawing a causal diagram to identify confounders before fitting mixed-effects or Bayesian models and documenting what the data cannot prove. These collaborations have produced peer-reviewed papers in <em>Current Biology</em>, <em>Philosophical Transactions of the Royal Society B</em>, and <em>Ecological Modelling</em>, most with reproducible public code.</p>
             <ul class="tags"><li>Causal inference</li><li>Mixed-effects models</li><li>Study design</li><li>R</li></ul>
             <p class="links"><a href="https://doi.org/10.1016/j.cub.2024.02.071" target="_blank" rel="noopener">Current Biology (2024)</a><a href="https://github.com/desai-nisarg/Geometry-model" target="_blank" rel="noopener">Example code</a></p>
           </div>
@@ -355,7 +358,7 @@
           <div>
             <p class="kicker">Georgia Tech · M.S. in Computer Science (Machine Learning) · GPA 4.00 · 2024–present</p>
             <h3 id="coursework-title">Coursework</h3>
-            <p>Language models and a question-answering network built by hand in PyTorch; supervised, unsupervised and reinforcement learning compared in four reports; tree ensembles written from scratch for trading; a team Android app; Bayesian modeling with PyMC.</p>
+            <p>I built PyTorch language models and an attention-based question-answering network from scratch, ran four controlled experiments comparing supervised, unsupervised, and reinforcement learning, coded tree ensembles in NumPy for market backtesting, shipped a four-person Android app, and modeled lab data in PyMC.</p>
             <p class="links"><a class="btn small primary" href="projects/coursework.html">Course by course</a></p>
           </div>
           <ul class="course-chips" aria-label="Completed courses">
@@ -372,7 +375,7 @@
           <article class="card">
             <p class="kicker">Internship · 0ptimus Analytics · 2019</p>
             <h3>Faster voter-turnout models</h3>
-            <p>Built and compared five ways to predict turnout from several past elections (XGBoost, random forests, logistic regression). A 4% training sample matched full-data accuracy, and one approach gave ~70× faster training at comparable accuracy.</p>
+            <p>I built and benchmarked five voter-turnout models (XGBoost, random forests, logistic regression) across multi-cycle election records. Training on a 4% sample matched full-data accuracy and cut pipeline runtime from 13 hours to 50 minutes, while one modeling approach trained roughly 70× faster at comparable accuracy.</p>
             <div class="bars" role="img" aria-label="Pipeline run time: 13 hours on full data, 50 minutes on a 4 percent sample">
               <p>Pipeline run time</p>
               <div><span>Full data</span><b><i style="width:100%"></i></b><em>13 h</em></div>
@@ -382,7 +385,7 @@
           <article class="card">
             <p class="kicker">Hackathon · PIT-UN Tech for Change, Georgia State University · 2025</p>
             <h3>Scoring sites for affordable housing</h3>
-            <p>Built a tool that scores possible development sites in Georgia against the state's criteria for housing tax credits (about 40 measures of nearby amenities such as grocery stores, schools and healthcare), a job developers usually do by hand in Google Maps.</p>
+            <p>I built a Python tool that scores proposed housing sites in Georgia against roughly 40 state tax-credit criteria—measuring nearby grocery stores, schools, and healthcare—via the Google Maps Places API. The script automates a site-scoring workflow developers typically complete by hand.</p>
             <ul class="tags"><li>Python</li><li>pandas</li><li>Google Maps Places API</li></ul>
             <p class="links"><a href="https://newventurefund.badges.parchment.com/public/assertions/sNqEpvR4TeuZZLxoskF3dQ" target="_blank" rel="noopener">Participant badge</a></p>
           </article>
@@ -390,54 +393,36 @@
       </div>
     </section>
 
-    <!-- ============ ABOUT ============ -->
-    <section id="about">
-      <div class="wrap about-grid">
-        <div>
-          <p class="kicker">About</p>
-          <p>I am a data scientist who trained as a biologist. I build computer-vision and audio models that measure what animals do, and I use Bayesian statistics to work out what those measurements mean. I am a Postdoctoral Fellow at Emory University in Atlanta and a part-time master's student in computer science at Georgia Tech.</p>
-          <p>I have been interested in wildlife since I was a child, and I studied biology and mathematics at IISER Pune in India. My first research jobs there were surveying birds up a mountainside in Arunachal Pradesh and writing simulations of when plants flower.</p>
-          <p>For my Ph.D. at the University of Minnesota, I recorded wild chimpanzees in Tanzania with a field team I trained. Collecting the recordings turned out to be the easier half. To analyze them I taught myself statistics and machine learning from textbooks and online courses, and along the way I became the person other researchers came to with their data: 19 projects so far, in fields from archaeology to neuroscience.</p>
-          <p>A postdoc in a neuroscience lab at Minnesota moved me into deep learning, where I built <a href="projects/openapepose.html">OpenApePose</a>. At Emory I designed a <a href="projects/movement-grammar.html">3D motion-capture system</a> from the cameras up, and I lead the statistics for a study of <a href="projects/zika-brain.html">how early Zika virus infection affects the developing brain</a>.</p>
-        </div>
-        <aside>
-          <h3>What I work with</h3>
-          <ul>
-            <li>PyTorch; MMPose, JARVIS, Keypoint-MoSeq</li>
-            <li>Multi-GPU training on computing clusters</li>
-            <li>2D and 3D pose estimation, multi-camera capture</li>
-            <li>Audio signal processing</li>
-            <li>Bayesian models (brms, PyMC) and causal diagrams</li>
-            <li>Python, R, SQL, Git; some Java</li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
     <!-- ============ PUBLICATIONS ============ -->
-    <section id="publications" class="alt">
+    <section id="publications">
       <div class="wrap">
         <h2>Publications</h2>
-        <p class="section-intro">15 peer-reviewed papers and 1 preprint, with code wherever it is public.</p>
+        <p class="section-intro">15 peer-reviewed papers and 1 preprint, with code linked wherever it is public.</p>
 
         <ol class="pubs">
           <li><strong>Desai, N.</strong>, Love, K., van Schoor, A., … Chahroudi, A., &amp; Raper, J. (2026). Altered neurodevelopment, CSF volume, and emotional reactivity following postnatal Zika virus infection in infant macaques. <em>bioRxiv</em> (preprint; in revision at <em>Communications Biology</em>). <a href="https://doi.org/10.64898/2026.03.27.714817" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/ZIKV-longitudinal-study" target="_blank" rel="noopener">code</a></li>
           <li><strong>Desai, N.</strong>, Bala, P., Richardson, R., Raper, J., Zimmermann, J., &amp; Hayden, B. (2023). OpenApePose, a database of annotated ape photographs for pose estimation. <em>eLife</em>, 12:RP86873. <a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/OpenApePose" target="_blank" rel="noopener">code</a></li>
           <li><strong>Desai, N.</strong>, Fedurek, P., Slocombe, K. E., &amp; Wilson, M. L. (2022). Chimpanzee pant-hoots encode individual information more reliably than group differences. <em>American Journal of Primatology</em>, 84(11):e23430. <a href="https://doi.org/10.1002/ajp.23430" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Gombe-dialects" target="_blank" rel="noopener">code</a></li>
-          <li>Mouginot, M., Wilson, M. L., <strong>Desai, N.</strong>, &amp; Surbeck, M. (2024). Differences in expression of male aggression between wild bonobos and chimpanzees. <em>Current Biology</em>. <a href="https://doi.org/10.1016/j.cub.2024.02.071" target="_blank" rel="noopener">doi</a></li>
-          <li>Crouse, K., <strong>Desai, N.</strong>, Cassidy, K., Stahler, E., Lehman, C., &amp; Wilson, M. L. (2022). Larger territories reduce mortality risk for chimpanzees, wolves, and agents: Multiple lines of evidence in a model validation framework. <em>Ecological Modelling</em>, 471:110063. <a href="https://doi.org/10.1016/j.ecolmodel.2022.110063" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Geometry-model" target="_blank" rel="noopener">code</a></li>
-          <li>Eleuteri, V., van der Werff, J., Wilhelm, W., Soldati, A., Crockford, C., <strong>Desai, N.</strong>, Fedurek, P., … Hobaiter, C. (2025). Chimpanzee drumming shows rhythmicity and subspecies variation. <em>Current Biology</em>. <a href="https://doi.org/10.1016/j.cub.2025.04.019" target="_blank" rel="noopener">doi</a></li>
-          <li>Khaksar, S., <strong>Desai, N.</strong>, Eren, M. I., &amp; Tostevin, G. (2023). The influence of cut material on the slicing efficiency effects of stone tool flake size, edge length, and gross edge curvature. <em>Journal of Archaeological Science: Reports</em>, 47:103700. <a href="https://doi.org/10.1016/j.jasrep.2022.103700" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Cut-material-and-efficiency" target="_blank" rel="noopener">code</a></li>
-          <li>Khaksar, S., <strong>Desai, N.</strong>, Eren, M. I., &amp; Tostevin, G. (2023). Experimental assessment of plan-view and profile-view gross-edge curvature on stone flake slicing efficiency. <em>Archaeometry</em>. <a href="https://doi.org/10.1111/arcm.12803" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Edge-curvature-and-efficiency" target="_blank" rel="noopener">code</a></li>
-          <li>Massaro, A., Gilby, I., <strong>Desai, N.</strong>, Weiss, A., Feldblum, J., Pusey, A., &amp; Wilson, M. L. (2022). Correlates of individual participation in boundary patrols by male chimpanzees. <em>Philosophical Transactions of the Royal Society B</em>, 377(1851):20210151. <a href="https://doi.org/10.1098/rstb.2021.0151" target="_blank" rel="noopener">doi</a></li>
-          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Kelty-Stephen, D. G. (2021). Proprioceptive afferents differentially contribute to effortful perception of object heaviness and length. <em>Experimental Brain Research</em>, 239(4):1085–1098. <a href="https://doi.org/10.1007/s00221-021-06045-4" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Heaviness-Length-EMG" target="_blank" rel="noopener">code</a></li>
-          <li>Das, S., Erinjery, J. J., <strong>Desai, N.</strong>, Mohan, K., Kumara, H. N., &amp; Singh, M. (2019). Deceased-infant carrying in nonhuman anthropoids: Insights from systematic analysis and case studies of bonnet macaques and lion-tailed macaques. <em>Journal of Comparative Psychology</em>, 133(2):156. <a href="https://doi.org/10.1037/com0000140" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Deceased-infant-carrying" target="_blank" rel="noopener">code</a></li>
-          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2016). Division of labour: a democratic approach towards understanding manual asymmetries in non-human primates. <em>Current Science</em>, 110(9):1630–1638. <a href="https://doi.org/10.18520/cs/v110/i9/1630-1638" target="_blank" rel="noopener">doi</a></li>
-          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2016). Self-organization of laterally asymmetrical movements as a consequence of space-time optimization. <em>Journal of Theoretical Biology</em>, 390:50–60. <a href="https://doi.org/10.1016/j.jtbi.2015.10.038" target="_blank" rel="noopener">doi</a></li>
-          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2015). Division of labor in hand usage is associated with higher hand performance in free-ranging bonnet macaques. <em>PLoS ONE</em>, 10(3):e0119337. <a href="https://doi.org/10.1371/journal.pone.0119337" target="_blank" rel="noopener">doi</a></li>
-          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2014). Do right-handed monkeys use the right cheek pouch before the left? <em>PLoS ONE</em>, 9(5):e97971. <a href="https://doi.org/10.1371/journal.pone.0097971" target="_blank" rel="noopener">doi</a></li>
-          <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2014). Division of labor in hand usage in free-ranging bonnet macaques. <em>American Journal of Primatology</em>, 76(6):576–585. <a href="https://doi.org/10.1002/ajp.22250" target="_blank" rel="noopener">doi</a></li>
         </ol>
+
+        <details>
+          <summary style="cursor:pointer;font-weight:600;margin:1.25rem 0 0.75rem">Show all 13 co-authored papers</summary>
+          <ol class="pubs" start="4">
+            <li>Mouginot, M., Wilson, M. L., <strong>Desai, N.</strong>, &amp; Surbeck, M. (2024). Differences in expression of male aggression between wild bonobos and chimpanzees. <em>Current Biology</em>. <a href="https://doi.org/10.1016/j.cub.2024.02.071" target="_blank" rel="noopener">doi</a></li>
+            <li>Crouse, K., <strong>Desai, N.</strong>, Cassidy, K., Stahler, E., Lehman, C., &amp; Wilson, M. L. (2022). Larger territories reduce mortality risk for chimpanzees, wolves, and agents: Multiple lines of evidence in a model validation framework. <em>Ecological Modelling</em>, 471:110063. <a href="https://doi.org/10.1016/j.ecolmodel.2022.110063" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Geometry-model" target="_blank" rel="noopener">code</a></li>
+            <li>Eleuteri, V., van der Werff, J., Wilhelm, W., Soldati, A., Crockford, C., <strong>Desai, N.</strong>, Fedurek, P., … Hobaiter, C. (2025). Chimpanzee drumming shows rhythmicity and subspecies variation. <em>Current Biology</em>. <a href="https://doi.org/10.1016/j.cub.2025.04.019" target="_blank" rel="noopener">doi</a></li>
+            <li>Khaksar, S., <strong>Desai, N.</strong>, Eren, M. I., &amp; Tostevin, G. (2023). The influence of cut material on the slicing efficiency effects of stone tool flake size, edge length, and gross edge curvature. <em>Journal of Archaeological Science: Reports</em>, 47:103700. <a href="https://doi.org/10.1016/j.jasrep.2022.103700" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Cut-material-and-efficiency" target="_blank" rel="noopener">code</a></li>
+            <li>Khaksar, S., <strong>Desai, N.</strong>, Eren, M. I., &amp; Tostevin, G. (2023). Experimental assessment of plan-view and profile-view gross-edge curvature on stone flake slicing efficiency. <em>Archaeometry</em>. <a href="https://doi.org/10.1111/arcm.12803" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Edge-curvature-and-efficiency" target="_blank" rel="noopener">code</a></li>
+            <li>Massaro, A., Gilby, I., <strong>Desai, N.</strong>, Weiss, A., Feldblum, J., Pusey, A., &amp; Wilson, M. L. (2022). Correlates of individual participation in boundary patrols by male chimpanzees. <em>Philosophical Transactions of the Royal Society B</em>, 377(1851):20210151. <a href="https://doi.org/10.1098/rstb.2021.0151" target="_blank" rel="noopener">doi</a></li>
+            <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Kelty-Stephen, D. G. (2021). Proprioceptive afferents differentially contribute to effortful perception of object heaviness and length. <em>Experimental Brain Research</em>, 239(4):1085–1098. <a href="https://doi.org/10.1007/s00221-021-06045-4" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Heaviness-Length-EMG" target="_blank" rel="noopener">code</a></li>
+            <li>Das, S., Erinjery, J. J., <strong>Desai, N.</strong>, Mohan, K., Kumara, H. N., &amp; Singh, M. (2019). Deceased-infant carrying in nonhuman anthropoids: Insights from systematic analysis and case studies of bonnet macaques and lion-tailed macaques. <em>Journal of Comparative Psychology</em>, 133(2):156. <a href="https://doi.org/10.1037/com0000140" target="_blank" rel="noopener">doi</a> · <a href="https://github.com/desai-nisarg/Deceased-infant-carrying" target="_blank" rel="noopener">code</a></li>
+            <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2016). Division of labour: a democratic approach towards understanding manual asymmetries in non-human primates. <em>Current Science</em>, 110(9):1630–1638. <a href="https://doi.org/10.18520/cs/v110/i9/1630-1638" target="_blank" rel="noopener">doi</a></li>
+            <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2016). Self-organization of laterally asymmetrical movements as a consequence of space-time optimization. <em>Journal of Theoretical Biology</em>, 390:50–60. <a href="https://doi.org/10.1016/j.jtbi.2015.10.038" target="_blank" rel="noopener">doi</a></li>
+            <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2015). Division of labor in hand usage is associated with higher hand performance in free-ranging bonnet macaques. <em>PLoS ONE</em>, 10(3):e0119337. <a href="https://doi.org/10.1371/journal.pone.0119337" target="_blank" rel="noopener">doi</a></li>
+            <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2014). Do right-handed monkeys use the right cheek pouch before the left? <em>PLoS ONE</em>, 9(5):e97971. <a href="https://doi.org/10.1371/journal.pone.0097971" target="_blank" rel="noopener">doi</a></li>
+            <li>Mangalam, M., <strong>Desai, N.</strong>, &amp; Singh, M. (2014). Division of labor in hand usage in free-ranging bonnet macaques. <em>American Journal of Primatology</em>, 76(6):576–585. <a href="https://doi.org/10.1002/ajp.22250" target="_blank" rel="noopener">doi</a></li>
+          </ol>
+        </details>
 
         <p class="more">Citations and the full record are on <a href="https://scholar.google.com/citations?user=u6LVnycAAAAJ" target="_blank" rel="noopener">Google Scholar</a>.</p>
 
@@ -448,13 +433,13 @@
           <li><strong>Best Poster Award</strong> (2024): EPC Research Day Symposium, Emory</li>
           <li><strong>Doctoral Dissertation Fellowship</strong> and <strong>Interdisciplinary Doctoral Fellowship</strong> (2019–21): University of Minnesota, $25,000 each</li>
           <li><strong>KVPY National Fellowship</strong> (2009–15): Department of Science &amp; Technology, Government of India</li>
-          <li><strong>In the press:</strong> Smithsonian National Museum of Natural History (“The Scientist Is In”), <em>The Conversation</em> and <em>EurekAlert!</em> (2018)</li>
+          <li><strong>In the press:</strong> Smithsonian National Museum of Natural History (“The Scientist Is In”), <em>The Conversation</em>, and <em>EurekAlert!</em> (2018)</li>
         </ul>
       </div>
     </section>
 
     <!-- ============ BACKGROUND ============ -->
-    <section id="background">
+    <section id="background" class="alt">
       <div class="wrap">
         <h2>Background</h2>
         <ol class="timeline">
@@ -463,7 +448,7 @@
             <div>
               <h3>Postdoctoral Fellow</h3>
               <p class="where">Emory National Biomedical Research Center, Emory University · Atlanta, GA</p>
-              <p>Lead the data science for studies of how early viral infections affect brain and behavioral development: the 3D motion-capture system, the audio call detector, and Bayesian analyses of MRI, immune and behavioral data. Work daily with neuroscientists, physicians (pediatrics, infectious diseases), and Parkinson's researchers. Co-PI on a funded $50K pilot grant and Principal Investigator on a 2026 proposal.</p>
+              <p>Lead machine learning and Bayesian statistics for studies of early viral infection, brain development, and motor behavior. Collaborate daily with neuroscientists, pediatric and infectious-disease physicians, and Parkinson's researchers. Co-PI on a funded $50K pilot grant and Principal Investigator on a 2026 grant proposal.</p>
             </div>
           </li>
           <li>
@@ -471,7 +456,7 @@
             <div>
               <h3>Postdoctoral Associate</h3>
               <p class="where">Department of Neuroscience, University of Minnesota · Minneapolis, MN</p>
-              <p>Created and open-sourced OpenApePose (<em>eLife</em>, 2023): designed the image collection, ran annotation with a commercial service, trained and benchmarked pose-estimation models on multiple GPUs, and documented where the models fail.</p>
+              <p>Created and open-sourced OpenApePose (<em>eLife</em>, 2023): coordinated multi-site image collection, managed commercial annotation quality control, trained and benchmarked multi-GPU pose models in MMPose, and audited out-of-distribution failures.</p>
             </div>
           </li>
           <li>
@@ -479,7 +464,7 @@
             <div>
               <h3>Statistical Consultant &amp; Research Collaborator</h3>
               <p class="where">Multiple national and international collaborations</p>
-              <p>Analysis lead or advisor on 19 research projects in diverse fields (e.g., neuroscience, archaeology, psychology, ecology), from study design to published results. Peer reviewer for 13 journals (about 17 manuscripts).</p>
+              <p>Served as analysis lead or statistical advisor on 19 interdisciplinary research projects across neuroscience, archaeology, psychology, and ecology, from study design through publication. Peer reviewer for 13 journals (about 17 manuscripts).</p>
             </div>
           </li>
           <li>
@@ -487,7 +472,7 @@
             <div>
               <h3>Ph.D. Researcher</h3>
               <p class="where">Department of Anthropology, University of Minnesota · Minneapolis, MN</p>
-              <p>Studied chimpanzee vocal communication with field recordings from Tanzania and Uganda, machine-learning classifiers and Bayesian models. Trained and supervised two field assistants in Tanzania, mentored 17 undergraduate researchers, and taught for seven semesters.</p>
+              <p>Investigated chimpanzee vocal communication using field recordings from Tanzania and Uganda, machine-learning classifiers, and causal inference. Trained and supervised two Tanzanian field assistants, mentored 17 undergraduate researchers, and taught for seven semesters.</p>
             </div>
           </li>
           <li>
@@ -495,7 +480,7 @@
             <div>
               <h3>Data Science Intern</h3>
               <p class="where">0ptimus Analytics · Washington, DC area</p>
-              <p>Built and compared five ways to predict voter turnout from several past elections (XGBoost, random forests, logistic regression). One approach gave ~70× faster training at comparable accuracy, and a 4% training sample matched full-data accuracy, which cut the pipeline from 13 hours to 50 minutes.</p>
+              <p>Built and benchmarked five voter-turnout modeling pipelines across multi-cycle election data, cutting runtime from 13 hours to 50 minutes without losing predictive accuracy.</p>
             </div>
           </li>
         </ol>
@@ -524,17 +509,15 @@
     </section>
 
     <!-- ============ CONTACT ============ -->
-    <section id="contact" class="contact alt">
+    <section id="contact" class="contact">
       <div class="wrap">
         <h2>Get in touch</h2>
-        <p>I am always glad to talk about machine learning, statistics or animal behavior, and most of all about how to tell whether a result is real. Email is the best way to reach me.</p>
+        <p>I am always glad to talk about machine learning, statistics, or animal behavior, especially how to tell whether a messy result is real. Email is the best way to reach me.</p>
         <div class="actions">
           <a class="btn primary" href="mailto:nisarg.p.desai@gmail.com">nisarg.p.desai@gmail.com</a>
           <a class="btn" href="assets/Nisarg_Desai_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
-          <a class="btn" href="https://github.com/desai-nisarg" rel="me noopener" target="_blank">GitHub</a>
-          <a class="btn" href="https://scholar.google.com/citations?user=u6LVnycAAAAJ" rel="me noopener" target="_blank">Google Scholar</a>
-          <a class="btn" href="https://www.linkedin.com/in/desai-nisarg" rel="me noopener" target="_blank">LinkedIn</a>
         </div>
+        <p class="more">Also on <a href="https://github.com/desai-nisarg" rel="me noopener" target="_blank">GitHub</a>, <a href="https://scholar.google.com/citations?user=u6LVnycAAAAJ" rel="me noopener" target="_blank">Google Scholar</a>, and <a href="https://www.linkedin.com/in/desai-nisarg" rel="me noopener" target="_blank">LinkedIn</a>.</p>
       </div>
     </section>
 

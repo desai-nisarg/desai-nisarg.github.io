@@ -34,7 +34,6 @@
       <a class="brand" href="../index.html">Nisarg Desai</a>
       <nav aria-label="Sections">
         <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#about">About</a>
         <a href="../index.html#publications">Publications</a>
         <a href="../index.html#background">Background</a>
         <a href="../index.html#contact">Contact</a>
@@ -49,7 +48,7 @@
         <p class="crumb"><a href="../index.html#projects">&larr; All projects</a></p>
         <p class="kicker">University of Minnesota · 2022–2023 · Open dataset · Computer vision · Pose estimation</p>
         <h1>OpenApePose</h1>
-        <p class="standfirst">Pose-tracking models learned what a body looks like from photographs of people. I wanted to know what they would make of an orangutan, and what it would take to do better.</p>
+        <p class="standfirst">Pose-tracking networks learned what a body looks like from photographs of people and monkeys. I built an open dataset of 71,868 labeled ape photographs to test whether those models transfer to apes, measure how much data a dedicated model needs, and audit how well it generalizes to species it has never seen.</p>
         <ul class="glance">
           <li><strong>71,868</strong><span>annotated photographs</span></li>
           <li><strong>6</strong><span>ape species</span></li>
@@ -65,49 +64,49 @@
 
         <h2>A borrowed skeleton</h2>
 
-        <p>Pose tracking is software that looks at an ordinary photograph or video and marks where the body's joints are: here is the nose, here is the left elbow, here is the right knee. Nothing has to be attached to the animal. It has changed how behavior is studied, because a camera can now record how a body moves, frame by frame.</p>
+        <p>Markerless pose tracking reads an ordinary photograph or video and places coordinates on a body's joints—nose, elbows, wrists, knees—without attaching a single sensor to the subject. That capability has transformed behavioral research because any camera can now turn raw footage into frame-by-frame kinematics.</p>
 
-        <p>The software learns from examples. People mark the joints by hand on thousands of photographs, and a neural network learns to do the same on photographs it has not seen. That is why it works so well for people: there are hundreds of thousands of labeled photographs of people. It also works for mice and flies, whose bodies and surroundings are simple. But for apes, in 2022, there was no public dataset at all. If you wanted to track a chimpanzee, there was nothing you could download and run.</p>
+        <p>Those models depend entirely on labeled training examples. Pose trackers excel on people because hundreds of thousands of hand-labeled human photographs are freely available, and they work cleanly on laboratory mice and flies whose bodies and backgrounds stay simple. In 2022, however, no public pose dataset existed for nonhuman apes; anyone wanting to track a chimpanzee had nothing ready to download and run.</p>
 
-        <p>Apes are hard subjects. Their fur gives a camera little texture to hold on to. Their bodies take up a huge range of positions: sitting, knuckle-walking, hanging by one arm, folded up asleep. And they are hard to photograph in large numbers, because there are few of them in captivity and footage from field sites tends to be closely held.</p>
+        <p>Apes pose a tougher computer-vision problem than lab animals. Dark fur offers few edges for a camera to lock onto, and ape bodies fold into far more configurations—sitting, knuckle-walking, hanging by one arm, or curling up asleep. Gathering large numbers of photographs is also difficult because relatively few apes live in zoos and sanctuaries, and wild field footage is rarely shared openly.</p>
 
-        <p>Did anyone need an ape dataset? The hope at the time was no. Humans are apes, and monkeys are close relatives, so a model trained on people or on monkeys might work on apes too. That hope could be tested, but only with a large set of labeled ape photographs. So we built one, and we gave it away.</p>
+        <p>At the time, many researchers hoped we might skip building an ape dataset altogether. Humans are apes, and monkeys are close evolutionary relatives, so models already trained on people or monkeys might transfer straight onto gorillas and orangutans. Testing that assumption required a large benchmark of labeled ape photographs, so I led the effort to build OpenApePose and release every image, label, and model publicly.</p>
 
         <h2>Where 71,868 photographs come from</h2>
 
-        <p>The photographs show six kinds of ape: chimpanzees, bonobos, gorillas, orangutans, gibbons and siamangs. Most were taken at zoos in 25 cities across the United States and Canada, and at four sanctuaries. We took some of them ourselves. For zoos we could not reach, I hired about ten photographers who lived nearby, on short contracts. Several volunteers sent pictures too.</p>
+        <p>We gathered imagery spanning six ape species: chimpanzees, bonobos, gorillas, orangutans, gibbons, and siamangs. Most photographs came from zoos in 25 cities across the United States and Canada and from four sanctuaries. Our lab shot part of the collection ourselves, volunteers contributed additional sets, and I hired roughly ten local photographers on short contracts to cover zoos we could not visit in person.</p>
 
-        <p>A smaller number came from public videos and photographs online, a use the university's legal office approved. And about 17,000 came from the lab's earlier monkey dataset, OpenMonkeyPose, which had included some apes.</p>
+        <p>Two additional sources filled out the collection. We drew a smaller set from public online videos and photographs—a workflow reviewed and approved by the university's legal office—and folded in roughly 17,000 ape photographs originally collected inside the lab's earlier monkey dataset, OpenMonkeyPose.</p>
 
         <figure class="wide">
           <img src="../assets/openapepose/elife-86873-fig1.jpg" width="1500" height="1000" loading="lazy" alt="A grid of 32 photographs of chimpanzees, gorillas, orangutans, bonobos, gibbons and siamangs in many poses and settings, each overlaid with colored lines joining the labeled body landmarks">
-          <figcaption>Thirty-two of the photographs, with the labeled landmarks joined by lines. Figure 1 of the paper.</figcaption>
+          <figcaption>Thirty-two photographs from OpenApePose, with colored lines connecting the 16 labeled landmarks on each animal. Figure 1 of the paper.</figcaption>
         </figure>
 
-        <p>We collected several hundred thousand images and threw most of them away. More than three quarters failed a check. Some were blurry. In some the animal was too small, or mostly hidden. And many were too much like a picture we already had, which was the check that mattered most. A thousand frames of a gorilla sitting still teach a model one thing a thousand times. A trained technician screened every photograph, and then I did. We kept the ones that added a pose, an angle or a background the set did not have yet.</p>
+        <p>Curating for pose diversity mattered far more than keeping raw volume. We collected several hundred thousand images and discarded more than three quarters of them during screening. Blurry shots and distant or mostly occluded animals went out first, followed by near-duplicates—because a thousand frames of a gorilla sitting still teach a neural network one posture a thousand times. A trained technician screened every image, and I reviewed the selections myself, retaining only photographs that added a new pose, viewing angle, or background.</p>
 
-        <p>A commercial annotation service then marked 16 landmarks on each animal (the nose, the eyes, the shoulders and so on), following written instructions that are published with the paper. We checked their work. From each batch of 10,000 images we drew five random samples of 100 and looked at every label, about 2,500 images in all. One batch had errors and went back to be redone.</p>
+        <p>Once the final 71,868 images were selected, a commercial annotation team labeled 16 landmarks per animal—nose, eyes, head, neck, shoulders, elbows, wrists, hip, knees, and feet—following written guidelines published alongside the paper. To guard label quality, we audited every batch of 10,000 images by inspecting five random 100-image samples, checking every single joint across roughly 2,500 photographs in total. That audit caught systematic errors in one batch, which I sent back to be redone before training began.</p>
 
         <div class="pair" style="margin-bottom: 1.8rem">
           <figure class="plate">
             <img src="../assets/openapepose/elife-86873-fig2B-landmarks.jpg" width="904" height="778" loading="lazy" alt="A gorilla with the 16 landmarks marked and named: nose, eyes, head, neck, shoulders, elbows, wrists, hip, knees and feet">
-            <figcaption>The 16 landmarks. They match the lab's monkey dataset, minus the tip of the tail, which apes do not have. Cropped from Figure 2.</figcaption>
+            <figcaption>The 16 body landmarks, matching the lab's OpenMonkeyPose schema minus the tail tip that apes lack. Cropped from Figure 2.</figcaption>
           </figure>
           <figure class="plate">
             <img src="../assets/openapepose/elife-86873-fig3.jpg" width="1500" height="1086" loading="lazy" alt="A two-dimensional map with one dot per photograph, colored by species, and example photographs for six regions. Gibbons and siamangs form clusters apart from the great apes, and orangutans overlap both">
-            <figcaption>A map of every pose in the dataset (UMAP). Each dot is one photograph and nearby dots are similar poses. Figure 3.</figcaption>
+            <figcaption>A two-dimensional pose map (UMAP) of the full dataset. Each dot represents one photograph, with similar body postures placed nearby. Figure 3.</figcaption>
           </figure>
         </div>
 
-        <p>Is the variety really there? The map on the right is one way to check. Gibbons and siamangs, which travel by swinging under branches, form their own clusters. The great apes, which spend more time on the ground, form another. Orangutans, the great apes that spend the most time in trees, sit across both.</p>
+        <p>To verify that our screening captured real behavioral variety, I projected all 71,868 labeled skeletons onto a two-dimensional map using <a href="https://umap-learn.readthedocs.io/" target="_blank" rel="noopener">UMAP</a>, an algorithm that groups similar body geometries together. The map reflects ape biology cleanly: gibbons and siamangs, which swing beneath branches, form clusters distinct from the more ground-dwelling great apes, while tree-dwelling orangutans bridge both regions.</p>
 
         <h2>The test</h2>
 
-        <p>A dataset is only worth something if models trained on it work. So I trained six standard pose networks on it, using the MMPose library. The best was HRNet-W48, which had also been the best in the lab's earlier comparison on monkeys. It is the only network in the paper, because the paper tests the data and does not rank networks. The model learned from 60% of the photographs, and I scored it on another 20% that it had never seen.</p>
+        <p>A dataset proves its value only when models trained on it perform accurately on unseen images. I trained and compared six standard pose-estimation architectures in <a href="https://mmpose.readthedocs.io/" target="_blank" rel="noopener">MMPose</a>, training each on 60% of the photographs (43,120 images) and evaluating on a held-out 20% test set. HRNet-W48 achieved the highest accuracy—matching its top finish in our lab's earlier monkey benchmark—so I carried that single network into the paper's comparisons to evaluate the data cleanly without turning the study into an architecture leaderboard.</p>
 
-        <p>Here is how the score works. A predicted landmark counts as correct if it falls close enough to where a person put it. How close is close enough? That is the tolerance, set as a fraction of the animal's size in the picture. At a tolerance of 20%, the model placed 88% of landmarks correctly. Averaged over every tolerance from strict to loose, it scored 0.90. That average is the number called AUC below.</p>
+        <p>Pose accuracy depends on how close a predicted joint must land to a human label to count as correct. Because an animal's pixel size varies across photos, that tolerance radius is scaled as a fraction of the animal's body size. At a 20% tolerance, my OpenApePose model placed 88% of landmarks correctly; averaged across tolerances from strict to loose, it achieved an area-under-the-curve (AUC) score of 0.90 (0.897).</p>
 
-        <p>Then came the comparison the project was built for. Could a model trained on other bodies do as well? I took the same network, trained on monkeys or on people, and scored it on the same ape photographs.</p>
+        <p>With that benchmark in hand, I ran the cross-species test the project was designed to answer. I took the exact same HRNet-W48 architecture trained on monkeys or on people and scored each model on the same held-out ape photographs.</p>
 
         <figure class="fig mid">
           <div class="bars wide" role="img" aria-label="Accuracy on ape photographs by training data: trained on apes 0.897, trained on monkeys 0.743, trained on humans 0.710">
@@ -116,25 +115,25 @@
             <div><span>Monkeys</span><b><i style="width:74.3%"></i></b><em>0.743</em></div>
             <div><span>Humans</span><b><i style="width:71.0%"></i></b><em>0.710</em></div>
           </div>
-          <figcaption>The same network, trained on 43,120 ape photographs (OpenApePose), 56,694 monkey photographs (OpenMonkeyPose with its apes removed) or 262,465 people (COCO).</figcaption>
+          <figcaption>HRNet-W48 evaluated on unseen ape photographs after training on 43,120 ape photos (OpenApePose), 56,694 monkey photos (OpenMonkeyPose with apes removed), or 262,465 people (<a href="https://cocodataset.org/" target="_blank" rel="noopener">COCO</a>).</figcaption>
         </figure>
 
-        <p>It could not. Neither relative was a good stand-in. The surprise is the order. The human model had almost five times as much training data as the monkey model, and humans are, biologically, apes. It still did slightly worse on apes than the monkey model did.</p>
+        <p>Neither relative came close to the ape-trained model: OpenApePose reached 0.897 AUC, compared with 0.743 for the monkey-trained model and 0.710 for the human-trained model. The ordering between the two baselines surprised me most. Although humans are biologically apes and the human dataset contained nearly five times as many training images as the monkey dataset, the human-trained model still scored slightly worse on ape photographs than the monkey-trained model.</p>
 
-        <p>Being related does count for something. The human model was better at apes (0.71) than at monkeys (0.58). It just was not good at either.</p>
+        <p>Evolutionary closeness did provide a modest boost: the human-trained model scored higher on apes (0.71) than on monkeys (0.58). Even so, upright human posture, clothing, and exposed skin left that model poorly equipped for hairy, climbing apes.</p>
 
         <p class="pull">Humans are apes. The model trained on humans did not seem to know it.</p>
 
-        <p>How good is 0.90? For comparison, the monkey model scores 0.93 on monkeys, and the human model scores 0.96 on people. So the ape model comes close to what the same network reaches on the bodies it was trained on, and sits a little behind both.</p>
+        <p>Placed alongside within-species benchmarks, 0.90 sits near the practical ceiling for this architecture. Tested on their own matching species, the monkey-trained model scores 0.93 on monkeys and the human-trained model scores 0.96 on people, leaving the ape-trained model close behind both.</p>
 
         <figure class="plate">
           <img src="../assets/openapepose/elife-86873-fig4.jpg" width="1500" height="1613" loading="lazy" alt="Curves and bar charts of keypoint accuracy. Models tested on the kind of body they were trained on score highest; models trained on monkeys or humans and tested on apes score much lower. Accuracy on apes rises with the share of the training set used and flattens from 70 percent">
-          <figcaption>Figure 4 of the paper. A: the share of landmarks placed correctly as the tolerance loosens, for every pairing of training and test data (left) and for smaller training sets (right). B, C: the same results as bars. OAP is OpenApePose, OMP is OpenMonkeyPose and COCO is the human dataset.</figcaption>
+          <figcaption>Figure 4 of the paper. A: share of landmarks placed correctly as tolerance loosens across training-and-test pairings (left) and across smaller training subsets (right). B, C: summary AUC bars for each pairing. OAP is OpenApePose, OMP is OpenMonkeyPose, and COCO is the human dataset.</figcaption>
         </figure>
 
         <h2>How much data is enough?</h2>
 
-        <p>Would more photographs help? To find out, I retrained the model on random portions of the training set (10%, 30% and so on), keeping the mix of species the same.</p>
+        <p>Building a 71,868-image dataset takes months of collection and labeling, so I wanted to know whether even more zoo photographs would keep improving accuracy. I retrained HRNet-W48 on species-balanced random subsets ranging from 10% (4,312 photos) up to 100% (43,120 photos) of the training set and measured test accuracy at each step.</p>
 
         <figure class="fig mid">
           <div class="bars wide" role="img" aria-label="Accuracy by share of the training set used: 10 percent 0.755, 30 percent 0.824, 50 percent 0.842, 70 percent 0.899, 90 percent 0.903, 100 percent 0.897">
@@ -146,61 +145,63 @@
             <div><span>90%</span><b><i style="width:90.3%"></i></b><em>0.903</em></div>
             <div><span>100%</span><b><i class="fast" style="width:89.7%"></i></b><em>0.897</em></div>
           </div>
-          <figcaption>Ten percent is 4,312 photographs; the full training set is 43,120.</figcaption>
+          <figcaption>Ten percent corresponds to 4,312 training photographs; 100% corresponds to all 43,120.</figcaption>
         </figure>
 
-        <p>Accuracy climbed until about 30,000 photographs and then went flat. The full set did no better than 70% of it. So for this network, more pictures of the same kind would not help. The next gain is more likely to come from a better model, or from a different kind of picture.</p>
+        <p>Accuracy climbed steeply up to roughly 30,000 training photographs (70% of the set, 0.899 AUC) and flattened completely from there. Training on 90% (0.903) or 100% (0.897) offered no additional gain over 70%. For HRNet-W48, adding more zoo photographs of the same style hits diminishing returns; further gains will come from stronger architectures or imagery from genuinely new environments.</p>
 
         <h2>A species it never saw</h2>
 
-        <p>The test above has a weakness. I split the photographs at random. That means pictures of the same animal in the same enclosure, taken minutes apart, can land on both sides of the split. A model can then look good just by recognizing a place.</p>
+        <p>Standard random train-test splits hide a subtle form of data leakage. When photographs are split randomly, two shots of the same chimpanzee in the same enclosure taken minutes apart can land on opposite sides of the split, letting a network score well partly by memorizing familiar backgrounds or individuals.</p>
 
-        <p>So I ran a harder test. I trained six more models, each with one species removed completely, and scored each on the species it had never seen. Now the model and its test photographs shared no animals and no enclosures.</p>
+        <p>To measure true out-of-distribution generalization, I designed a stricter leave-one-species-out test. I trained six separate HRNet-W48 models, holding one entire ape species out of training each time and scoring each model on the species it had never seen. Under that split, training and test sets shared zero animals and zero enclosures.</p>
 
         <figure class="fig mid">
           <h4 class="first">Accuracy (AUC) on a species held out of training</h4>
           <ul class="chips">
             <li>Gibbon 0.827</li><li>Chimpanzee 0.836</li><li>Orangutan 0.839</li><li>Siamang 0.848</li><li>Bonobo 0.896</li><li>Gorilla 0.896</li>
           </ul>
-          <figcaption>With every species in training, the same scores run from 0.883 to 0.908. The monkey-trained model scores 0.71 to 0.80 on these species.</figcaption>
+          <figcaption>With all six species included in training, species-level scores range from 0.883 to 0.908. The monkey-trained baseline scores 0.71 to 0.80 on these same species.</figcaption>
         </figure>
 
-        <p>Every model lost some accuracy on its missing species, as it should. Chimpanzees lost the most. Gibbons were the hardest overall, which matched our own experience: an animal hanging by one arm with its legs tucked up is hard for a person to label too. But every one of these models still beat the monkey-trained model on the species it had never seen. So close relatives do help. They do not replace pictures of the animal itself.</p>
+        <p>Every model lost some accuracy on its unseen species, yet every single one still outperformed the monkey-trained baseline (0.827–0.896 vs. 0.71–0.80). Chimpanzees showed the sharpest drop relative to full-dataset performance, and gibbons remained the hardest species overall—echoing what our annotators experienced when labeling an animal hanging by one arm with its legs tucked tightly underneath. Training on close ape relatives transfers meaningfully to an unseen ape, though it still cannot fully replace examples of the target species itself.</p>
 
         <figure class="plate">
           <img src="../assets/openapepose/elife-86873-fig5.jpg" width="1500" height="1497" loading="lazy" alt="Three rows of plots, one line or bar per ape species: accuracy of the full model, of models with that species held out of training, and of the monkey-trained model. The held-out models score below the full model and above the monkey-trained model for every species">
-          <figcaption>Figure 5 of the paper. Accuracy on each species for the full model (A), for models trained without that species (B), and for the monkey-trained model (C).</figcaption>
+          <figcaption>Figure 5 of the paper. Per-species accuracy for the full OpenApePose model (A), models trained with that species held out (B), and the monkey-trained baseline (C).</figcaption>
         </figure>
 
         <h2>What it cannot do</h2>
 
+        <p>Releasing an open benchmark means stating clearly where its boundaries lie. Five practical limits apply to OpenApePose:</p>
+
         <ul>
-          <li><strong>It knows zoos.</strong> Most photographs come from zoos and sanctuaries. A forest, with its shade, leaves and distance, is a different problem, and I did not measure how the model does there.</li>
-          <li><strong>It is flat.</strong> The dataset has single photographs, not synchronized views from several cameras, so it supports 2D tracking only.</li>
-          <li><strong>One animal per picture.</strong> Many photographs show several apes, but only one is labeled in each.</li>
-          <li><strong>No hands or faces.</strong> Sixteen landmarks describe the trunk and limbs. Gestures and facial expressions, which many primatologists care about most, are not there.</li>
-          <li><strong>One network in the published tests.</strong> The comparisons, the data-size test and the held-out-species test all use HRNet-W48. Another network might keep improving past 30,000 photographs.</li>
+          <li><strong>Zoo and sanctuary bias:</strong> Most images come from captive enclosures. Wild forests introduce deep shade, dense foliage, and long camera distances—conditions we have not yet benchmarked.</li>
+          <li><strong>2D skeletons only:</strong> Because the dataset contains single-camera photographs without synchronized viewpoints, models trained on it track flat 2D coordinates.</li>
+          <li><strong>One labeled animal per image:</strong> Many frames contain multiple apes, yet only one focal animal is annotated in each photograph.</li>
+          <li><strong>No hands or facial expressions:</strong> Sixteen landmarks capture trunk and limb geometry, leaving out fine finger gestures and facial cues central to primate communication.</li>
+          <li><strong>Single benchmark architecture:</strong> Every scaling curve and cross-species test in the paper uses HRNet-W48; larger or newer architectures might keep improving beyond 30,000 images.</li>
         </ul>
 
-        <p>Because the photographs are public, another group can fix any of these by adding labels or images, without starting again from nothing.</p>
+        <p>Because the photographs and annotations are in the public domain, other researchers can extend the labels or add forest footage without rebuilding the foundation from scratch.</p>
 
         <h2>Building with OpenApePose</h2>
 
-        <p>The photographs, the annotations, the trained models and the code are all public, and people I have never met have built on them.</p>
+        <p>Making the dataset, labels, and trained weights public has already let researchers outside our lab build new tools on top of it.</p>
 
-        <p>One of them is Wim Pouw at Tilburg University. He combined the OpenApePose model with two other tools: a detector that finds the apes in each frame (OWLv2) and a tracker that follows each one from frame to frame (ByteTrack). The result is a small Python package, <a href="https://wimpouw.github.io/using_envisionboxbio-apetrack/" target="_blank" rel="noopener">envisionboxbio-apetrack</a>. You install it, point it at a video, and get a box, an identity and 16 landmarks for every ape in each frame, with no labeling or training of your own.</p>
+        <p>Wim Pouw at Tilburg University paired the OpenApePose pose model with an open-vocabulary object detector (OWLv2) and a multi-object tracker (ByteTrack) to create a lightweight Python package called <a href="https://wimpouw.github.io/using_envisionboxbio-apetrack/" target="_blank" rel="noopener">envisionboxbio-apetrack</a>. Point the package at a video and it outputs bounding boxes, animal identities, and 16 tracked landmarks per ape with no custom labeling or model training required.</p>
 
-        <p>The work is his. My part was the model, which was there for him to pick up, and he kindly listed me as a co-author. For the package he also <a href="https://zenodo.org/records/22989835" target="_blank" rel="noopener">reposted the model on Zenodo</a> in a newer file format, converted but not retrained. The package has not yet been formally evaluated, and it struggles with distant or overlapping animals. Its demo page shows it running on zoo footage of gibbons and on field footage of wild chimpanzees, a setting the dataset barely covers.</p>
+        <p>The software engineering behind that package is his; my contribution was the open pose model he built upon, for which he kindly credited me as a co-author. He also <a href="https://zenodo.org/records/22989835" target="_blank" rel="noopener">reposted the converted model weights on Zenodo</a> in a newer format without retraining. The combined pipeline has not yet undergone formal benchmarking and still struggles with distant or overlapping apes, though its demo shows promising tracking on zoo gibbons and even wild chimpanzee field video—a setting barely represented in our training set.</p>
 
-        <p>For me, the limits above set the next project. A flat dataset of single animals could not measure how an infant monkey moves through space. So at Emory I built a system that could: <a href="movement-grammar.html">twelve synchronized cameras and a 3D pose model</a>.</p>
+        <p>For my own work, OpenApePose's limits directly shaped what I built next. Flat, single-view photographs could not capture how a young primate moves through three-dimensional space, so at Emory I designed a multi-view system that could: <a href="movement-grammar.html">twelve synchronized cameras and a 3D pose network</a>.</p>
 
         <div class="aside-note">
-          <p><strong>Get it.</strong> Paper: <a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener"><em>eLife</em> 12:RP86873</a> (2023). Full dataset and trained models: <a href="https://doi.org/10.5061/dryad.c59zw3rds" target="_blank" rel="noopener">Dryad</a>, in the public domain. Code: <a href="https://github.com/desai-nisarg/OpenApePose" target="_blank" rel="noopener">github.com/desai-nisarg/OpenApePose</a>. The model as converted for envisionboxbio-apetrack, posted by Wim Pouw: <a href="https://zenodo.org/records/22989835" target="_blank" rel="noopener">Zenodo</a>.</p>
+          <p><strong>Get it.</strong> Paper: <a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener"><em>eLife</em> 12:RP86873</a> (2023). Full dataset and trained models: <a href="https://doi.org/10.5061/dryad.c59zw3rds" target="_blank" rel="noopener">Dryad</a>, in the public domain. Code: <a href="https://github.com/desai-nisarg/OpenApePose" target="_blank" rel="noopener">github.com/desai-nisarg/OpenApePose</a>. Converted weights for envisionboxbio-apetrack, posted by Wim Pouw: <a href="https://zenodo.org/records/22989835" target="_blank" rel="noopener">Zenodo</a>.</p>
         </div>
 
         <div class="credits">
-          <p>With Praneet Bala, Rebecca Richardson, Jessica Raper, Jan Zimmermann and Benjamin Hayden (principal investigator), at the University of Minnesota and Emory University. Thanks to the zoos and sanctuaries that let us photograph, including the Chimpanzee Conservation Center, Project Chimps, Chimp Haven and the Ape Initiative, and to everyone who contributed pictures.</p>
-          <p>Figures and numbers are from Desai et al. (2023), <a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener"><em>eLife</em> 12:RP86873</a>, used under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. The landmark image is cropped from Figure 2; the bar charts are redrawn from the paper's numbers.</p>
+          <p>With Praneet Bala, Rebecca Richardson, Jessica Raper, Jan Zimmermann, and Benjamin Hayden (principal investigator), at the University of Minnesota and Emory University. Thanks to the zoos and sanctuaries that welcomed our photographers—including the Chimpanzee Conservation Center, Project Chimps, Chimp Haven, and the Ape Initiative—and to everyone who contributed photographs.</p>
+          <p>Figures and numbers come from Desai et al. (2023), <a href="https://doi.org/10.7554/eLife.86873" target="_blank" rel="noopener"><em>eLife</em> 12:RP86873</a>, used under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>. The landmark diagram is cropped from Figure 2, and the bar charts are redrawn from the paper's numbers.</p>
         </div>
 
       </div>

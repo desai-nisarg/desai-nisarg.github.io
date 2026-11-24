@@ -34,7 +34,6 @@
       <a class="brand" href="../index.html">Nisarg Desai</a>
       <nav aria-label="Sections">
         <a href="../index.html#projects">Projects</a>
-        <a href="../index.html#about">About</a>
         <a href="../index.html#publications">Publications</a>
         <a href="../index.html#background">Background</a>
         <a href="../index.html#contact">Contact</a>
@@ -49,7 +48,7 @@
         <p class="crumb"><a href="../index.html#projects">&larr; All projects</a></p>
         <p class="kicker">Emory University · 2023–present · Bayesian statistics · Study design · Reproducible analysis</p>
         <h1>Zika and the developing brain</h1>
-        <p class="standfirst">Twelve infant monkeys were infected with Zika virus at five weeks old and followed until they were eight months old, alongside twelve controls. My job was the statistics: to learn as much as 24 animals can honestly tell you, and no more.</p>
+        <p class="standfirst">Twelve infant rhesus macaques were infected with Zika virus at five weeks old and followed for eight months alongside twelve controls. I led the Bayesian statistical analysis, building models that draw honest evidence from 24 animals and stress-testing every finding until the fragile ones broke.</p>
         <ul class="glance">
           <li><strong>24</strong><span>infants, 12 infected and 12 controls</span></li>
           <li><strong>8 months</strong><span>of follow-up</span></li>
@@ -65,12 +64,12 @@
 
         <h2>An infection after birth</h2>
 
-        <p>Zika virus is known for what it does before birth. During the epidemic of 2015 and 2016, infection in pregnancy was linked to microcephaly and other birth defects. Much less is known about infection after birth, even though children account for 10 to 31 percent of Zika infections and the brain grows rapidly through the first two years of life.</p>
+        <p>Most people know Zika virus for the damage it inflicts before birth. During the 2015 and 2016 epidemic, infection during pregnancy caused microcephaly and other severe birth defects. What Zika does when it infects a baby after birth remains far less clear, even though children account for 10 to 31 percent of Zika infections and the human brain grows rapidly throughout the first two years of life.</p>
 
-        <p>That question is hard to answer in children. You cannot choose who gets infected or when, and a mild infection often goes unnoticed. Our lab studies it using infant rhesus macaque models. In this study, 12 infants were infected at about five weeks of age. The virus peaked in the blood within three days and was gone within three weeks. Then we watched what happened to development over the next eight months.</p>
+        <p>Answering that question directly in children is nearly impossible because doctors cannot observe who gets infected or exactly when, and mild cases often pass unnoticed. To track postnatal infection from day one, our lab studied 24 infant rhesus macaques—12 infected with Zika virus at about five weeks old and 12 controls. In the infected infants, virus levels peaked in the blood within three days and cleared within three weeks. Our team then tracked all 24 animals across seven developmental domains over the next eight months.</p>
 
         <ol class="when-list wide">
-          <li><b>Weeks 2–9</b><span>Weekly exams of reflexes, attention and temperament</span></li>
+          <li><b>Weeks 2–9</b><span>Weekly exams of reflexes, attention, and temperament</span></li>
           <li class="hot"><b>Week 5</b><span>Zika infection, or a control treatment</span></li>
           <li><b>Month 3</b><span>Brain MRI</span></li>
           <li><b>Months 4 and 6</b><span>Visual acuity by eye tracking</span></li>
@@ -80,81 +79,105 @@
 
         <h2>Twenty-four animals</h2>
 
-        <p>The statistics of a study like this are shaped by one number. There are 24 animals. Split them by infection and you have 12 against 12. Split again by sex and you have 6. Split the controls by type and you have 3. Every one of those animals matters, and there will not be more of them.</p>
+        <p>One number shaped every statistical decision I made on this project: 24. Split the cohort by infection status and you compare 12 Zika-infected infants against 12 controls. Split again by sex and each subgroup drops to 6; divide the controls by treatment type as well and you are down to 3 animals per cell. In a longitudinal primate study, no extra cohorts wait in the wings, so every single observation counts.</p>
 
         <p class="pull">A study this small cannot afford to waste information, and it cannot afford to fool itself.</p>
 
-        <p>Those two needs pull in opposite directions, and most of my decisions were about holding both.</p>
+        <p>Those two competing pressures—getting full value out of 24 animals while guarding against false alarms—guided three core modeling choices.</p>
+
+        <p><strong>Report uncertainty instead of binary verdicts.</strong> I wrote every model in R using <a href="https://paulbuerkner.com/brms/" target="_blank" rel="noopener">brms</a>, which compiles Bayesian hierarchical models into <a href="https://mc-stan.org/" target="_blank" rel="noopener">Stan</a>. Instead of sorting findings into "significant" or "not significant" with p-values, I reported each result as a full posterior distribution: a central estimate, an <a href="https://hal.science/hal-05243742/document" target="_blank" rel="noopener">89% credible interval</a>, and the posterior probability that the difference points in the stated direction. Following Richard McElreath's <em>Statistical Rethinking</em>, I chose 89% over the conventional 95% as a deliberate reminder that any numerical cutoff is arbitrary.</p>
+
+        <p><strong>Borrow baseline knowledge where earlier data exist.</strong> Our lab had already measured healthy infant rhesus macaques in previous studies, and discarding that history in a 24-animal study would throw away hard-won information. For the control group, I anchored each model's starting expectations (its priors) in those earlier cohorts, weighted by their sample sizes, while allowing the new measurements to pull the estimates wherever the evidence led. Because no comparable postnatal data existed for Zika-infected infants, I assigned weakly informative priors to the infection effects so the new data drove those estimates on their own.</p>
+
+        <p><strong>Match each model to the shape of its measurement.</strong> Forcing every outcome into a standard bell-curve regression distorts small datasets, so I selected a model family tailored to how each measurement behaves:</p>
 
         <ul>
-          <li><strong>Report a range, never a verdict.</strong> Every model is Bayesian (written in R with brms). Each result is an estimate with an 89% interval and the probability that the effect goes in the stated direction. There are no p-values in the paper and nothing is called “significant.”</li>
-          <li><strong>Borrow from the past, where the past exists.</strong> The lab had measured healthy infant macaques before, in earlier studies. Ignoring that would be waste. So for the control animals, each model starts from what those studies found, weighted by their size, and lets the new data pull it. For infected animals there was nothing comparable to borrow, so the models start with almost no opinion.</li>
-          <li><strong>Fit the model to the measurement.</strong> Exam scores on an ordered scale get an ordinal model. Counts of behaviors get a negative binomial model. Percent of time looking gets a beta regression, with missing values estimated inside the model. Brain volumes get a linear model adjusted for overall brain size, so a region is not called small merely because the whole brain is.</li>
+          <li><strong>Ordered exam scales (ordinal model):</strong> Weekly neurobehavioral exams use discrete rating scales where the step from 1 to 2 may not equal the step from 4 to 5, so I modeled those ratings with an ordinal regression.</li>
+          <li><strong>Behavioral tallies (negative binomial model):</strong> Stress and attachment behaviors are whole-number counts that vary widely from animal to animal, so I used a negative binomial model that accommodates heavy spread.</li>
+          <li><strong>Proportions bounded at 0–100% (beta regression):</strong> Eye-tracking visual acuity measures the share of time an infant looks at a target—a number pinned strictly between zero and one—so I applied a beta regression and estimated missing trials directly inside the Bayesian model.</li>
+          <li><strong>Brain volumes (size-adjusted linear model):</strong> Raw MRI region volumes scale with an infant's overall head size, so I fitted linear models adjusted for total brain volume, ensuring a region appears smaller only when it shrinks relative to the rest of the brain.</li>
         </ul>
 
         <h2>Two kinds of control</h2>
 
-        <p>An infection does two things at once. The virus acts on the body, and the body's immune system reacts. Either could alter a developing brain. To separate them, half of the controls were left alone, and the other half received a synthetic molecule that sets off the immune reaction to a virus without any virus.</p>
+        <p>A viral infection hits a developing brain through two channels at once: direct action by the virus and the body's own immune response. Because inflammation alone can perturb early brain development, comparing Zika-infected infants only against untreated controls leaves those two forces tangled together. To pull them apart, the study divided the 12 controls in half: 6 infants received no treatment, while 6 received a synthetic molecule that triggers an antiviral immune reaction without introducing any virus.</p>
 
-        <p>The weekly exams show why that matters. Two things worsened after infection, and the two controls split them apart.</p>
+        <p>Weekly neurobehavioral exams from weeks 2 to 9 quickly showed why that three-way design mattered. Two domains declined in Zika-infected infants after week 5, and the two control groups separated those shifts cleanly.</p>
 
         <figure class="plate mid">
           <img src="../assets/zika/neurobehavior.png" width="1300" height="1625" loading="lazy" alt="Four rows of panels showing estimated differences in exam scores between groups from 2 to 9 weeks of age, for motor, neuromotor, orientation and state control scores">
-          <figcaption>Estimated differences between groups as the infants aged, with 89% intervals. Each row is one part of the exam; the columns compare immune-stimulated with untreated controls, infected with immune-stimulated, and infected with untreated. The dotted vertical line marks the infection.</figcaption>
+          <figcaption>Estimated differences in weekly exam scores from weeks 2 to 9, with 89% credible intervals. Each row shows one exam domain; from left to right, the columns compare immune-stimulated vs. untreated controls, Zika-infected infants vs. immune-stimulated controls, and Zika-infected infants vs. untreated controls. The dotted vertical line marks week 5, when infection or control treatment occurred.</figcaption>
         </figure>
 
-        <p><strong>Attention</strong> to sights and sounds (third row) fell in the infected infants. It fell about as much in the immune-stimulated controls. That points to the immune reaction, not the virus.</p>
+        <p><strong>Attention to sights and sounds</strong> (third row) fell in Zika-infected infants compared with untreated controls, yet it fell by roughly the same amount in immune-stimulated controls. Because mimicking an immune response produced the same dip with no virus present, that change points to immune activation instead of Zika virus itself.</p>
 
-        <p><strong>Emotional regulation</strong> (bottom row: how irritable an infant is, and how hard to console) worsened only in the infected infants, week after week. The immune-stimulated controls showed no such change. That one belongs to the virus.</p>
+        <p><strong>Emotional regulation</strong> (bottom row)—how irritable an infant gets and how hard it is to console—worsened specifically after Zika infection. Zika-infected infants lost ground week after week compared with both control groups, whereas immune-stimulated controls tracked untreated controls closely. That divergence links disrupted emotional regulation directly to the virus.</p>
 
         <h2>What the animals showed</h2>
 
-        <p>Across eight months, the picture that emerged was of an infection that leaves the basics intact and changes how emotion is regulated.</p>
+        <p>Across eight months of testing, Zika-infected infants developed basic sensory abilities and caregiver bonds much like controls, yet their emotional responses diverged at every stage we measured—and three-month brain scans showed structural differences in regions tied to emotion.</p>
 
-        <ul>
-          <li><strong>In the first weeks,</strong> poorer emotional regulation, beginning at the first exam after infection and growing through week 9.</li>
-          <li><strong>At five months,</strong> more hostile behavior, and in an unusual place: during the least threatening parts of the stress test, which is not typical for this test.</li>
-          <li><strong>At seven to eight months,</strong> attachment to the caregiver was as strong as in controls, but distress at being kept apart was blunted. Infected males screamed less. (I followed that thread into the sound of the calls themselves: <a href="zika-vocalizations.html">What a scream carries</a>.)</li>
-          <li><strong>In the brain at three months,</strong> more cerebrospinal fluid, most clearly in females, sitting in the space around the brain and not in its ventricles. Males had a larger amygdala. Females had a smaller temporal-limbic cortex.</li>
-        </ul>
+        <p>The earliest behavioral shift appeared right after infection. Starting at the first exam after week 5 and widening through week 9, Zika-infected infants showed poorer emotional regulation than controls, growing more irritable and harder to soothe.</p>
+
+        <p>At three months of age, brain MRI scans revealed anatomical differences in Zika-infected infants compared with controls, beginning with the clear liquid that cushions brain tissue. Zika-infected infants—most clearly females—carried more cerebrospinal fluid than controls. That excess fluid pooled in wider spaces around the outer folds of the brain rather than swelling the fluid-filled chambers deep inside it (the ventricles), a different pattern from classic internal fluid buildup.</p>
+
+        <p>Adjusting each brain region for overall brain size uncovered two additional differences in emotion-related anatomy, each concentrated in one sex. Zika-infected males had a larger amygdala than control males—the deep, almond-shaped hub that detects threats and drives emotional vigilance. Zika-infected females, by contrast, had a smaller temporal-limbic cortex than control females—outer regions along the sides of the brain that help interpret social cues and regulate emotional responses.</p>
 
         <figure class="wide">
           <img src="../assets/zika/mri.jpg" width="1600" height="1113" loading="lazy" alt="MRI slices of two infant macaque brains side by side. Arrows on the infected animal's scans point to wider fluid-filled spaces around the folds of the brain">
-          <figcaption>MRI at three months: an infected male (left two columns) and a control male (right two columns). Arrows mark the wider fluid-filled spaces around the brain of the infected animal.</figcaption>
+          <figcaption>MRI scans at three months showing a Zika-infected male (left two columns) alongside a control male (right two columns). Arrows mark the wider fluid-filled spaces around the outer folds of the infected infant's brain.</figcaption>
         </figure>
 
         <figure class="wide plate">
           <img src="../assets/zika/brain-regions.png" width="1500" height="960" loading="lazy" alt="For each of twelve brain regions, the estimated difference between infected and control animals, shown separately for females and males with intervals">
-          <figcaption>The estimated difference between infected and control animals in each brain region, adjusted for overall brain size, for females (red) and males (blue). Shapes show the full range of plausible values; the bars are 89% intervals.</figcaption>
+          <figcaption>Estimated volume differences between Zika-infected infants and controls across twelve brain regions, adjusted for overall brain size, for females (red) and males (blue). Shaded shapes show the full posterior range of plausible values; horizontal bars mark 89% credible intervals.</figcaption>
         </figure>
 
-        <p>One result was a clear absence. The early drop in attention raised the worry of lasting damage to vision. We tested visual acuity at four and six months, at three levels of difficulty, and found no difference at either age. I gave that null result the same care as the positive ones, because a careful “no” is worth as much to a parent or a doctor as a “yes.”</p>
+        <p>Behavioral tests over the next five months echoed that emotional pattern, though scanning brains at three months and testing behavior later means we cannot tie any single anatomical change directly to a specific behavior. At five months, Zika-infected infants showed more hostile behavior than controls during a brief stress test—and unusually, that hostility emerged during the mildest, least threatening stages of the test, where controls stayed calm.</p>
+
+        <p>By seven to eight months, Zika-infected infants still formed attachments to their caregivers just as strongly as controls, yet their protest during separation was blunted. When kept briefly apart from their caregiver, Zika-infected infants showed less separation distress, and Zika-infected males screamed less often than control males. That quiet shift led me to examine the acoustics of their calls in a companion study (<a href="zika-vocalizations.html">What a scream carries</a>).</p>
+
+        <p>One closely watched outcome showed no effect of infection at all. Because attention to sights and sounds dropped in the weeks after infection, our team worried that Zika virus might have caused lasting visual impairment. We tested visual acuity via eye tracking at four and six months across three levels of contrast difficulty, and Zika-infected infants matched controls at every level and both ages. I gave that null finding the same modeling care as our positive results, because a reliable "no" matters as much to parents and pediatricians as a "yes."</p>
 
         <figure class="plate narrow">
           <img src="../assets/zika/visual-acuity.png" width="1100" height="1333" loading="lazy" alt="Estimated differences in looking time between infected and control infants at high, medium and low contrast, at four and six months; all intervals include zero">
-          <figcaption>Visual acuity at four and six months. Every interval includes zero.</figcaption>
+          <figcaption>Visual acuity at four and six months across high, medium, and low contrast (Zika-infected infants vs. controls). Every 89% credible interval includes zero.</figcaption>
         </figure>
 
         <h2>Where the checks changed the story</h2>
 
-        <p>The first version of the analysis was not the last. Reviewers pushed, I pushed, and four checks shaped what the paper now says.</p>
+        <p>The first complete analysis of this dataset did not survive intact. Small longitudinal cohorts invite subtle traps where a convenient modeling assumption—a straight trend line, a pooled baseline, a single outlier—can manufacture an illusion out of noise. Between my own skepticism and sharp questions from peer reviewers, I ran four major stress tests that reshaped what the revised paper now claims.</p>
 
-        <ul>
-          <li><strong>An effect before its cause.</strong> My main model described each group difference as a straight line over age. For emotional regulation, that line crossed into “credible” at four weeks, a week before anyone was infected. A virus cannot do that. I refit the model with every week estimated separately. The virus-specific difference appeared only after infection; the early signal reflected a brief dip in the untreated controls, not anything particular to the infected group. The same check found that a small difference in reflexes really was there before infection, so the paper now calls it what it is: variation between animals, not a consequence.</li>
-          <li><strong>Pooled controls.</strong> Most analyses compare infected animals with both kinds of control together. Is that fair? I refit everything with the three groups apart. The main findings held against each control group separately. Two did not hold against both (reductions in visual and auditory cortex), and the paper now treats those with caution.</li>
-          <li><strong>“Different in males” is a claim about a difference.</strong> An effect that is credible in one sex and not in the other does not show that the sexes differ. That needs its own test. I estimated the difference between the sexes directly: strong for some regions, weaker for others, and all labeled preliminary, because six animals per subgroup cannot carry more.</li>
-          <li><strong>Does more virus mean more harm?</strong> If the virus causes these changes, animals that carried more of it might be expected to show more. Within the 12 infected animals, I tested that. A few associations crossed the threshold, but each one depended on whether a single animal with an unusually low viral load was included. The paper reports the analysis as exploratory and the answer as a null, and says why a null among 12 animals settles little.</li>
-        </ul>
+        <p><strong>An effect that arrived before its cause.</strong> My initial longitudinal model assumed that the gap between Zika-infected infants and controls changed along a straight line from week 2 to week 9. When I checked that fitted line for emotional regulation, the 89% credible interval excluded zero at week 4—one full week before any infant was infected. Because a virus cannot alter behavior before it enters the body, that impossible timing signaled a modeling artifact: a rigid straight line was dragging the steep post-infection divergence backward in time.</p>
+
+        <p>To remove that linearity assumption, I refit the model so each week's group difference was estimated separately. Once freed from a straight line, the Zika-specific decline in emotional regulation appeared strictly after week 5; the illusory week-4 signal turned out to be a brief dip in the untreated controls instead of anything unusual in the Zika-infected infants. Running the same week-by-week check on infant reflexes exposed the opposite situation: a small reflex difference genuinely existed before week 5, so the revised paper reports it as preexisting variation between animals instead of a consequence of Zika infection.</p>
+
+        <p><strong>Testing whether pooled controls hid a shortcut.</strong> To preserve statistical power with 24 animals, most of our primary analyses pooled the untreated controls and immune-stimulated controls into one 12-animal reference group. Reviewers asked whether lumping those two subgroups together masked real differences. I refit every outcome with all three groups modeled apart, comparing Zika-infected infants against untreated controls and against immune-stimulated controls independently.</p>
+
+        <p>Every core finding held against both control groups on their own, giving those results firmer support. Two cortical results—apparent volume reductions in visual and auditory cortex—failed to hold against both control groups separately, so the revised paper flags them with explicit caution.</p>
+
+        <p><strong>Checking whether "credible in males" meant "different between sexes."</strong> Several brain-region estimates excluded zero in one sex while overlapping zero in the other, a pattern that often tempts researchers to declare a sex difference. Statistically, however, the gap between a credible estimate and an uncertain one is not itself a credible difference; claiming that males and females responded differently requires testing the contrast between sexes directly. When I estimated that direct male-versus-female difference for every brain region, the evidence proved strong for some regions and much weaker for others, and the revised paper labels all sex-specific patterns as preliminary because six animals per subgroup cannot carry firmer claims.</p>
+
+        <p><strong>Asking whether more virus meant more harm.</strong> If Zika virus directly drove these changes, infants carrying higher viral loads in their blood might reasonably show larger shifts. I tested that dose-response relationship within the 12 Zika-infected infants, and a few associations initially cleared our credibility threshold.</p>
+
+        <p>Leave-one-out checks quickly punctured those trends: every single association depended on whether one infant with an unusually low viral load remained in the dataset. Drop that animal and the apparent slopes vanished. The revised paper therefore reports the viral-load analysis as exploratory with a null result—and notes plainly that a null across 12 animals settles very little either way.</p>
 
         <p class="pull">The shape of a model can create a result. The only defense is to change the shape and see whether the result stays.</p>
 
         <h2>What I would still not claim</h2>
 
-        <p>The brain was scanned at three months and the behaviors were measured at other ages, so the study cannot tie a particular brain change to a particular behavior. The explanations offered for the extra fluid are inferences from images, not measurements of how the fluid moves. The infants were raised in a nursery, not by their mothers. And eight months is early. Whether these changes fade, persist or grow is a question for longer follow-up.</p>
+        <p>Even after those sensitivity checks, four clear limits bound what this study can support:</p>
+
+        <ul>
+          <li><strong>No direct brain-to-behavior links.</strong> Because we scanned brains at three months and measured behavior at other ages, the data cannot tie a specific anatomical shift to a specific behavioral outcome.</li>
+          <li><strong>No direct measurements of fluid flow.</strong> Structural MRI captures the wider cerebrospinal fluid spaces around the cortex, yet any explanation for why that fluid accumulated remains an inference from images instead of a measurement of fluid circulation or clearance.</li>
+          <li><strong>Nursery rearing.</strong> All 24 infants grew up in a nursery instead of with their mothers, an early environment that shapes emotional development and limits how directly these results generalize.</li>
+          <li><strong>An early follow-up window.</strong> Eight months covers only early infancy; determining whether these anatomical and emotional differences fade, persist, or grow requires longer follow-up.</li>
+        </ul>
 
         <h2>Open by default</h2>
 
-        <p>All of the analysis code and the data behind it are public: nine R scripts, in the order the analyses appear in the paper, with the priors and the sensitivity analyses. Anyone can rerun it, and anyone can disagree with a choice I made and see what changes.</p>
+        <p>Every analysis script and dataset behind these models is public. The repository holds nine R scripts arranged in the order the analyses appear in the paper, complete with prior specifications, model code, and all sensitivity checks. Anyone can rerun the pipeline from scratch—or disagree with a modeling choice I made and see immediately what changes.</p>
 
         <p class="links"><a href="https://github.com/desai-nisarg/ZIKV-longitudinal-study" target="_blank" rel="noopener">Code and data on GitHub</a><a href="https://doi.org/10.64898/2026.03.27.714817" target="_blank" rel="noopener">Preprint on bioRxiv</a></p>
 
@@ -163,7 +186,7 @@
         </div>
 
         <div class="credits">
-          <p>With Jessica Raper (senior author), Ann Chahroudi and 18 other colleagues; the full author list is on the preprint. Funded by the National Institute of Neurological Disorders and Stroke (R01 NS120182), the NIH Office of the Director (P51 OD011132) and the other awards listed in the paper.</p>
+          <p>With Jessica Raper (senior author), Ann Chahroudi, and 18 other colleagues; the full author list is on the preprint. Funded by the National Institute of Neurological Disorders and Stroke (R01 NS120182), the NIH Office of the Director (P51 OD011132), and the other awards listed in the paper.</p>
         </div>
 
       </div>
